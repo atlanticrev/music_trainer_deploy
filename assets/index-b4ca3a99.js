@@ -17391,40 +17391,42 @@ const getIntervalsPageSchema = (audioConfig2) => {
                   playInterval(intervalsExerciseState.currentIntervalNotes);
                 }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
               } else {
-                const dialog = createElTreeFromSchema({ tagName: "x-modal-dialog" });
-                const onDialogOptionClick = (event) => {
-                  const { name } = event.detail;
-                  switch (name) {
-                    case "repeat": {
-                      dialog.close();
-                      window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
-                      break;
-                    }
-                  }
-                };
-                dialog.setSlotContent(createElTreeFromSchema({
-                  tagName: "div",
-                  cssClasses: "actions-container",
-                  children: {
-                    tagName: "button",
-                    cssClasses: "neu-button",
-                    attrs: { "data-value": "repeat" },
-                    children: "Repeat",
-                    events: {
-                      click: () => {
-                        dialog.dispatchEvent(createEvent(ModalDialog.EVENT_OPTION_SELECTED, { name: "repeat" }));
+                window.setTimeout(() => {
+                  const dialog = createElTreeFromSchema({ tagName: "x-modal-dialog" });
+                  const onDialogOptionClick = (event) => {
+                    const { name } = event.detail;
+                    switch (name) {
+                      case "repeat": {
+                        dialog.close();
+                        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
+                        break;
                       }
                     }
-                  }
-                }));
-                dialog.onOpened(() => {
-                  dialog.addEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
-                });
-                dialog.onClosed(() => {
-                  dialog.removeEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
-                });
-                document.body.append(dialog);
-                dialog.open();
+                  };
+                  dialog.setSlotContent(createElTreeFromSchema({
+                    tagName: "div",
+                    cssClasses: "actions-container",
+                    children: {
+                      tagName: "button",
+                      cssClasses: "neu-button",
+                      attrs: { "data-value": "repeat" },
+                      children: "Repeat",
+                      events: {
+                        click: () => {
+                          dialog.dispatchEvent(createEvent(ModalDialog.EVENT_OPTION_SELECTED, { name: "repeat" }));
+                        }
+                      }
+                    }
+                  }));
+                  dialog.onOpened(() => {
+                    dialog.addEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
+                  });
+                  dialog.onClosed(() => {
+                    dialog.removeEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
+                  });
+                  document.body.append(dialog);
+                  dialog.open();
+                }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
               }
             }
           }
