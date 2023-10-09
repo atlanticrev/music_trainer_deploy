@@ -16852,42 +16852,6 @@ const getExercisesPageSchema = () => ({
     }
   ]
 });
-const chords = {
-  // Triads
-  Maj3: [0, 4, 7],
-  Maj6: [4, 7, 12],
-  Maj46: [7, 12, 16],
-  Min3: [0, 3, 7],
-  Min6: [3, 7, 12],
-  Min46: [7, 12, 15],
-  Sus2: [0, 2, 7],
-  Sus4: [0, 5, 7],
-  Sus42: [0, 2, 5, 7],
-  Min6th: [0, 3, 7, 9],
-  Maj6th: [0, 4, 7, 9],
-  // Seventh
-  Min7: [0, 3, 7, 10],
-  Min7InvIII: [10, 12, 3, 7],
-  D7: [0, 4, 7, 10],
-  D7InvIII: [10, 12, 4, 7],
-  Maj7: [0, 4, 7, 11],
-  Maj7InvIII: [11, 12, 4, 7],
-  Dim: [0, 3, 6, 9],
-  Min7b5: [0, 3, 6, 10],
-  Aug: [0, 4, 8, 12],
-  // Added steps (9, 11, 13)
-  Maj39: [0, 4, 7, 14],
-  Maj39InvIII: [2, 4, 7, 12],
-  // todo (?)
-  Min39: [0, 3, 7, 14],
-  Min39InvIII: [2, 3, 7, 12],
-  // todo (?)
-  Maj79: [0, 4, 7, 11, 14],
-  Min79: [0, 3, 7, 10, 14],
-  D79: [0, 4, 7, 10, 14],
-  D7b9: [0, 4, 7, 10, 13]
-};
-const createChord = (root, chord) => chord.map((tones) => Frequency(root).transpose(tones).toNote());
 const INTERVAL_NOTES = {
   unison: [0, 0],
   min2: [0, 1],
@@ -16910,18 +16874,15 @@ function between(min, max) {
 function betweenInt(min, max) {
   return Math.round(between(min, max));
 }
-const startPlaying = () => {
-  start();
-  if (audioConfig.isPlaying) {
-    audioConfig.isPlaying = false;
-    Transport2.cancel();
-    if (Transport2.state !== "stopped") {
-      Transport2.stop();
-    }
-  }
-  audioConfig.isPlaying = true;
+const getRandomInterval = (audioConfig2, options) => {
+  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
+  const intervalName = options.selectedIntervals[intervalValueIndex];
+  const intervalValue = INTERVAL_NOTES[intervalName];
+  return {
+    name: intervalName,
+    notes: intervalValue
+  };
 };
-const style$1 = "@media screen and (max-width: 420px) {\n  :host {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n:host .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n:host .play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n:host .play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
 class IntervalsExerciseState {
   constructor() {
     __publicField(this, "numberOfAllQuestions", 0);
@@ -16929,213 +16890,25 @@ class IntervalsExerciseState {
     __publicField(this, "variants", []);
     __publicField(this, "rightVariant", null);
     __publicField(this, "selectedVariant", null);
+    // todo Move it to the right place
     __publicField(this, "currentIntervalNotes", null);
     __publicField(this, "isSelectedVariantIsRight", () => this.selectedVariant === this.rightVariant);
+    __publicField(this, "reset", (options) => {
+      const initInterval = getRandomInterval(audioConfig, options);
+      Object.assign(this, {
+        numberOfAllQuestions: options.numberOfQuestions,
+        numberOfCompletedQuestions: 0,
+        variants: options.selectedIntervals,
+        rightVariant: initInterval.name,
+        selectedVariant: null,
+        currentIntervalNotes: initInterval.notes
+      });
+    });
   }
 }
 const intervalsExerciseState = new IntervalsExerciseState();
 window.intervalsExerciseState = intervalsExerciseState;
-const INTERVAL_EXERCISE_SETTINGS = "interval_exercise_settings";
-const localStorageService = {
-  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
-  write: (key, value) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  },
-  update: (key, value) => {
-    const lastValue = localStorageService.read(key);
-    localStorageService.write(key, Object.assign(lastValue, value));
-  }
-};
-const styles$7 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.success {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.failure {\n  color: red;\n  border: 1px solid red;\n}\n\n:host(.grid-button-group) > .neu-button.disabled {\n  opacity: 0.2;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
-const _ButtonGroupMultiple = class _ButtonGroupMultiple extends CustomElement {
-  constructor() {
-    super();
-    __publicField(this, "_name");
-    __publicField(this, "_selectedOptions");
-    __publicField(this, "_locked", false);
-    this.onBtnClick = this.onBtnClick.bind(this);
-  }
-  connectedCallback() {
-    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
-    this._name = this.getAttribute("name");
-    this.shadowRoot.addEventListener("click", this.onBtnClick);
-  }
-  getElementStyles() {
-    return styles$7.toString();
-  }
-  getPushedButtonIcon(pushedButton) {
-    return Array.from(pushedButton.children).find((child) => child instanceof Icon);
-  }
-  getSelectedOptions() {
-    return this._buttons.filter((button) => button.classList.contains("active")).map((button) => button.dataset.value);
-  }
-  getName() {
-    return this._name;
-  }
-  toggleButtonActive(pushedButton) {
-    var _a, _b;
-    pushedButton.classList.toggle("active");
-    (_b = (_a = this.getPushedButtonIcon(pushedButton)) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
-  }
-  getButtons() {
-    return this._buttons;
-  }
-  onBtnClick(e) {
-    e.stopPropagation();
-    if (this.isLocked()) {
-      return;
-    }
-    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
-    if (button && this._buttons.includes(button)) {
-      this.toggleButtonActive(button);
-      this.dispatchEvent(
-        createEvent(_ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, {
-          name: this.getName(),
-          value: this.getSelectedOptions()
-        })
-      );
-    }
-  }
-  isLocked() {
-    return this._locked;
-  }
-  lock() {
-    this._locked = true;
-  }
-  unlock() {
-    this._locked = false;
-  }
-  reset() {
-    var _a, _b;
-    this.unlock();
-    for (const button of this.getButtons()) {
-      button.classList.remove("disabled");
-      button.classList.remove("active");
-      button.classList.remove("success");
-      button.classList.remove("failure");
-      (_b = (_a = this.getPushedButtonIcon(button)) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
-    }
-  }
-};
-__publicField(_ButtonGroupMultiple, "EVENT_OPTIONS_SELECTED", "EVENT_OPTIONS_SELECTED");
-let ButtonGroupMultiple = _ButtonGroupMultiple;
-customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
-const initIntervalOptionsState = () => {
-  const defaultSettings = {
-    numberOfQuestions: 10,
-    playingMode: "asc",
-    selectedIntervals: Object.keys(INTERVAL_NOTES)
-  };
-  const lastSettings = localStorageService.read(INTERVAL_EXERCISE_SETTINGS);
-  const intervalOptionsState = {
-    ...defaultSettings,
-    ...lastSettings
-  };
-  window.intervalOptionsState = intervalOptionsState;
-  const NUMBER_OF_QUESTION_OPTIONS = [
-    {
-      label: "10",
-      value: "10"
-    },
-    {
-      label: "20",
-      value: "20"
-    },
-    {
-      label: "40",
-      value: "40"
-    }
-  ];
-  const numberOfQuestionsActiveOption = NUMBER_OF_QUESTION_OPTIONS.find((option) => option.value === intervalOptionsState.numberOfQuestions.toString());
-  if (numberOfQuestionsActiveOption) {
-    numberOfQuestionsActiveOption.isActive = true;
-  }
-  const PLAYING_MODE_OPTIONS = [
-    {
-      label: "Asc",
-      value: "asc"
-    },
-    {
-      label: "Desc",
-      value: "desc"
-    },
-    {
-      label: "Harm",
-      value: "harm"
-    }
-  ];
-  const playingModeActiveOption = PLAYING_MODE_OPTIONS.find((option) => option.value === intervalOptionsState.playingMode);
-  if (playingModeActiveOption) {
-    playingModeActiveOption.isActive = true;
-  }
-  const INTERVALS_OPTIONS = [
-    {
-      label: "Unison",
-      value: "unison"
-    },
-    {
-      label: "Min2",
-      value: "min2"
-    },
-    {
-      label: "Maj2",
-      value: "maj2"
-    },
-    {
-      label: "Min3",
-      value: "min3"
-    },
-    {
-      label: "Maj3",
-      value: "maj3"
-    },
-    {
-      label: "Perf4",
-      value: "perf4"
-    },
-    {
-      label: "Tritone",
-      value: "tritone"
-    },
-    {
-      label: "Perf5",
-      value: "perf5"
-    },
-    {
-      label: "Min6",
-      value: "min6"
-    },
-    {
-      label: "Maj6",
-      value: "maj6"
-    },
-    {
-      label: "Min7",
-      value: "min7"
-    },
-    {
-      label: "Maj7",
-      value: "maj7"
-    },
-    {
-      label: "Octave",
-      value: "octave"
-    }
-  ];
-  INTERVALS_OPTIONS.forEach((intervalOption) => {
-    if (intervalOptionsState.selectedIntervals.includes(intervalOption.value)) {
-      intervalOption.isActive = true;
-    }
-  });
-  return {
-    intervalOptionsState,
-    NUMBER_OF_QUESTION_OPTIONS,
-    PLAYING_MODE_OPTIONS,
-    INTERVALS_OPTIONS
-  };
-};
-const intervalsOptionsState = initIntervalOptionsState();
-const styles$6 = ".content .dialog-content .intervals-option-buttons, .content .dialog-content, .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.content .controls, .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\n.overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 80%;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  z-index: 2;\n  transform: translate(0, 100%);\n}\n\n.content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\n.content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$7 = ".content .dialog-content .intervals-option-buttons, .content .dialog-content, .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.content .controls, .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\n.overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 80%;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  z-index: 2;\n  transform: translate(0, 100%);\n}\n\n.content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\n.content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class Dialog extends CustomElement {
   constructor() {
     super();
@@ -17256,7 +17029,7 @@ class Dialog extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$6.toString();
+    return styles$7.toString();
   }
   setSlotContent(el) {
     this._slot.replaceChildren(el);
@@ -17271,7 +17044,7 @@ class Dialog extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Dialog), Dialog);
-const styles$5 = ".container .content .dialog-content .actions-container, .container .content .dialog-content, .container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.container .content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.container .content .dialog-content .controls, .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 15;\n}\n\n.container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 400px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-radius: 24px;\n  z-index: 2;\n}\n\n.container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container {\n  display: grid;\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container > button {\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n.container .content .dialog-content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$6 = ".container .content .dialog-content .actions-container, .container .content .dialog-content, .container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.container .content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.container .content .dialog-content .controls, .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 15;\n}\n\n.container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 400px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-radius: 24px;\n  z-index: 2;\n}\n\n.container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container {\n  display: grid;\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container > button {\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n.container .content .dialog-content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class ModalDialog extends Dialog {
   constructor() {
     super(...arguments);
@@ -17329,38 +17102,198 @@ class ModalDialog extends Dialog {
     });
   }
   getElementStyles() {
-    return styles$5.toString();
+    return styles$6.toString();
   }
 }
 __publicField(ModalDialog, "EVENT_OPTION_SELECTED", "EVENT_OPTION_SELECTED");
 customElements.define(getTagNameByCtor(ModalDialog), ModalDialog);
-const DELAY_BEFORE_INIT_INTERVAL_PLAYING = 250;
-const getRandomInterval = (audioConfig2, options) => {
-  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
-  const intervalName = options.selectedIntervals[intervalValueIndex];
-  const intervalValue = INTERVAL_NOTES[intervalName];
-  return {
-    name: intervalName,
-    notes: intervalValue
-  };
+const chords = {
+  // Triads
+  Maj3: [0, 4, 7],
+  Maj6: [4, 7, 12],
+  Maj46: [7, 12, 16],
+  Min3: [0, 3, 7],
+  Min6: [3, 7, 12],
+  Min46: [7, 12, 15],
+  Sus2: [0, 2, 7],
+  Sus4: [0, 5, 7],
+  Sus42: [0, 2, 5, 7],
+  Min6th: [0, 3, 7, 9],
+  Maj6th: [0, 4, 7, 9],
+  // Seventh
+  Min7: [0, 3, 7, 10],
+  Min7InvIII: [10, 12, 3, 7],
+  D7: [0, 4, 7, 10],
+  D7InvIII: [10, 12, 4, 7],
+  Maj7: [0, 4, 7, 11],
+  Maj7InvIII: [11, 12, 4, 7],
+  Dim: [0, 3, 6, 9],
+  Min7b5: [0, 3, 6, 10],
+  Aug: [0, 4, 8, 12],
+  // Added steps (9, 11, 13)
+  Maj39: [0, 4, 7, 14],
+  Maj39InvIII: [2, 4, 7, 12],
+  // todo (?)
+  Min39: [0, 3, 7, 14],
+  Min39InvIII: [2, 3, 7, 12],
+  // todo (?)
+  Maj79: [0, 4, 7, 11, 14],
+  Min79: [0, 3, 7, 10, 14],
+  D79: [0, 4, 7, 10, 14],
+  D7b9: [0, 4, 7, 10, 13]
 };
-const playInterval = (audioConfig2, intervalNotes) => {
+const createChord = (root, chord) => chord.map((tones) => Frequency(root).transpose(tones).toNote());
+const startPlaying = () => {
+  start();
+  if (audioConfig.isPlaying) {
+    audioConfig.isPlaying = false;
+    Transport2.cancel();
+    if (Transport2.state !== "stopped") {
+      Transport2.stop();
+    }
+  }
+  audioConfig.isPlaying = true;
+};
+const playInterval = (intervalNotes) => {
   startPlaying();
-  const interval = createChord(`${audioConfig2.activeTonality}${audioConfig2.activeOctave}`, intervalNotes);
-  audioConfig2.activeInstrument.triggerAttackRelease(interval, "2n");
+  const interval = createChord(`${audioConfig.activeTonality}${audioConfig.activeOctave}`, intervalNotes);
+  audioConfig.activeInstrument.triggerAttackRelease(interval, "2n");
   Transport2.start();
 };
-const getIntervalsPageSchema = (audioConfig2, options) => {
-  const initInterval = getRandomInterval(audioConfig2, options);
-  Object.assign(intervalsExerciseState, {
-    numberOfCompletedQuestions: 0,
-    numberOfAllQuestions: options.numberOfQuestions,
-    variants: options.selectedIntervals,
-    rightVariant: initInterval.name,
-    currentIntervalNotes: initInterval.notes
+const style$1 = "@media screen and (max-width: 420px) {\n  :host {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n:host .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n:host .play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n:host .play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
+const INTERVAL_EXERCISE_SETTINGS = "interval_exercise_settings";
+const localStorageService = {
+  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
+  write: (key, value) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  },
+  update: (key, value) => {
+    const lastValue = localStorageService.read(key);
+    localStorageService.write(key, Object.assign(lastValue, value));
+  }
+};
+const initIntervalOptionsState = () => {
+  const defaultSettings = {
+    numberOfQuestions: 10,
+    playingMode: "asc",
+    selectedIntervals: Object.keys(INTERVAL_NOTES)
+  };
+  const lastSettings = localStorageService.read(INTERVAL_EXERCISE_SETTINGS);
+  const intervalOptionsState = {
+    ...defaultSettings,
+    ...lastSettings
+  };
+  window.intervalOptionsState = intervalOptionsState;
+  const NUMBER_OF_QUESTION_OPTIONS = [
+    {
+      label: "10",
+      value: "10"
+    },
+    {
+      label: "20",
+      value: "20"
+    },
+    {
+      label: "40",
+      value: "40"
+    }
+  ];
+  const numberOfQuestionsActiveOption = NUMBER_OF_QUESTION_OPTIONS.find((option) => option.value === intervalOptionsState.numberOfQuestions.toString());
+  if (numberOfQuestionsActiveOption) {
+    numberOfQuestionsActiveOption.isActive = true;
+  }
+  const PLAYING_MODE_OPTIONS = [
+    {
+      label: "Asc",
+      value: "asc"
+    },
+    {
+      label: "Desc",
+      value: "desc"
+    },
+    {
+      label: "Harm",
+      value: "harm"
+    }
+  ];
+  const playingModeActiveOption = PLAYING_MODE_OPTIONS.find((option) => option.value === intervalOptionsState.playingMode);
+  if (playingModeActiveOption) {
+    playingModeActiveOption.isActive = true;
+  }
+  const INTERVALS_OPTIONS = [
+    {
+      label: "Unison",
+      value: "unison"
+    },
+    {
+      label: "Min2",
+      value: "min2"
+    },
+    {
+      label: "Maj2",
+      value: "maj2"
+    },
+    {
+      label: "Min3",
+      value: "min3"
+    },
+    {
+      label: "Maj3",
+      value: "maj3"
+    },
+    {
+      label: "Perf4",
+      value: "perf4"
+    },
+    {
+      label: "Tritone",
+      value: "tritone"
+    },
+    {
+      label: "Perf5",
+      value: "perf5"
+    },
+    {
+      label: "Min6",
+      value: "min6"
+    },
+    {
+      label: "Maj6",
+      value: "maj6"
+    },
+    {
+      label: "Min7",
+      value: "min7"
+    },
+    {
+      label: "Maj7",
+      value: "maj7"
+    },
+    {
+      label: "Octave",
+      value: "octave"
+    }
+  ];
+  INTERVALS_OPTIONS.forEach((intervalOption) => {
+    if (intervalOptionsState.selectedIntervals.includes(intervalOption.value)) {
+      intervalOption.isActive = true;
+    }
   });
+  return {
+    intervalOptionsState,
+    NUMBER_OF_QUESTION_OPTIONS,
+    PLAYING_MODE_OPTIONS,
+    INTERVALS_OPTIONS
+  };
+};
+const intervalsOptionsState = initIntervalOptionsState();
+const DELAY_BEFORE_INIT_INTERVAL_PLAYING = 250;
+const DELAY_BEFORE_NEXT_INTERVAL_PLAYING = 1500;
+const getIntervalsPageSchema = (audioConfig2) => {
+  const { intervalOptionsState: options } = intervalsOptionsState;
+  intervalsExerciseState.reset(options);
   window.setTimeout(() => {
-    playInterval(audioConfig2, intervalsExerciseState.currentIntervalNotes);
+    playInterval(intervalsExerciseState.currentIntervalNotes);
   }, DELAY_BEFORE_INIT_INTERVAL_PLAYING);
   return {
     tagName: "x-grid",
@@ -17404,7 +17337,7 @@ const getIntervalsPageSchema = (audioConfig2, options) => {
               cssClasses: ["icon", "icon_replay"]
             }
           ],
-          events: { click: () => playInterval(audioConfig2, intervalsExerciseState.currentIntervalNotes) }
+          events: { click: () => playInterval(intervalsExerciseState.currentIntervalNotes) }
         }
       },
       {
@@ -17426,7 +17359,7 @@ const getIntervalsPageSchema = (audioConfig2, options) => {
               if (buttonGroupEl.isLocked()) {
                 return;
               }
-              playInterval(audioConfig2, INTERVAL_NOTES[e.target.dataset.interval]);
+              playInterval(INTERVAL_NOTES[e.target.dataset.interval]);
               Object.assign(intervalsExerciseState, {
                 numberOfCompletedQuestions: intervalsExerciseState.numberOfCompletedQuestions + 1,
                 selectedVariant: e.target.dataset.interval
@@ -17448,9 +17381,26 @@ const getIntervalsPageSchema = (audioConfig2, options) => {
               });
               buttonGroupEl.lock();
               if (intervalsExerciseState.numberOfCompletedQuestions < intervalsExerciseState.numberOfAllQuestions) {
+                window.setTimeout(() => {
+                  buttonGroupEl.reset();
+                  const nextInterval = getRandomInterval(audioConfig2, options);
+                  Object.assign(intervalsExerciseState, {
+                    rightVariant: nextInterval.name,
+                    currentIntervalNotes: nextInterval.notes
+                  });
+                  playInterval(intervalsExerciseState.currentIntervalNotes);
+                }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
+              } else {
                 const dialog = createElTreeFromSchema({ tagName: "x-modal-dialog" });
                 const onDialogOptionClick = (event) => {
-                  event.detail;
+                  const { name } = event.detail;
+                  switch (name) {
+                    case "repeat": {
+                      dialog.close();
+                      window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
+                      break;
+                    }
+                  }
                 };
                 dialog.setSlotContent(createElTreeFromSchema({
                   tagName: "div",
@@ -17473,21 +17423,6 @@ const getIntervalsPageSchema = (audioConfig2, options) => {
                 dialog.onClosed(() => {
                   dialog.removeEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
                 });
-                document.body.append(dialog);
-                dialog.open();
-              } else {
-                const dialog = createElTreeFromSchema({ tagName: "x-modal-dialog" });
-                dialog.setSlotContent(createElTreeFromSchema({
-                  tagName: "x-button-group-multiple",
-                  cssClasses: "grid-button-group",
-                  attrs: { name: "interval-selection" },
-                  children: {
-                    tagName: "button",
-                    cssClasses: "neu-button",
-                    attrs: { "data-value": "repeat" },
-                    children: "Repeat"
-                  }
-                }));
                 document.body.append(dialog);
                 dialog.open();
               }
@@ -17591,7 +17526,7 @@ const getSettingsPageSchema = (audioConfig2) => ({
     }
   ]
 });
-const styles$3 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
+const styles$4 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
 const _ButtonGroup = class _ButtonGroup extends CustomElement {
   constructor() {
     super();
@@ -17608,7 +17543,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
     this.shadowRoot.addEventListener("click", this.onBtnClick);
   }
   getElementStyles() {
-    return styles$3.toString();
+    return styles$4.toString();
   }
   getActiveBtnIcon() {
     return Array.from(this.activeButton.children).find((child) => child instanceof Icon);
@@ -17648,6 +17583,80 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
 __publicField(_ButtonGroup, "EVENT_OPTION_SELECTED", "EVENT_OPTION_SELECTED");
 let ButtonGroup = _ButtonGroup;
 customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
+const styles$3 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.success {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.failure {\n  color: red;\n  border: 1px solid red;\n}\n\n:host(.grid-button-group) > .neu-button.disabled {\n  opacity: 0.2;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
+const _ButtonGroupMultiple = class _ButtonGroupMultiple extends CustomElement {
+  constructor() {
+    super();
+    __publicField(this, "_name");
+    __publicField(this, "_selectedOptions");
+    __publicField(this, "_locked", false);
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+  connectedCallback() {
+    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
+    this._name = this.getAttribute("name");
+    this.shadowRoot.addEventListener("click", this.onBtnClick);
+  }
+  getElementStyles() {
+    return styles$3.toString();
+  }
+  getPushedButtonIcon(pushedButton) {
+    return Array.from(pushedButton.children).find((child) => child instanceof Icon);
+  }
+  getSelectedOptions() {
+    return this._buttons.filter((button) => button.classList.contains("active")).map((button) => button.dataset.value);
+  }
+  getName() {
+    return this._name;
+  }
+  toggleButtonActive(pushedButton) {
+    var _a, _b;
+    pushedButton.classList.toggle("active");
+    (_b = (_a = this.getPushedButtonIcon(pushedButton)) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
+  }
+  getButtons() {
+    return this._buttons;
+  }
+  onBtnClick(e) {
+    e.stopPropagation();
+    if (this.isLocked()) {
+      return;
+    }
+    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
+    if (button && this._buttons.includes(button)) {
+      this.toggleButtonActive(button);
+      this.dispatchEvent(
+        createEvent(_ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, {
+          name: this.getName(),
+          value: this.getSelectedOptions()
+        })
+      );
+    }
+  }
+  isLocked() {
+    return this._locked;
+  }
+  lock() {
+    this._locked = true;
+  }
+  unlock() {
+    this._locked = false;
+  }
+  reset() {
+    var _a, _b;
+    this.unlock();
+    for (const button of this.getButtons()) {
+      button.classList.remove("disabled");
+      button.classList.remove("active");
+      button.classList.remove("success");
+      button.classList.remove("failure");
+      (_b = (_a = this.getPushedButtonIcon(button)) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
+    }
+  }
+};
+__publicField(_ButtonGroupMultiple, "EVENT_OPTIONS_SELECTED", "EVENT_OPTIONS_SELECTED");
+let ButtonGroupMultiple = _ButtonGroupMultiple;
+customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
 const style = ".intervals-options {\n  grid-auto-rows: fit-content(100%);\n  gap: 1rem;\n}\n.intervals-options__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n.intervals-options__description {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n.intervals-options__button-group-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n.intervals-options__button-group-container .button-group-label {\n  font-size: 0.75rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n.intervals-options__select-intervals {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n.intervals-options__submit {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const getIntervalsOptionsPageSchema = () => {
   const {
@@ -17857,9 +17866,8 @@ const setPageContent = (pageContainer, content) => {
   });
 };
 const initRouter = () => {
-  const app = document.querySelector("#app");
   const pageContainer = document.querySelector(".page-container");
-  app.addEventListener(ROUTER_ROUTE_TO_EVENT, (e) => {
+  window.addEventListener(ROUTER_ROUTE_TO_EVENT, (e) => {
     const { route, options } = e.detail;
     const bottomPanel = document.querySelector("x-bottom-panel");
     switch (route) {
@@ -17879,7 +17887,7 @@ const initRouter = () => {
         break;
       case "intervals":
         window.history.pushState({ route: "intervals" }, "", "/intervals");
-        setPageContent(pageContainer, getIntervalsPageSchema(audioConfig, options));
+        setPageContent(pageContainer, getIntervalsPageSchema(audioConfig));
         break;
       case "chords":
         window.history.pushState({ route: "chords" }, "", "/chords");

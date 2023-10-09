@@ -193,145 +193,6 @@ svg path {
 
 :host button.active {
   color: #43cbc5;
-}@media screen and (max-width: 420px) {
-  :host {
-    grid-auto-rows: fit-content(100%);
-    gap: 1.5rem;
-  }
-}
-:host .intervals-exercise__title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 140%;
-  color: #ffffff;
-}
-:host .play-button {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  margin: 0 auto;
-  width: 85px;
-  height: 85px;
-}
-:host .play-button .icon {
-  width: 35px;
-  height: 35px;
-  color: #ffffff;
-}:host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  box-sizing: border-box;
-}
-
-.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {
-  user-select: none;
-}
-
-.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {
-  cursor: pointer;
-}
-
-:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {
-  width: 80px;
-  height: 80px;
-  border: 1px solid #373a3f;
-  border-radius: 20px;
-  background: linear-gradient(-45deg, #26272b, #33363b);
-  color: #ffffff;
-  font-weight: bolder;
-}
-
-:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {
-  background: linear-gradient(-45deg, #33363b, #26272b);
-  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;
-}
-
-.neu-button {
-  width: 115px;
-  height: 115px;
-  border: 1px solid #373a3f;
-  border-radius: 20px;
-  background: linear-gradient(-45deg, #26272b, #33363b);
-  color: #ffffff;
-  font-weight: bolder;
-  font-size: 1.05rem;
-}
-
-.neu-button:active {
-  background: linear-gradient(-45deg, #33363b, #26272b);
-  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;
-}
-
-.menu-btn-close, .menu-btn-open {
-  background-color: transparent;
-}
-
-:host(.row-button-group) {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: 1px solid #373a3f;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-:host(.row-button-group) .neu-button {
-  width: unset;
-  height: unset;
-  border: 0;
-  border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
-  transition: color ease-out 0.15s;
-}
-
-:host(.row-button-group) .neu-button.active {
-  color: #43cbc5;
-}
-
-:host(.grid-button-group) {
-  display: inline-grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: 80px;
-  justify-content: center;
-  gap: 0.3rem;
-  width: 100%;
-}
-
-:host(.grid-button-group) > .neu-button {
-  width: 100%;
-  height: 100%;
-  font-size: 0.85rem;
-  transition: color ease-out 0.15s;
-}
-
-:host(.grid-button-group) > .neu-button.active {
-  color: #43cbc5;
-}
-
-:host(.grid-button-group) > .neu-button.success {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
-}
-
-:host(.grid-button-group) > .neu-button.failure {
-  color: red;
-  border: 1px solid red;
-}
-
-:host(.grid-button-group) > .neu-button.disabled {
-  opacity: 0.2;
-}
-
-@media screen and (max-width: 420px) {
-  :host(.grid-button-group) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }.content .dialog-content .intervals-option-buttons, .content .dialog-content, .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {
   margin: 0;
   padding: 0;
@@ -582,6 +443,32 @@ svg path {
   gap: 10px;
   width: 100%;
   padding: 20px 10px;
+}@media screen and (max-width: 420px) {
+  :host {
+    grid-auto-rows: fit-content(100%);
+    gap: 1.5rem;
+  }
+}
+:host .intervals-exercise__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 140%;
+  color: #ffffff;
+}
+:host .play-button {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 85px;
+  height: 85px;
+}
+:host .play-button .icon {
+  width: 35px;
+  height: 35px;
+  color: #ffffff;
 }.controls {
   display: flex;
   flex-flow: column nowrap;
@@ -704,6 +591,119 @@ svg path {
 
 :host(.grid-button-group) > .neu-button.active {
   color: #43cbc5;
+}
+
+@media screen and (max-width: 420px) {
+  :host(.grid-button-group) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}:host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {
+  user-select: none;
+}
+
+.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {
+  cursor: pointer;
+}
+
+:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #373a3f;
+  border-radius: 20px;
+  background: linear-gradient(-45deg, #26272b, #33363b);
+  color: #ffffff;
+  font-weight: bolder;
+}
+
+:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {
+  background: linear-gradient(-45deg, #33363b, #26272b);
+  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;
+}
+
+.neu-button {
+  width: 115px;
+  height: 115px;
+  border: 1px solid #373a3f;
+  border-radius: 20px;
+  background: linear-gradient(-45deg, #26272b, #33363b);
+  color: #ffffff;
+  font-weight: bolder;
+  font-size: 1.05rem;
+}
+
+.neu-button:active {
+  background: linear-gradient(-45deg, #33363b, #26272b);
+  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;
+}
+
+.menu-btn-close, .menu-btn-open {
+  background-color: transparent;
+}
+
+:host(.row-button-group) {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid #373a3f;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+:host(.row-button-group) .neu-button {
+  width: unset;
+  height: unset;
+  border: 0;
+  border-radius: 0;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  transition: color ease-out 0.15s;
+}
+
+:host(.row-button-group) .neu-button.active {
+  color: #43cbc5;
+}
+
+:host(.grid-button-group) {
+  display: inline-grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 80px;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+:host(.grid-button-group) > .neu-button {
+  width: 100%;
+  height: 100%;
+  font-size: 0.85rem;
+  transition: color ease-out 0.15s;
+}
+
+:host(.grid-button-group) > .neu-button.active {
+  color: #43cbc5;
+}
+
+:host(.grid-button-group) > .neu-button.success {
+  color: #43cbc5;
+  border: 1px solid #43cbc5;
+}
+
+:host(.grid-button-group) > .neu-button.failure {
+  color: red;
+  border: 1px solid red;
+}
+
+:host(.grid-button-group) > .neu-button.disabled {
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 420px) {
