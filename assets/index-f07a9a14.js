@@ -19500,7 +19500,7 @@ class IntervalsExerciseResultsPage extends Page {
   }
   getTemplateSchema() {
     const numberOfSuccessfulQuestions = (intervalsExerciseState.numberOfAllQuestions - intervalsExerciseState.numberOfWrongAnswers).toString();
-    const numberOfFailedQuestions = (intervalsExerciseState.numberOfAllQuestions - intervalsExerciseState.numberOfWrongAnswers).toString();
+    const numberOfAllQuestions = intervalsExerciseState.numberOfAllQuestions.toString();
     return {
       tagName: "div",
       cssClasses: "container",
@@ -19527,7 +19527,7 @@ class IntervalsExerciseResultsPage extends Page {
             {
               tagName: "span",
               cssClasses: "all",
-              children: numberOfFailedQuestions
+              children: numberOfAllQuestions
             }
           ]
         },
