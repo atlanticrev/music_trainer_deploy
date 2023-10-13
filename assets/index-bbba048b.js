@@ -19353,11 +19353,15 @@ class IntervalsExerciseState {
       numberOfWrongAnswers: 0
     });
   }
-  update(values) {
-    Object.assign(this, values);
+  updateSelectedVariant(variant) {
+    this.selectedVariant = variant;
+    this.numberOfCompletedQuestions++;
     if (!this.isSelectedVariantIsRight()) {
       this.numberOfWrongAnswers++;
     }
+  }
+  updateRightVariant(variant) {
+    this.rightVariant = variant;
   }
 }
 const intervalsExerciseState = new IntervalsExerciseState();
@@ -19443,10 +19447,7 @@ class IntervalsExercisePage extends Page {
       return;
     }
     playInterval(INTERVAL_NOTES[event.target.dataset.interval], intervalsOptionsState.playingMode);
-    intervalsExerciseState.update({
-      numberOfCompletedQuestions: intervalsExerciseState.numberOfCompletedQuestions + 1,
-      selectedVariant: event.target.dataset.interval
-    });
+    intervalsExerciseState.updateSelectedVariant(event.target.dataset.interval);
     for (const button of this._variantButtons.getButtons()) {
       const { interval } = button.dataset;
       if (interval === intervalsExerciseState.rightVariant) {
@@ -19466,7 +19467,7 @@ class IntervalsExercisePage extends Page {
       window.setTimeout(() => {
         this._variantButtons.reset();
         const nextInterval = getRandomInterval(audioSettings, intervalsOptionsState);
-        intervalsExerciseState.update({ rightVariant: nextInterval.name });
+        intervalsExerciseState.updateRightVariant(nextInterval.name);
         playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsOptionsState.playingMode);
       }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
     } else {
