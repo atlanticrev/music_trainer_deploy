@@ -15943,6 +15943,821 @@ __decorate([
 __decorate([
   timeRange(0)
 ], Sampler.prototype, "release", void 0);
+class ToneEvent extends ToneWithContext {
+  constructor() {
+    super(optionsFromArguments(ToneEvent.getDefaults(), arguments, ["callback", "value"]));
+    this.name = "ToneEvent";
+    this._state = new StateTimeline("stopped");
+    this._startOffset = 0;
+    const options = optionsFromArguments(ToneEvent.getDefaults(), arguments, ["callback", "value"]);
+    this._loop = options.loop;
+    this.callback = options.callback;
+    this.value = options.value;
+    this._loopStart = this.toTicks(options.loopStart);
+    this._loopEnd = this.toTicks(options.loopEnd);
+    this._playbackRate = options.playbackRate;
+    this._probability = options.probability;
+    this._humanize = options.humanize;
+    this.mute = options.mute;
+    this._playbackRate = options.playbackRate;
+    this._state.increasing = true;
+    this._rescheduleEvents();
+  }
+  static getDefaults() {
+    return Object.assign(ToneWithContext.getDefaults(), {
+      callback: noOp,
+      humanize: false,
+      loop: false,
+      loopEnd: "1m",
+      loopStart: 0,
+      mute: false,
+      playbackRate: 1,
+      probability: 1,
+      value: null
+    });
+  }
+  /**
+   * Reschedule all of the events along the timeline
+   * with the updated values.
+   * @param after Only reschedules events after the given time.
+   */
+  _rescheduleEvents(after = -1) {
+    this._state.forEachFrom(after, (event) => {
+      let duration;
+      if (event.state === "started") {
+        if (event.id !== -1) {
+          this.context.transport.clear(event.id);
+        }
+        const startTick = event.time + Math.round(this.startOffset / this._playbackRate);
+        if (this._loop === true || isNumber(this._loop) && this._loop > 1) {
+          duration = Infinity;
+          if (isNumber(this._loop)) {
+            duration = this._loop * this._getLoopDuration();
+          }
+          const nextEvent = this._state.getAfter(startTick);
+          if (nextEvent !== null) {
+            duration = Math.min(duration, nextEvent.time - startTick);
+          }
+          if (duration !== Infinity) {
+            this._state.setStateAtTime("stopped", startTick + duration + 1, { id: -1 });
+            duration = new TicksClass(this.context, duration);
+          }
+          const interval = new TicksClass(this.context, this._getLoopDuration());
+          event.id = this.context.transport.scheduleRepeat(this._tick.bind(this), interval, new TicksClass(this.context, startTick), duration);
+        } else {
+          event.id = this.context.transport.schedule(this._tick.bind(this), new TicksClass(this.context, startTick));
+        }
+      }
+    });
+  }
+  /**
+   * Returns the playback state of the note, either "started" or "stopped".
+   */
+  get state() {
+    return this._state.getValueAtTime(this.context.transport.ticks);
+  }
+  /**
+   * The start from the scheduled start time.
+   */
+  get startOffset() {
+    return this._startOffset;
+  }
+  set startOffset(offset) {
+    this._startOffset = offset;
+  }
+  /**
+   * The probability of the notes being triggered.
+   */
+  get probability() {
+    return this._probability;
+  }
+  set probability(prob) {
+    this._probability = prob;
+  }
+  /**
+   * If set to true, will apply small random variation
+   * to the callback time. If the value is given as a time, it will randomize
+   * by that amount.
+   * @example
+   * const event = new Tone.ToneEvent();
+   * event.humanize = true;
+   */
+  get humanize() {
+    return this._humanize;
+  }
+  set humanize(variation) {
+    this._humanize = variation;
+  }
+  /**
+   * Start the note at the given time.
+   * @param  time  When the event should start.
+   */
+  start(time) {
+    const ticks = this.toTicks(time);
+    if (this._state.getValueAtTime(ticks) === "stopped") {
+      this._state.add({
+        id: -1,
+        state: "started",
+        time: ticks
+      });
+      this._rescheduleEvents(ticks);
+    }
+    return this;
+  }
+  /**
+   * Stop the Event at the given time.
+   * @param  time  When the event should stop.
+   */
+  stop(time) {
+    this.cancel(time);
+    const ticks = this.toTicks(time);
+    if (this._state.getValueAtTime(ticks) === "started") {
+      this._state.setStateAtTime("stopped", ticks, { id: -1 });
+      const previousEvent = this._state.getBefore(ticks);
+      let reschedulTime = ticks;
+      if (previousEvent !== null) {
+        reschedulTime = previousEvent.time;
+      }
+      this._rescheduleEvents(reschedulTime);
+    }
+    return this;
+  }
+  /**
+   * Cancel all scheduled events greater than or equal to the given time
+   * @param  time  The time after which events will be cancel.
+   */
+  cancel(time) {
+    time = defaultArg(time, -Infinity);
+    const ticks = this.toTicks(time);
+    this._state.forEachFrom(ticks, (event) => {
+      this.context.transport.clear(event.id);
+    });
+    this._state.cancel(ticks);
+    return this;
+  }
+  /**
+   * The callback function invoker. Also
+   * checks if the Event is done playing
+   * @param  time  The time of the event in seconds
+   */
+  _tick(time) {
+    const ticks = this.context.transport.getTicksAtTime(time);
+    if (!this.mute && this._state.getValueAtTime(ticks) === "started") {
+      if (this.probability < 1 && Math.random() > this.probability) {
+        return;
+      }
+      if (this.humanize) {
+        let variation = 0.02;
+        if (!isBoolean(this.humanize)) {
+          variation = this.toSeconds(this.humanize);
+        }
+        time += (Math.random() * 2 - 1) * variation;
+      }
+      this.callback(time, this.value);
+    }
+  }
+  /**
+   * Get the duration of the loop.
+   */
+  _getLoopDuration() {
+    return Math.round((this._loopEnd - this._loopStart) / this._playbackRate);
+  }
+  /**
+   * If the note should loop or not
+   * between ToneEvent.loopStart and
+   * ToneEvent.loopEnd. If set to true,
+   * the event will loop indefinitely,
+   * if set to a number greater than 1
+   * it will play a specific number of
+   * times, if set to false, 0 or 1, the
+   * part will only play once.
+   */
+  get loop() {
+    return this._loop;
+  }
+  set loop(loop) {
+    this._loop = loop;
+    this._rescheduleEvents();
+  }
+  /**
+   * The playback rate of the note. Defaults to 1.
+   * @example
+   * const note = new Tone.ToneEvent();
+   * note.loop = true;
+   * // repeat the note twice as fast
+   * note.playbackRate = 2;
+   */
+  get playbackRate() {
+    return this._playbackRate;
+  }
+  set playbackRate(rate) {
+    this._playbackRate = rate;
+    this._rescheduleEvents();
+  }
+  /**
+   * The loopEnd point is the time the event will loop
+   * if ToneEvent.loop is true.
+   */
+  get loopEnd() {
+    return new TicksClass(this.context, this._loopEnd).toSeconds();
+  }
+  set loopEnd(loopEnd) {
+    this._loopEnd = this.toTicks(loopEnd);
+    if (this._loop) {
+      this._rescheduleEvents();
+    }
+  }
+  /**
+   * The time when the loop should start.
+   */
+  get loopStart() {
+    return new TicksClass(this.context, this._loopStart).toSeconds();
+  }
+  set loopStart(loopStart) {
+    this._loopStart = this.toTicks(loopStart);
+    if (this._loop) {
+      this._rescheduleEvents();
+    }
+  }
+  /**
+   * The current progress of the loop interval.
+   * Returns 0 if the event is not started yet or
+   * it is not set to loop.
+   */
+  get progress() {
+    if (this._loop) {
+      const ticks = this.context.transport.ticks;
+      const lastEvent = this._state.get(ticks);
+      if (lastEvent !== null && lastEvent.state === "started") {
+        const loopDuration = this._getLoopDuration();
+        const progress = (ticks - lastEvent.time) % loopDuration;
+        return progress / loopDuration;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  }
+  dispose() {
+    super.dispose();
+    this.cancel();
+    this._state.dispose();
+    return this;
+  }
+}
+class Part extends ToneEvent {
+  constructor() {
+    super(optionsFromArguments(Part.getDefaults(), arguments, ["callback", "events"]));
+    this.name = "Part";
+    this._state = new StateTimeline("stopped");
+    this._events = /* @__PURE__ */ new Set();
+    const options = optionsFromArguments(Part.getDefaults(), arguments, ["callback", "events"]);
+    this._state.increasing = true;
+    options.events.forEach((event) => {
+      if (isArray(event)) {
+        this.add(event[0], event[1]);
+      } else {
+        this.add(event);
+      }
+    });
+  }
+  static getDefaults() {
+    return Object.assign(ToneEvent.getDefaults(), {
+      events: []
+    });
+  }
+  /**
+   * Start the part at the given time.
+   * @param  time    When to start the part.
+   * @param  offset  The offset from the start of the part to begin playing at.
+   */
+  start(time, offset) {
+    const ticks = this.toTicks(time);
+    if (this._state.getValueAtTime(ticks) !== "started") {
+      offset = defaultArg(offset, this._loop ? this._loopStart : 0);
+      if (this._loop) {
+        offset = defaultArg(offset, this._loopStart);
+      } else {
+        offset = defaultArg(offset, 0);
+      }
+      const computedOffset = this.toTicks(offset);
+      this._state.add({
+        id: -1,
+        offset: computedOffset,
+        state: "started",
+        time: ticks
+      });
+      this._forEach((event) => {
+        this._startNote(event, ticks, computedOffset);
+      });
+    }
+    return this;
+  }
+  /**
+   * Start the event in the given event at the correct time given
+   * the ticks and offset and looping.
+   * @param  event
+   * @param  ticks
+   * @param  offset
+   */
+  _startNote(event, ticks, offset) {
+    ticks -= offset;
+    if (this._loop) {
+      if (event.startOffset >= this._loopStart && event.startOffset < this._loopEnd) {
+        if (event.startOffset < offset) {
+          ticks += this._getLoopDuration();
+        }
+        event.start(new TicksClass(this.context, ticks));
+      } else if (event.startOffset < this._loopStart && event.startOffset >= offset) {
+        event.loop = false;
+        event.start(new TicksClass(this.context, ticks));
+      }
+    } else if (event.startOffset >= offset) {
+      event.start(new TicksClass(this.context, ticks));
+    }
+  }
+  get startOffset() {
+    return this._startOffset;
+  }
+  set startOffset(offset) {
+    this._startOffset = offset;
+    this._forEach((event) => {
+      event.startOffset += this._startOffset;
+    });
+  }
+  /**
+   * Stop the part at the given time.
+   * @param  time  When to stop the part.
+   */
+  stop(time) {
+    const ticks = this.toTicks(time);
+    this._state.cancel(ticks);
+    this._state.setStateAtTime("stopped", ticks);
+    this._forEach((event) => {
+      event.stop(time);
+    });
+    return this;
+  }
+  /**
+   * Get/Set an Event's value at the given time.
+   * If a value is passed in and no event exists at
+   * the given time, one will be created with that value.
+   * If two events are at the same time, the first one will
+   * be returned.
+   * @example
+   * const part = new Tone.Part();
+   * part.at("1m"); // returns the part at the first measure
+   * part.at("2m", "C2"); // set the value at "2m" to C2.
+   * // if an event didn't exist at that time, it will be created.
+   * @param time The time of the event to get or set.
+   * @param value If a value is passed in, the value of the event at the given time will be set to it.
+   */
+  at(time, value) {
+    const timeInTicks = new TransportTimeClass(this.context, time).toTicks();
+    const tickTime = new TicksClass(this.context, 1).toSeconds();
+    const iterator = this._events.values();
+    let result = iterator.next();
+    while (!result.done) {
+      const event = result.value;
+      if (Math.abs(timeInTicks - event.startOffset) < tickTime) {
+        if (isDefined(value)) {
+          event.value = value;
+        }
+        return event;
+      }
+      result = iterator.next();
+    }
+    if (isDefined(value)) {
+      this.add(time, value);
+      return this.at(time);
+    } else {
+      return null;
+    }
+  }
+  add(time, value) {
+    if (time instanceof Object && Reflect.has(time, "time")) {
+      value = time;
+      time = value.time;
+    }
+    const ticks = this.toTicks(time);
+    let event;
+    if (value instanceof ToneEvent) {
+      event = value;
+      event.callback = this._tick.bind(this);
+    } else {
+      event = new ToneEvent({
+        callback: this._tick.bind(this),
+        context: this.context,
+        value
+      });
+    }
+    event.startOffset = ticks;
+    event.set({
+      humanize: this.humanize,
+      loop: this.loop,
+      loopEnd: this.loopEnd,
+      loopStart: this.loopStart,
+      playbackRate: this.playbackRate,
+      probability: this.probability
+    });
+    this._events.add(event);
+    this._restartEvent(event);
+    return this;
+  }
+  /**
+   * Restart the given event
+   */
+  _restartEvent(event) {
+    this._state.forEach((stateEvent) => {
+      if (stateEvent.state === "started") {
+        this._startNote(event, stateEvent.time, stateEvent.offset);
+      } else {
+        event.stop(new TicksClass(this.context, stateEvent.time));
+      }
+    });
+  }
+  remove(time, value) {
+    if (isObject(time) && time.hasOwnProperty("time")) {
+      value = time;
+      time = value.time;
+    }
+    time = this.toTicks(time);
+    this._events.forEach((event) => {
+      if (event.startOffset === time) {
+        if (isUndef(value) || isDefined(value) && event.value === value) {
+          this._events.delete(event);
+          event.dispose();
+        }
+      }
+    });
+    return this;
+  }
+  /**
+   * Remove all of the notes from the group.
+   */
+  clear() {
+    this._forEach((event) => event.dispose());
+    this._events.clear();
+    return this;
+  }
+  /**
+   * Cancel scheduled state change events: i.e. "start" and "stop".
+   * @param after The time after which to cancel the scheduled events.
+   */
+  cancel(after) {
+    this._forEach((event) => event.cancel(after));
+    this._state.cancel(this.toTicks(after));
+    return this;
+  }
+  /**
+   * Iterate over all of the events
+   */
+  _forEach(callback) {
+    if (this._events) {
+      this._events.forEach((event) => {
+        if (event instanceof Part) {
+          event._forEach(callback);
+        } else {
+          callback(event);
+        }
+      });
+    }
+    return this;
+  }
+  /**
+   * Set the attribute of all of the events
+   * @param  attr  the attribute to set
+   * @param  value      The value to set it to
+   */
+  _setAll(attr, value) {
+    this._forEach((event) => {
+      event[attr] = value;
+    });
+  }
+  /**
+   * Internal tick method
+   * @param  time  The time of the event in seconds
+   */
+  _tick(time, value) {
+    if (!this.mute) {
+      this.callback(time, value);
+    }
+  }
+  /**
+   * Determine if the event should be currently looping
+   * given the loop boundries of this Part.
+   * @param  event  The event to test
+   */
+  _testLoopBoundries(event) {
+    if (this._loop && (event.startOffset < this._loopStart || event.startOffset >= this._loopEnd)) {
+      event.cancel(0);
+    } else if (event.state === "stopped") {
+      this._restartEvent(event);
+    }
+  }
+  get probability() {
+    return this._probability;
+  }
+  set probability(prob) {
+    this._probability = prob;
+    this._setAll("probability", prob);
+  }
+  get humanize() {
+    return this._humanize;
+  }
+  set humanize(variation) {
+    this._humanize = variation;
+    this._setAll("humanize", variation);
+  }
+  /**
+   * If the part should loop or not
+   * between Part.loopStart and
+   * Part.loopEnd. If set to true,
+   * the part will loop indefinitely,
+   * if set to a number greater than 1
+   * it will play a specific number of
+   * times, if set to false, 0 or 1, the
+   * part will only play once.
+   * @example
+   * const part = new Tone.Part();
+   * // loop the part 8 times
+   * part.loop = 8;
+   */
+  get loop() {
+    return this._loop;
+  }
+  set loop(loop) {
+    this._loop = loop;
+    this._forEach((event) => {
+      event.loopStart = this.loopStart;
+      event.loopEnd = this.loopEnd;
+      event.loop = loop;
+      this._testLoopBoundries(event);
+    });
+  }
+  /**
+   * The loopEnd point determines when it will
+   * loop if Part.loop is true.
+   */
+  get loopEnd() {
+    return new TicksClass(this.context, this._loopEnd).toSeconds();
+  }
+  set loopEnd(loopEnd) {
+    this._loopEnd = this.toTicks(loopEnd);
+    if (this._loop) {
+      this._forEach((event) => {
+        event.loopEnd = loopEnd;
+        this._testLoopBoundries(event);
+      });
+    }
+  }
+  /**
+   * The loopStart point determines when it will
+   * loop if Part.loop is true.
+   */
+  get loopStart() {
+    return new TicksClass(this.context, this._loopStart).toSeconds();
+  }
+  set loopStart(loopStart) {
+    this._loopStart = this.toTicks(loopStart);
+    if (this._loop) {
+      this._forEach((event) => {
+        event.loopStart = this.loopStart;
+        this._testLoopBoundries(event);
+      });
+    }
+  }
+  /**
+   * The playback rate of the part
+   */
+  get playbackRate() {
+    return this._playbackRate;
+  }
+  set playbackRate(rate) {
+    this._playbackRate = rate;
+    this._setAll("playbackRate", rate);
+  }
+  /**
+   * The number of scheduled notes in the part.
+   */
+  get length() {
+    return this._events.size;
+  }
+  dispose() {
+    super.dispose();
+    this.clear();
+    return this;
+  }
+}
+class Sequence extends ToneEvent {
+  constructor() {
+    super(optionsFromArguments(Sequence.getDefaults(), arguments, ["callback", "events", "subdivision"]));
+    this.name = "Sequence";
+    this._part = new Part({
+      callback: this._seqCallback.bind(this),
+      context: this.context
+    });
+    this._events = [];
+    this._eventsArray = [];
+    const options = optionsFromArguments(Sequence.getDefaults(), arguments, ["callback", "events", "subdivision"]);
+    this._subdivision = this.toTicks(options.subdivision);
+    this.events = options.events;
+    this.loop = options.loop;
+    this.loopStart = options.loopStart;
+    this.loopEnd = options.loopEnd;
+    this.playbackRate = options.playbackRate;
+    this.probability = options.probability;
+    this.humanize = options.humanize;
+    this.mute = options.mute;
+    this.playbackRate = options.playbackRate;
+  }
+  static getDefaults() {
+    return Object.assign(omitFromObject(ToneEvent.getDefaults(), ["value"]), {
+      events: [],
+      loop: true,
+      loopEnd: 0,
+      loopStart: 0,
+      subdivision: "8n"
+    });
+  }
+  /**
+   * The internal callback for when an event is invoked
+   */
+  _seqCallback(time, value) {
+    if (value !== null) {
+      this.callback(time, value);
+    }
+  }
+  /**
+   * The sequence
+   */
+  get events() {
+    return this._events;
+  }
+  set events(s) {
+    this.clear();
+    this._eventsArray = s;
+    this._events = this._createSequence(this._eventsArray);
+    this._eventsUpdated();
+  }
+  /**
+   * Start the part at the given time.
+   * @param  time    When to start the part.
+   * @param  offset  The offset index to start at
+   */
+  start(time, offset) {
+    this._part.start(time, offset ? this._indexTime(offset) : offset);
+    return this;
+  }
+  /**
+   * Stop the part at the given time.
+   * @param  time  When to stop the part.
+   */
+  stop(time) {
+    this._part.stop(time);
+    return this;
+  }
+  /**
+   * The subdivision of the sequence. This can only be
+   * set in the constructor. The subdivision is the
+   * interval between successive steps.
+   */
+  get subdivision() {
+    return new TicksClass(this.context, this._subdivision).toSeconds();
+  }
+  /**
+   * Create a sequence proxy which can be monitored to create subsequences
+   */
+  _createSequence(array) {
+    return new Proxy(array, {
+      get: (target, property) => {
+        return target[property];
+      },
+      set: (target, property, value) => {
+        if (isString(property) && isFinite(parseInt(property, 10))) {
+          if (isArray(value)) {
+            target[property] = this._createSequence(value);
+          } else {
+            target[property] = value;
+          }
+        } else {
+          target[property] = value;
+        }
+        this._eventsUpdated();
+        return true;
+      }
+    });
+  }
+  /**
+   * When the sequence has changed, all of the events need to be recreated
+   */
+  _eventsUpdated() {
+    this._part.clear();
+    this._rescheduleSequence(this._eventsArray, this._subdivision, this.startOffset);
+    this.loopEnd = this.loopEnd;
+  }
+  /**
+   * reschedule all of the events that need to be rescheduled
+   */
+  _rescheduleSequence(sequence, subdivision, startOffset) {
+    sequence.forEach((value, index) => {
+      const eventOffset = index * subdivision + startOffset;
+      if (isArray(value)) {
+        this._rescheduleSequence(value, subdivision / value.length, eventOffset);
+      } else {
+        const startTime = new TicksClass(this.context, eventOffset, "i").toSeconds();
+        this._part.add(startTime, value);
+      }
+    });
+  }
+  /**
+   * Get the time of the index given the Sequence's subdivision
+   * @param  index
+   * @return The time of that index
+   */
+  _indexTime(index) {
+    return new TicksClass(this.context, index * this._subdivision + this.startOffset).toSeconds();
+  }
+  /**
+   * Clear all of the events
+   */
+  clear() {
+    this._part.clear();
+    return this;
+  }
+  dispose() {
+    super.dispose();
+    this._part.dispose();
+    return this;
+  }
+  //-------------------------------------
+  // PROXY CALLS
+  //-------------------------------------
+  get loop() {
+    return this._part.loop;
+  }
+  set loop(l) {
+    this._part.loop = l;
+  }
+  /**
+   * The index at which the sequence should start looping
+   */
+  get loopStart() {
+    return this._loopStart;
+  }
+  set loopStart(index) {
+    this._loopStart = index;
+    this._part.loopStart = this._indexTime(index);
+  }
+  /**
+   * The index at which the sequence should end looping
+   */
+  get loopEnd() {
+    return this._loopEnd;
+  }
+  set loopEnd(index) {
+    this._loopEnd = index;
+    if (index === 0) {
+      this._part.loopEnd = this._indexTime(this._eventsArray.length);
+    } else {
+      this._part.loopEnd = this._indexTime(index);
+    }
+  }
+  get startOffset() {
+    return this._part.startOffset;
+  }
+  set startOffset(start2) {
+    this._part.startOffset = start2;
+  }
+  get playbackRate() {
+    return this._part.playbackRate;
+  }
+  set playbackRate(rate) {
+    this._part.playbackRate = rate;
+  }
+  get probability() {
+    return this._part.probability;
+  }
+  set probability(prob) {
+    this._part.probability = prob;
+  }
+  get progress() {
+    return this._part.progress;
+  }
+  get humanize() {
+    return this._part.humanize;
+  }
+  set humanize(variation) {
+    this._part.humanize = variation;
+  }
+  /**
+   * The number of scheduled events
+   */
+  get length() {
+    return this._part.length;
+  }
+}
 class Panner extends ToneAudioNode {
   constructor() {
     super(Object.assign(optionsFromArguments(Panner.getDefaults(), arguments, ["pan"])));
@@ -16324,7 +17139,7 @@ getContext().destination;
 getContext().listener;
 getContext().draw;
 getContext();
-const styles$a = ":host {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\nsvg {\n  width: 100%;\n  height: 100%;\n}\n\nsvg path {\n  fill: #636363;\n  transition: all ease-out 0.25s;\n}\n\n:host(.active) svg path {\n  fill: #43cbc5;\n}";
+const styles$h = ":host {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\nsvg {\n  width: 100%;\n  height: 100%;\n}\n\nsvg path {\n  fill: #636363;\n  transition: all ease-out 0.25s;\n}\n\n:host(.active) svg path {\n  fill: #43cbc5;\n}";
 const _utilElContainer = document.createElement("div");
 const createElFromString = (schema) => {
   _utilElContainer.innerHTML = schema;
@@ -16478,7 +17293,7 @@ class Icon extends CustomElement {
     return super.getTemplateSchema();
   }
   getElementStyles() {
-    return styles$a.toString();
+    return styles$h.toString();
   }
 }
 class ProfileIcon extends Icon {
@@ -16705,7 +17520,7 @@ class ReplayIcon extends Icon {
   }
 }
 customElements.define(getTagNameByCtor(ReplayIcon), ReplayIcon);
-const styles$9 = ".side-panel .side-panel-header .menu-btn-close, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.side-panel .side-panel-header .menu-btn-close, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.side-panel .side-panel-header .menu-btn-close:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.side-panel .side-panel-header .menu-btn-close, .menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.side-panel .controls, .side-panel .side-panel-header {\n  padding: 0 10px;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.side-panel-container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100vh;\n  z-index: 15;\n}\n\n.side-panel-overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.side-panel {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 300px;\n  height: 100%;\n  background-color: #26272b;\n  border-right: 1px solid #373a3f;\n  z-index: 2;\n  transform: translate(-100%, 0);\n}\n\n.side-panel .side-panel-header {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  height: 45px;\n}\n\n.side-panel .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$g = ".side-panel .side-panel-header .menu-btn-close, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, .side-panel .side-panel-header .menu-btn-close, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .side-panel .side-panel-header .menu-btn-close:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.side-panel .side-panel-header .menu-btn-close, .menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.side-panel .controls, .side-panel .side-panel-header {\n  padding: 0 10px;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.side-panel-container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100vh;\n  z-index: 15;\n}\n\n.side-panel-overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.side-panel {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 300px;\n  height: 100%;\n  background-color: #26272b;\n  border-right: 1px solid #373a3f;\n  z-index: 2;\n  transform: translate(-100%, 0);\n}\n\n.side-panel .side-panel-header {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  height: 45px;\n}\n\n.side-panel .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class SidePanel extends CustomElement {
   constructor() {
     super();
@@ -16805,7 +17620,7 @@ class SidePanel extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$9.toString();
+    return styles$g.toString();
   }
   toggleSidePanel() {
     if (this._isOpened) {
@@ -16816,99 +17631,290 @@ class SidePanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(SidePanel), SidePanel);
-const styles$8 = ".menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n:host button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n:host button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n\n@media screen and (min-width: 1200px) {\n  :host :host {\n    display: none;\n  }\n}\n\n:host button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  padding: 0;\n  border: 0;\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\n\n:host button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\n\n:host button > img > svg {\n  width: 100%;\n  height: 100%;\n}\n\n:host button.active {\n  color: #43cbc5;\n}";
-const getExercisesPageSchema = () => ({
-  tagName: "x-button-options-grid",
-  children: [
-    {
-      tagName: "div",
-      cssClasses: "grid-cell",
-      children: {
-        tagName: "button",
-        cssClasses: "neu-button",
-        attrs: { "data-route": "intervals-options" },
-        children: "Intervals"
-      }
-    },
-    {
-      tagName: "div",
-      cssClasses: "grid-cell",
-      children: {
-        tagName: "button",
-        cssClasses: "neu-button",
-        attrs: { "data-route": "chords" },
-        children: "Chords"
-      }
-    },
-    {
-      tagName: "div",
-      cssClasses: "grid-cell",
-      children: {
-        tagName: "button",
-        cssClasses: "neu-button",
-        attrs: { "data-route": "scales" },
-        children: "Scales"
-      }
-    }
-  ]
-});
-const INTERVAL_NOTES = {
-  unison: [0, 0],
-  min2: [0, 1],
-  maj2: [0, 2],
-  min3: [0, 3],
-  maj3: [0, 4],
-  perf4: [0, 5],
-  tritone: [0, 6],
-  perf5: [0, 7],
-  min6: [0, 8],
-  maj6: [0, 9],
-  min7: [0, 10],
-  maj7: [0, 11],
-  octave: [0, 12]
+const styles$f = ".menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n:host button, .neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n:host button:hover, .neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n\n@media screen and (min-width: 1200px) {\n  :host :host {\n    display: none;\n  }\n}\n\n:host button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  padding: 0;\n  border: 0;\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\n\n:host button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\n\n:host button > img > svg {\n  width: 100%;\n  height: 100%;\n}\n\n:host button.active {\n  color: #43cbc5;\n}";
+const BOTTOM_MENU_BUTTON_NAMES = {
+  HOME: "home",
+  EXERCISES: "exercises",
+  UTILS: "utils",
+  SETTINGS: "settings",
+  PROFILE: "profile"
 };
-function between(min, max) {
-  const range2 = max - min;
-  return min + Math.random() * range2;
-}
-function betweenInt(min, max) {
-  return Math.round(between(min, max));
-}
-const getRandomInterval = (audioConfig2, options) => {
-  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
-  const intervalName = options.selectedIntervals[intervalValueIndex];
-  const intervalValue = INTERVAL_NOTES[intervalName];
-  return {
-    name: intervalName,
-    notes: intervalValue
-  };
-};
-class IntervalsExerciseState {
+const ROUTER_ROUTE_TO_EVENT = "ROUTER_ROUTE_TO_EVENT";
+class BottomPanel extends CustomElement {
   constructor() {
-    __publicField(this, "numberOfAllQuestions", 0);
-    __publicField(this, "numberOfCompletedQuestions", 0);
-    __publicField(this, "variants", []);
-    __publicField(this, "rightVariant", null);
-    __publicField(this, "selectedVariant", null);
-    // todo Move it to the right place
-    __publicField(this, "currentIntervalNotes", null);
-    __publicField(this, "isSelectedVariantIsRight", () => this.selectedVariant === this.rightVariant);
-    __publicField(this, "reset", (options) => {
-      const initInterval = getRandomInterval(audioConfig, options);
-      Object.assign(this, {
-        numberOfAllQuestions: options.numberOfQuestions,
-        numberOfCompletedQuestions: 0,
-        variants: options.selectedIntervals,
-        rightVariant: initInterval.name,
-        selectedVariant: null,
-        currentIntervalNotes: initInterval.notes
-      });
-    });
+    super();
+    __publicField(this, "activeBtn");
+    __publicField(this, "buttons");
+    __publicField(this, "initActiveBtnName", BOTTOM_MENU_BUTTON_NAMES.HOME);
+    this.buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
+    this.setActive(this.initActiveBtnName);
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+  static get observedAttributes() {
+    return ["active"];
+  }
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (attr === "active" && oldValue !== newValue) {
+      this.setActive(newValue.slice(1));
+    }
+  }
+  connectedCallback() {
+    this.shadowRoot.addEventListener("click", this.onBtnClick);
+  }
+  getTemplateSchema() {
+    return [
+      {
+        tagName: "button",
+        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.HOME },
+        children: [
+          { tagName: "x-home-icon" },
+          {
+            tagName: "span",
+            cssClasses: ["btn-text"],
+            children: "Home"
+          }
+        ]
+      },
+      {
+        tagName: "button",
+        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.EXERCISES },
+        children: [
+          { tagName: "x-exercises-icon" },
+          {
+            tagName: "span",
+            cssClasses: ["btn-text"],
+            children: "Exercises"
+          }
+        ]
+      },
+      {
+        tagName: "button",
+        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.UTILS },
+        children: [
+          { tagName: "x-utils-icon" },
+          {
+            tagName: "span",
+            cssClasses: ["btn-text"],
+            children: "Utils"
+          }
+        ]
+      },
+      {
+        tagName: "button",
+        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.SETTINGS },
+        children: [
+          { tagName: "x-settings-icon" },
+          {
+            tagName: "span",
+            cssClasses: ["btn-text"],
+            children: "Settings"
+          }
+        ]
+      },
+      {
+        tagName: "button",
+        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.PROFILE },
+        children: [
+          { tagName: "x-profile-icon" },
+          {
+            tagName: "span",
+            cssClasses: ["btn-text"],
+            children: "Profile"
+          }
+        ]
+      }
+    ];
+  }
+  getElementStyles() {
+    return styles$f.toString();
+  }
+  getActiveBtnIcon() {
+    return Array.from(this.activeBtn.children).find((child) => child instanceof Icon);
+  }
+  setActive(btnName) {
+    var _a, _b, _c, _d;
+    const pushedBtn = this.buttons.find((btn) => btn.dataset.name === btnName);
+    if (this.activeBtn) {
+      this.activeBtn.classList.remove("active");
+      (_b = (_a = this.getActiveBtnIcon()) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
+    }
+    this.activeBtn = pushedBtn;
+    this.activeBtn.classList.add("active");
+    (_d = (_c = this.getActiveBtnIcon()) == null ? void 0 : _c.classList) == null ? void 0 : _d.toggle("active");
+  }
+  onBtnClick(e) {
+    e.stopPropagation();
+    const btn = e.composedPath().find((el) => el.tagName === "BUTTON");
+    if (btn && this.buttons.includes(btn)) {
+      if (btn !== this.activeBtn) {
+        this.setActive(btn.dataset.name);
+      }
+      this.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: btn.dataset.name }));
+    }
   }
 }
-const intervalsExerciseState = new IntervalsExerciseState();
-window.intervalsExerciseState = intervalsExerciseState;
-const styles$7 = ".content .dialog-content .intervals-option-buttons, .content .dialog-content, .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.content .controls, .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\n.overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 80%;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  z-index: 2;\n  transform: translate(0, 100%);\n}\n\n.content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\n.content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
+const styles$e = ":host, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  display: grid;\n  grid-template-columns: repeat(3, fit-content(100%));\n  grid-auto-rows: 1fr;\n  width: 100%;\n  gap: 1rem;\n  padding: 1rem;\n}\n\n:host > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  :host {\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
+class Grid extends CustomElement {
+  getElementStyles() {
+    return styles$e.toString();
+  }
+}
+customElements.define(getTagNameByCtor(Grid), Grid);
+const styles$d = ".menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  gap: 0.5rem;\n}\n\n:host > .grid-cell > button {\n  font-size: 1.2rem;\n}\n\n@media screen and (max-width: 420px) {\n  :host > .grid-cell > button {\n    width: 100%;\n  }\n}";
+class ButtonOptionsGrid extends Grid {
+  // todo Its not beauty, rework it
+  getElementStyles() {
+    return [
+      super.getElementStyles(),
+      styles$d.toString()
+    ].join("\n\n");
+  }
+  connectedCallback() {
+    const buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
+    for (const button of buttons) {
+      const routeTo = button.dataset.route;
+      if (routeTo) {
+        button.addEventListener("click", () => {
+          this.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: routeTo }));
+        });
+      }
+    }
+  }
+}
+customElements.define(getTagNameByCtor(ButtonOptionsGrid), ButtonOptionsGrid);
+const styles$c = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
+const _ButtonGroup = class _ButtonGroup extends CustomElement {
+  constructor() {
+    super();
+    __publicField(this, "_name");
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+  connectedCallback() {
+    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
+    const activeButton = this._buttons.find((button) => button.hasAttribute("active"));
+    if (activeButton) {
+      this.setActive(activeButton);
+    }
+    this._name = this.getAttribute("name");
+    this.shadowRoot.addEventListener("click", this.onBtnClick);
+  }
+  getElementStyles() {
+    return styles$c.toString();
+  }
+  getActiveBtnIcon() {
+    return Array.from(this.activeButton.children).find((child) => child instanceof Icon);
+  }
+  getSelectedOption() {
+    return this.activeButton.dataset.value;
+  }
+  getName() {
+    return this._name;
+  }
+  setActive(pushedButton) {
+    var _a, _b, _c, _d;
+    if (this.activeButton) {
+      this.activeButton.classList.remove("active");
+      (_b = (_a = this.getActiveBtnIcon()) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
+    }
+    this.activeButton = pushedButton;
+    this.activeButton.classList.add("active");
+    (_d = (_c = this.getActiveBtnIcon()) == null ? void 0 : _c.classList) == null ? void 0 : _d.add("active");
+  }
+  onBtnClick(e) {
+    e.stopPropagation();
+    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
+    if (button && this._buttons.includes(button)) {
+      if (button !== this.activeButton) {
+        this.setActive(button);
+      }
+      this.dispatchEvent(
+        createEvent(_ButtonGroup.EVENT_OPTION_SELECTED, {
+          name: this.getName(),
+          value: this.activeButton.dataset.value
+        })
+      );
+    }
+  }
+};
+__publicField(_ButtonGroup, "EVENT_OPTION_SELECTED", "EVENT_OPTION_SELECTED");
+let ButtonGroup = _ButtonGroup;
+customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
+const styles$b = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.success {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.failure {\n  color: red;\n  border: 1px solid red;\n}\n\n:host(.grid-button-group) > .neu-button.disabled {\n  opacity: 0.2;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
+const _ButtonGroupMultiple = class _ButtonGroupMultiple extends CustomElement {
+  constructor() {
+    super();
+    __publicField(this, "_name");
+    __publicField(this, "_selectedOptions");
+    __publicField(this, "_locked", false);
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+  connectedCallback() {
+    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
+    this._name = this.getAttribute("name");
+    this.shadowRoot.addEventListener("click", this.onBtnClick);
+  }
+  getElementStyles() {
+    return styles$b.toString();
+  }
+  getPushedButtonIcon(pushedButton) {
+    return Array.from(pushedButton.children).find((child) => child instanceof Icon);
+  }
+  getSelectedOptions() {
+    return this._buttons.filter((button) => button.classList.contains("active")).map((button) => button.dataset.value);
+  }
+  getName() {
+    return this._name;
+  }
+  toggleButtonActive(pushedButton) {
+    var _a, _b;
+    pushedButton.classList.toggle("active");
+    (_b = (_a = this.getPushedButtonIcon(pushedButton)) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
+  }
+  getButtons() {
+    return this._buttons;
+  }
+  onBtnClick(e) {
+    e.stopPropagation();
+    if (this.isLocked()) {
+      return;
+    }
+    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
+    if (button && this._buttons.includes(button)) {
+      this.toggleButtonActive(button);
+      this.dispatchEvent(
+        createEvent(_ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, {
+          name: this.getName(),
+          value: this.getSelectedOptions()
+        })
+      );
+    }
+  }
+  isLocked() {
+    return this._locked;
+  }
+  lock() {
+    this._locked = true;
+  }
+  unlock() {
+    this._locked = false;
+  }
+  reset() {
+    var _a, _b;
+    this.unlock();
+    for (const button of this.getButtons()) {
+      button.classList.remove("disabled");
+      button.classList.remove("active");
+      button.classList.remove("success");
+      button.classList.remove("failure");
+      (_b = (_a = this.getPushedButtonIcon(button)) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
+    }
+  }
+};
+__publicField(_ButtonGroupMultiple, "EVENT_OPTIONS_SELECTED", "EVENT_OPTIONS_SELECTED");
+let ButtonGroupMultiple = _ButtonGroupMultiple;
+customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
+const styles$a = ".content .dialog-content .intervals-option-buttons, .content .dialog-content, .content .dialog-header .dialog-close-button, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.content .dialog-header .dialog-close-button, .neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.content .dialog-header .dialog-close-button:hover, .neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.content .controls, .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\n.overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 80%;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  z-index: 2;\n  transform: translate(0, 100%);\n}\n\n.content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\n.content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class Dialog extends CustomElement {
   constructor() {
     super();
@@ -17029,7 +18035,7 @@ class Dialog extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$7.toString();
+    return styles$a.toString();
   }
   setSlotContent(el) {
     this._slot.replaceChildren(el);
@@ -17044,7 +18050,7 @@ class Dialog extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Dialog), Dialog);
-const styles$6 = ".container .content .dialog-content .actions-container, .container .content .dialog-content, .container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.container .content .dialog-header .dialog-close-button, .menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.container .content .dialog-header .dialog-close-button:hover, .menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.container .content .dialog-content .controls, .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 15;\n}\n\n.container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 400px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-radius: 24px;\n  z-index: 2;\n}\n\n.container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container {\n  display: grid;\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container > button {\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n.container .content .dialog-content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$9 = ".container .content .dialog-content .actions-container, .container .content .dialog-content, .container .content .dialog-header .dialog-close-button, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.container .content .dialog-header .dialog-close-button, .neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.container .content .dialog-header .dialog-close-button:hover, .neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.container .content .dialog-content .controls, .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.container {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 15;\n}\n\n.container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\n.container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 400px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n  border-radius: 24px;\n  z-index: 2;\n}\n\n.container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\n.container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\n.container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container {\n  display: grid;\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\n.container .content .dialog-content .actions-container > button {\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n.container .content .dialog-content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class ModalDialog extends Dialog {
   constructor() {
     super(...arguments);
@@ -17102,994 +18108,16 @@ class ModalDialog extends Dialog {
     });
   }
   getElementStyles() {
-    return styles$6.toString();
+    return styles$9.toString();
   }
 }
 __publicField(ModalDialog, "EVENT_OPTION_SELECTED", "EVENT_OPTION_SELECTED");
 customElements.define(getTagNameByCtor(ModalDialog), ModalDialog);
-const chords = {
-  // Triads
-  Maj3: [0, 4, 7],
-  Maj6: [4, 7, 12],
-  Maj46: [7, 12, 16],
-  Min3: [0, 3, 7],
-  Min6: [3, 7, 12],
-  Min46: [7, 12, 15],
-  Sus2: [0, 2, 7],
-  Sus4: [0, 5, 7],
-  Sus42: [0, 2, 5, 7],
-  Min6th: [0, 3, 7, 9],
-  Maj6th: [0, 4, 7, 9],
-  // Seventh
-  Min7: [0, 3, 7, 10],
-  Min7InvIII: [10, 12, 3, 7],
-  D7: [0, 4, 7, 10],
-  D7InvIII: [10, 12, 4, 7],
-  Maj7: [0, 4, 7, 11],
-  Maj7InvIII: [11, 12, 4, 7],
-  Dim: [0, 3, 6, 9],
-  Min7b5: [0, 3, 6, 10],
-  Aug: [0, 4, 8, 12],
-  // Added steps (9, 11, 13)
-  Maj39: [0, 4, 7, 14],
-  Maj39InvIII: [2, 4, 7, 12],
-  // todo (?)
-  Min39: [0, 3, 7, 14],
-  Min39InvIII: [2, 3, 7, 12],
-  // todo (?)
-  Maj79: [0, 4, 7, 11, 14],
-  Min79: [0, 3, 7, 10, 14],
-  D79: [0, 4, 7, 10, 14],
-  D7b9: [0, 4, 7, 10, 13]
+const styles$8 = ':host {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\n:host:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\n:host .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\n:host .indicator .counter {\n  font-size: 1.2rem;\n}\n:host .indicator .percent {\n  font-size: 0.75rem;\n}';
+const formatFraction = (fractionNumberStr) => {
+  const [integerPart, fractionPart] = fractionNumberStr.split(".");
+  return `${integerPart}${fractionPart > 0 ? `.${fractionPart}` : ""}`;
 };
-const createChord = (root, chord) => chord.map((tones) => Frequency(root).transpose(tones).toNote());
-const startPlaying = () => {
-  start();
-  if (audioConfig.isPlaying) {
-    audioConfig.isPlaying = false;
-    Transport2.cancel();
-    if (Transport2.state !== "stopped") {
-      Transport2.stop();
-    }
-  }
-  audioConfig.isPlaying = true;
-};
-const playInterval = (intervalNotes) => {
-  startPlaying();
-  const interval = createChord(`${audioConfig.activeTonality}${audioConfig.activeOctave}`, intervalNotes);
-  audioConfig.activeInstrument.triggerAttackRelease(interval, "2n");
-  Transport2.start();
-};
-const style$1 = "@media screen and (max-width: 420px) {\n  :host {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n:host .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n:host .play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n:host .play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
-const INTERVAL_EXERCISE_SETTINGS = "interval_exercise_settings";
-const localStorageService = {
-  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
-  write: (key, value) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  },
-  update: (key, value) => {
-    const lastValue = localStorageService.read(key);
-    localStorageService.write(key, Object.assign(lastValue, value));
-  }
-};
-const initIntervalOptionsState = () => {
-  const defaultSettings = {
-    numberOfQuestions: 10,
-    playingMode: "asc",
-    selectedIntervals: Object.keys(INTERVAL_NOTES)
-  };
-  const lastSettings = localStorageService.read(INTERVAL_EXERCISE_SETTINGS);
-  const intervalOptionsState = {
-    ...defaultSettings,
-    ...lastSettings
-  };
-  window.intervalOptionsState = intervalOptionsState;
-  const NUMBER_OF_QUESTION_OPTIONS = [
-    {
-      label: "10",
-      value: "10"
-    },
-    {
-      label: "20",
-      value: "20"
-    },
-    {
-      label: "40",
-      value: "40"
-    }
-  ];
-  const numberOfQuestionsActiveOption = NUMBER_OF_QUESTION_OPTIONS.find((option) => option.value === intervalOptionsState.numberOfQuestions.toString());
-  if (numberOfQuestionsActiveOption) {
-    numberOfQuestionsActiveOption.isActive = true;
-  }
-  const PLAYING_MODE_OPTIONS = [
-    {
-      label: "Asc",
-      value: "asc"
-    },
-    {
-      label: "Desc",
-      value: "desc"
-    },
-    {
-      label: "Harm",
-      value: "harm"
-    }
-  ];
-  const playingModeActiveOption = PLAYING_MODE_OPTIONS.find((option) => option.value === intervalOptionsState.playingMode);
-  if (playingModeActiveOption) {
-    playingModeActiveOption.isActive = true;
-  }
-  const INTERVALS_OPTIONS = [
-    {
-      label: "Unison",
-      value: "unison"
-    },
-    {
-      label: "Min2",
-      value: "min2"
-    },
-    {
-      label: "Maj2",
-      value: "maj2"
-    },
-    {
-      label: "Min3",
-      value: "min3"
-    },
-    {
-      label: "Maj3",
-      value: "maj3"
-    },
-    {
-      label: "Perf4",
-      value: "perf4"
-    },
-    {
-      label: "Tritone",
-      value: "tritone"
-    },
-    {
-      label: "Perf5",
-      value: "perf5"
-    },
-    {
-      label: "Min6",
-      value: "min6"
-    },
-    {
-      label: "Maj6",
-      value: "maj6"
-    },
-    {
-      label: "Min7",
-      value: "min7"
-    },
-    {
-      label: "Maj7",
-      value: "maj7"
-    },
-    {
-      label: "Octave",
-      value: "octave"
-    }
-  ];
-  INTERVALS_OPTIONS.forEach((intervalOption) => {
-    if (intervalOptionsState.selectedIntervals.includes(intervalOption.value)) {
-      intervalOption.isActive = true;
-    }
-  });
-  return {
-    intervalOptionsState,
-    NUMBER_OF_QUESTION_OPTIONS,
-    PLAYING_MODE_OPTIONS,
-    INTERVALS_OPTIONS
-  };
-};
-const intervalsOptionsState = initIntervalOptionsState();
-const DELAY_BEFORE_INIT_INTERVAL_PLAYING = 250;
-const DELAY_BEFORE_NEXT_INTERVAL_PLAYING = 1500;
-const getIntervalsPageSchema = (audioConfig2) => {
-  const { intervalOptionsState: options } = intervalsOptionsState;
-  intervalsExerciseState.reset(options);
-  window.setTimeout(() => {
-    playInterval(intervalsExerciseState.currentIntervalNotes);
-  }, DELAY_BEFORE_INIT_INTERVAL_PLAYING);
-  return {
-    tagName: "x-grid",
-    children: [
-      {
-        tagName: "style",
-        children: style$1.toString()
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "span",
-          cssClasses: "intervals-exercise__title",
-          children: "Intervals recognition"
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "x-progress",
-          cssClasses: "",
-          attrs: {
-            progress: JSON.stringify({
-              all: intervalsExerciseState.numberOfAllQuestions,
-              completed: intervalsExerciseState.numberOfCompletedQuestions
-            })
-          }
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "button",
-          cssClasses: ["neu-button", "play-button"],
-          children: [
-            {
-              tagName: "x-replay-icon",
-              cssClasses: ["icon", "icon_replay"]
-            }
-          ],
-          events: { click: () => playInterval(intervalsExerciseState.currentIntervalNotes) }
-        }
-      },
-      {
-        tagName: "x-button-group-multiple",
-        cssClasses: "grid-button-group",
-        attrs: {
-          name: "interval-selection",
-          "highlight-active": false
-        },
-        children: intervalsExerciseState.variants.map((intervalValue) => ({
-          tagName: "button",
-          cssClasses: ["neu-button"],
-          attrs: { "data-interval": intervalValue },
-          children: intervalValue,
-          events: {
-            // todo All logic need to be placed above!
-            click: (e) => {
-              const buttonGroupEl = e.target.getRootNode().host;
-              if (buttonGroupEl.isLocked()) {
-                return;
-              }
-              playInterval(INTERVAL_NOTES[e.target.dataset.interval]);
-              Object.assign(intervalsExerciseState, {
-                numberOfCompletedQuestions: intervalsExerciseState.numberOfCompletedQuestions + 1,
-                selectedVariant: e.target.dataset.interval
-              });
-              const variantButtons = buttonGroupEl.getButtons();
-              for (const button of variantButtons) {
-                if (button.dataset.interval === intervalsExerciseState.rightVariant) {
-                  button.classList.add("success");
-                } else if (button.dataset.interval === intervalsExerciseState.selectedVariant && intervalsExerciseState.selectedVariant !== intervalsExerciseState.rightVariant) {
-                  button.classList.add("failure");
-                } else {
-                  button.classList.add("disabled");
-                }
-              }
-              const progressEl = buttonGroupEl.getRootNode().querySelector("x-progress");
-              progressEl.setProgress({
-                all: intervalsExerciseState.numberOfAllQuestions,
-                completed: intervalsExerciseState.numberOfCompletedQuestions
-              });
-              buttonGroupEl.lock();
-              if (intervalsExerciseState.numberOfCompletedQuestions < intervalsExerciseState.numberOfAllQuestions) {
-                window.setTimeout(() => {
-                  buttonGroupEl.reset();
-                  const nextInterval = getRandomInterval(audioConfig2, options);
-                  Object.assign(intervalsExerciseState, {
-                    rightVariant: nextInterval.name,
-                    currentIntervalNotes: nextInterval.notes
-                  });
-                  playInterval(intervalsExerciseState.currentIntervalNotes);
-                }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
-              } else {
-                window.setTimeout(() => {
-                  const dialog = createElTreeFromSchema({ tagName: "x-modal-dialog" });
-                  const onDialogOptionClick = (event) => {
-                    const { name } = event.detail;
-                    switch (name) {
-                      case "repeat": {
-                        dialog.close();
-                        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
-                        break;
-                      }
-                    }
-                  };
-                  dialog.setSlotContent(createElTreeFromSchema({
-                    tagName: "div",
-                    cssClasses: "actions-container",
-                    children: {
-                      tagName: "button",
-                      cssClasses: "neu-button",
-                      attrs: { "data-value": "repeat" },
-                      children: "Repeat",
-                      events: {
-                        click: () => {
-                          dialog.dispatchEvent(createEvent(ModalDialog.EVENT_OPTION_SELECTED, { name: "repeat" }));
-                        }
-                      }
-                    }
-                  }));
-                  dialog.onOpened(() => {
-                    dialog.addEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
-                  });
-                  dialog.onClosed(() => {
-                    dialog.removeEventListener(ModalDialog.EVENT_OPTION_SELECTED, onDialogOptionClick);
-                  });
-                  document.body.append(dialog);
-                  dialog.open();
-                }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
-              }
-            }
-          }
-        }))
-      }
-    ]
-  };
-};
-const getHomePageSchema = () => ({
-  tagName: "div",
-  cssClasses: "header",
-  children: "Home page"
-});
-const getChordsPageSchema = (config) => ({
-  tagName: "div",
-  cssClasses: ["chord-buttons-container"],
-  children: Object.keys(chords).map((chordName) => ({
-    tagName: "button",
-    cssClasses: ["neu-button"],
-    attrs: { "data-chord": chordName },
-    children: chordName,
-    events: {
-      click: () => {
-        startPlaying();
-        const chord = createChord(`${config.activeTonality}${config.activeOctave}`, chords[chordName]);
-        config.activeInstrument.triggerAttackRelease(chord, "2n");
-        Transport2.start();
-      }
-    }
-  }))
-});
-const notes = [
-  "C",
-  "C#",
-  "D",
-  "D#",
-  "E",
-  "F",
-  "F#",
-  "G",
-  "G#",
-  "A",
-  "A#",
-  "B"
-];
-const getSettingsPageSchema = (audioConfig2) => ({
-  tagName: "div",
-  cssClasses: "controls",
-  children: [
-    {
-      tagName: "div",
-      cssClasses: "control",
-      children: [
-        {
-          tagName: "label",
-          attrs: { for: "tonality-selector" },
-          children: "Tonality"
-        },
-        {
-          tagName: "select",
-          attrs: { id: "tonality-selector" },
-          children: notes.map((note) => ({
-            tagName: "option",
-            attrs: { value: note },
-            children: note
-          })),
-          events: {
-            change: (e) => {
-              audioConfig2.activeTonality = e.target.selectedOptions[0].value;
-            }
-          }
-        }
-      ]
-    },
-    {
-      tagName: "div",
-      cssClasses: "control",
-      children: [
-        {
-          tagName: "label",
-          attrs: { for: "instruments-selector" },
-          children: "Instrument"
-        },
-        {
-          tagName: "select",
-          attrs: { id: "instruments-selector" },
-          children: Object.keys(audioConfig2.instruments).map((instrumentName) => ({
-            tagName: "option",
-            attrs: { value: instrumentName },
-            children: instrumentName
-          })),
-          events: {
-            change: (e) => {
-              audioConfig2.activeInstrument = audioConfig2.instruments[e.target.selectedOptions[0].value];
-            }
-          }
-        }
-      ]
-    }
-  ]
-});
-const styles$4 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
-const _ButtonGroup = class _ButtonGroup extends CustomElement {
-  constructor() {
-    super();
-    __publicField(this, "_name");
-    this.onBtnClick = this.onBtnClick.bind(this);
-  }
-  connectedCallback() {
-    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
-    const activeButton = this._buttons.find((button) => button.hasAttribute("active"));
-    if (activeButton) {
-      this.setActive(activeButton);
-    }
-    this._name = this.getAttribute("name");
-    this.shadowRoot.addEventListener("click", this.onBtnClick);
-  }
-  getElementStyles() {
-    return styles$4.toString();
-  }
-  getActiveBtnIcon() {
-    return Array.from(this.activeButton.children).find((child) => child instanceof Icon);
-  }
-  getSelectedOption() {
-    return this.activeButton.dataset.value;
-  }
-  getName() {
-    return this._name;
-  }
-  setActive(pushedButton) {
-    var _a, _b, _c, _d;
-    if (this.activeButton) {
-      this.activeButton.classList.remove("active");
-      (_b = (_a = this.getActiveBtnIcon()) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
-    }
-    this.activeButton = pushedButton;
-    this.activeButton.classList.add("active");
-    (_d = (_c = this.getActiveBtnIcon()) == null ? void 0 : _c.classList) == null ? void 0 : _d.add("active");
-  }
-  onBtnClick(e) {
-    e.stopPropagation();
-    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
-    if (button && this._buttons.includes(button)) {
-      if (button !== this.activeButton) {
-        this.setActive(button);
-      }
-      this.dispatchEvent(
-        createEvent(_ButtonGroup.EVENT_OPTION_SELECTED, {
-          name: this.getName(),
-          value: this.activeButton.dataset.value
-        })
-      );
-    }
-  }
-};
-__publicField(_ButtonGroup, "EVENT_OPTION_SELECTED", "EVENT_OPTION_SELECTED");
-let ButtonGroup = _ButtonGroup;
-customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
-const styles$3 = ":host(.grid-button-group), :host(.row-button-group), .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button, :host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n:host(.grid-button-group) > .neu-button, :host(.row-button-group) .neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host(.grid-button-group) > .neu-button:active, :host(.row-button-group) .neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host(.row-button-group) {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  overflow: hidden;\n}\n\n:host(.row-button-group) .neu-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.row-button-group) .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n:host(.grid-button-group) > .neu-button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n  transition: color ease-out 0.15s;\n}\n\n:host(.grid-button-group) > .neu-button.active {\n  color: #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.success {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\n:host(.grid-button-group) > .neu-button.failure {\n  color: red;\n  border: 1px solid red;\n}\n\n:host(.grid-button-group) > .neu-button.disabled {\n  opacity: 0.2;\n}\n\n@media screen and (max-width: 420px) {\n  :host(.grid-button-group) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
-const _ButtonGroupMultiple = class _ButtonGroupMultiple extends CustomElement {
-  constructor() {
-    super();
-    __publicField(this, "_name");
-    __publicField(this, "_selectedOptions");
-    __publicField(this, "_locked", false);
-    this.onBtnClick = this.onBtnClick.bind(this);
-  }
-  connectedCallback() {
-    this._buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
-    this._name = this.getAttribute("name");
-    this.shadowRoot.addEventListener("click", this.onBtnClick);
-  }
-  getElementStyles() {
-    return styles$3.toString();
-  }
-  getPushedButtonIcon(pushedButton) {
-    return Array.from(pushedButton.children).find((child) => child instanceof Icon);
-  }
-  getSelectedOptions() {
-    return this._buttons.filter((button) => button.classList.contains("active")).map((button) => button.dataset.value);
-  }
-  getName() {
-    return this._name;
-  }
-  toggleButtonActive(pushedButton) {
-    var _a, _b;
-    pushedButton.classList.toggle("active");
-    (_b = (_a = this.getPushedButtonIcon(pushedButton)) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
-  }
-  getButtons() {
-    return this._buttons;
-  }
-  onBtnClick(e) {
-    e.stopPropagation();
-    if (this.isLocked()) {
-      return;
-    }
-    const button = e.composedPath().find((el) => el.tagName === "BUTTON");
-    if (button && this._buttons.includes(button)) {
-      this.toggleButtonActive(button);
-      this.dispatchEvent(
-        createEvent(_ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, {
-          name: this.getName(),
-          value: this.getSelectedOptions()
-        })
-      );
-    }
-  }
-  isLocked() {
-    return this._locked;
-  }
-  lock() {
-    this._locked = true;
-  }
-  unlock() {
-    this._locked = false;
-  }
-  reset() {
-    var _a, _b;
-    this.unlock();
-    for (const button of this.getButtons()) {
-      button.classList.remove("disabled");
-      button.classList.remove("active");
-      button.classList.remove("success");
-      button.classList.remove("failure");
-      (_b = (_a = this.getPushedButtonIcon(button)) == null ? void 0 : _a.classList) == null ? void 0 : _b.remove("active");
-    }
-  }
-};
-__publicField(_ButtonGroupMultiple, "EVENT_OPTIONS_SELECTED", "EVENT_OPTIONS_SELECTED");
-let ButtonGroupMultiple = _ButtonGroupMultiple;
-customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
-const style = ".intervals-options {\n  grid-auto-rows: fit-content(100%);\n  gap: 1rem;\n}\n.intervals-options__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n.intervals-options__description {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n.intervals-options__button-group-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n.intervals-options__button-group-container .button-group-label {\n  font-size: 0.75rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n.intervals-options__select-intervals {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n.intervals-options__submit {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
-const getIntervalsOptionsPageSchema = () => {
-  const {
-    intervalOptionsState,
-    INTERVALS_OPTIONS,
-    NUMBER_OF_QUESTION_OPTIONS,
-    PLAYING_MODE_OPTIONS
-  } = intervalsOptionsState;
-  return {
-    tagName: "x-grid",
-    cssClasses: "intervals-options",
-    children: [
-      {
-        tagName: "style",
-        children: style.toString()
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "span",
-          cssClasses: "intervals-options__title",
-          children: "Intervals recognition"
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "span",
-          cssClasses: "intervals-options__description",
-          children: "Two notes will be played. Your goal is to identify the interval between them by ear."
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "div",
-          cssClasses: "intervals-options__button-group-container",
-          children: [
-            {
-              tagName: "span",
-              cssClasses: "button-group-label",
-              children: "Number of questions:"
-            },
-            {
-              tagName: "x-button-group",
-              cssClasses: "row-button-group",
-              attrs: { name: "number-of-questions" },
-              children: NUMBER_OF_QUESTION_OPTIONS.map((elSchema) => ({
-                tagName: "button",
-                cssClasses: "neu-button",
-                attrs: {
-                  "data-value": elSchema.value,
-                  ...elSchema.isActive ? { active: elSchema.isActive } : {}
-                },
-                children: elSchema.label
-              }))
-            }
-          ]
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "div",
-          cssClasses: "intervals-options__button-group-container",
-          children: [
-            {
-              tagName: "span",
-              cssClasses: "button-group-label",
-              children: "Playing mode:"
-            },
-            {
-              tagName: "x-button-group",
-              cssClasses: "row-button-group",
-              attrs: { name: "playing-mode" },
-              children: PLAYING_MODE_OPTIONS.map((elSchema) => ({
-                tagName: "button",
-                cssClasses: "neu-button",
-                attrs: {
-                  "data-value": elSchema.value,
-                  ...elSchema.isActive ? { active: elSchema.isActive } : {}
-                },
-                children: elSchema.label
-              }))
-            }
-          ]
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "button",
-          cssClasses: ["neu-button", "intervals-options__select-intervals"],
-          children: "Select intervals"
-        },
-        events: {
-          click: (e) => {
-            e.stopPropagation();
-            const onOptionsSelected = (event) => {
-              const { name, value } = event.detail;
-              switch (name) {
-                case "interval-selection":
-                  intervalOptionsState.selectedIntervals = value;
-                  localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { selectedIntervals: value });
-                  break;
-              }
-            };
-            const dialog = createElTreeFromSchema({ tagName: "x-dialog" });
-            dialog.onOpened(() => {
-              dialog.addEventListener(ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, onOptionsSelected);
-            });
-            dialog.onClosed(() => {
-              dialog.removeEventListener(ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, onOptionsSelected);
-            });
-            dialog.setSlotContent(createElTreeFromSchema({
-              tagName: "x-button-group-multiple",
-              cssClasses: "grid-button-group",
-              attrs: { name: "interval-selection" },
-              children: INTERVALS_OPTIONS.map((interval) => ({
-                tagName: "button",
-                cssClasses: [
-                  "neu-button",
-                  ...interval.isActive ? ["active"] : []
-                ],
-                attrs: { "data-value": interval.value },
-                children: interval.label
-              }))
-            }));
-            document.body.append(dialog);
-            dialog.open();
-          }
-        }
-      },
-      {
-        tagName: "div",
-        cssClasses: "grid-cell",
-        children: {
-          tagName: "button",
-          cssClasses: ["neu-button", "intervals-options__submit"],
-          children: "Start!"
-        },
-        events: {
-          click: (e) => {
-            e.target.dispatchEvent(createEvent("start", { options: intervalOptionsState }));
-          }
-        }
-      }
-    ],
-    events: {
-      [ButtonGroup.EVENT_OPTION_SELECTED]: (e) => {
-        const { name, value } = e.detail;
-        switch (name) {
-          case "number-of-questions":
-            intervalOptionsState.numberOfQuestions = parseInt(value, 10);
-            localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { numberOfQuestions: parseInt(value, 10) });
-            break;
-          case "playing-mode":
-            intervalOptionsState.playingMode = value;
-            localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { playingMode: value });
-            break;
-        }
-      },
-      start: (e) => {
-        e.stopPropagation();
-        const { options } = e.detail;
-        e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals", options }));
-      }
-    }
-  };
-};
-const ROUTER_ROUTE_TO_EVENT = "router.routeTo";
-const _pageContent = createElTreeFromSchema({
-  tagName: "div",
-  cssClasses: ["page-content"]
-});
-const getPageContent = (content) => {
-  _pageContent.replaceChildren(createElTreeFromSchema(content));
-  return _pageContent;
-};
-const setPageContent = (pageContainer, content) => {
-  const pageContent = getPageContent(content);
-  pageContainer.replaceChildren(pageContent);
-  TransitionAnimator.animateBatch({
-    target: pageContent,
-    origin: "top left",
-    animations: [
-      {
-        property: "opacity",
-        time: "0.25s",
-        easing: "ease-out",
-        from: "0",
-        to: "1"
-      },
-      {
-        property: "transform",
-        time: "0.25s",
-        easing: "ease-out",
-        from: "scale(0.75, 0.75)",
-        to: "scale(1, 1)"
-      }
-    ]
-  });
-};
-const initRouter = () => {
-  const pageContainer = document.querySelector(".page-container");
-  window.addEventListener(ROUTER_ROUTE_TO_EVENT, (e) => {
-    const { route, options } = e.detail;
-    const bottomPanel = document.querySelector("x-bottom-panel");
-    switch (route) {
-      case "home":
-        window.history.pushState({ route: "" }, "", "/");
-        setPageContent(pageContainer, getHomePageSchema());
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
-        break;
-      case "exercises":
-        window.history.pushState({ route: "exercises" }, "", "/exercises");
-        setPageContent(pageContainer, getExercisesPageSchema());
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.EXERCISES);
-        break;
-      case "intervals-options":
-        window.history.pushState({ route: "intervals-options" }, "", "/intervals-options");
-        setPageContent(pageContainer, getIntervalsOptionsPageSchema());
-        break;
-      case "intervals":
-        window.history.pushState({ route: "intervals" }, "", "/intervals");
-        setPageContent(pageContainer, getIntervalsPageSchema(audioConfig));
-        break;
-      case "chords":
-        window.history.pushState({ route: "chords" }, "", "/chords");
-        setPageContent(pageContainer, getChordsPageSchema(audioConfig));
-        break;
-      case "scales":
-        break;
-      case "settings":
-        window.history.pushState({ route: "settings" }, "", "/settings");
-        setPageContent(pageContainer, getSettingsPageSchema(audioConfig));
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.SETTINGS);
-        break;
-    }
-  });
-  window.addEventListener("popstate", (e) => {
-    const { state: { route } } = e;
-    const bottomPanel = document.querySelector("x-bottom-panel");
-    if (!route) {
-      setPageContent(pageContainer, getHomePageSchema());
-      bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
-      return;
-    }
-    switch (route) {
-      case "home":
-        setPageContent(pageContainer, getHomePageSchema());
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
-        break;
-      case "exercises":
-        setPageContent(pageContainer, getExercisesPageSchema());
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.EXERCISES);
-        break;
-      case "intervals-options":
-        setPageContent(pageContainer, getIntervalsOptionsPageSchema());
-        break;
-      case "intervals":
-        setPageContent(pageContainer, getIntervalsPageSchema(audioConfig));
-        break;
-      case "chords":
-        setPageContent(pageContainer, getChordsPageSchema(audioConfig));
-        break;
-      case "scales":
-        break;
-      case "settings":
-        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.SETTINGS);
-        break;
-    }
-  });
-  setPageContent(pageContainer, getHomePageSchema());
-};
-const BOTTOM_MENU_BUTTON_NAMES = {
-  HOME: "home",
-  EXERCISES: "exercises",
-  UTILS: "utils",
-  SETTINGS: "settings",
-  PROFILE: "profile"
-};
-class BottomPanel extends CustomElement {
-  constructor() {
-    super();
-    __publicField(this, "activeBtn");
-    __publicField(this, "buttons");
-    __publicField(this, "initActiveBtnName", BOTTOM_MENU_BUTTON_NAMES.HOME);
-    this.buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
-    this.setActive(this.initActiveBtnName);
-    this.onBtnClick = this.onBtnClick.bind(this);
-  }
-  static get observedAttributes() {
-    return ["active"];
-  }
-  attributeChangedCallback(attr, oldValue, newValue) {
-    if (attr === "active" && oldValue !== newValue) {
-      this.setActive(newValue.slice(1));
-    }
-  }
-  connectedCallback() {
-    this.shadowRoot.addEventListener("click", this.onBtnClick);
-  }
-  getTemplateSchema() {
-    return [
-      {
-        tagName: "button",
-        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.HOME },
-        children: [
-          { tagName: "x-home-icon" },
-          {
-            tagName: "span",
-            cssClasses: ["btn-text"],
-            children: "Home"
-          }
-        ]
-      },
-      {
-        tagName: "button",
-        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.EXERCISES },
-        children: [
-          { tagName: "x-exercises-icon" },
-          {
-            tagName: "span",
-            cssClasses: ["btn-text"],
-            children: "Exercises"
-          }
-        ]
-      },
-      {
-        tagName: "button",
-        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.UTILS },
-        children: [
-          { tagName: "x-utils-icon" },
-          {
-            tagName: "span",
-            cssClasses: ["btn-text"],
-            children: "Utils"
-          }
-        ]
-      },
-      {
-        tagName: "button",
-        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.SETTINGS },
-        children: [
-          { tagName: "x-settings-icon" },
-          {
-            tagName: "span",
-            cssClasses: ["btn-text"],
-            children: "Settings"
-          }
-        ]
-      },
-      {
-        tagName: "button",
-        attrs: { "data-name": BOTTOM_MENU_BUTTON_NAMES.PROFILE },
-        children: [
-          { tagName: "x-profile-icon" },
-          {
-            tagName: "span",
-            cssClasses: ["btn-text"],
-            children: "Profile"
-          }
-        ]
-      }
-    ];
-  }
-  getElementStyles() {
-    return styles$8.toString();
-  }
-  getActiveBtnIcon() {
-    return Array.from(this.activeBtn.children).find((child) => child instanceof Icon);
-  }
-  setActive(btnName) {
-    var _a, _b, _c, _d;
-    const pushedBtn = this.buttons.find((btn) => btn.dataset.name === btnName);
-    if (this.activeBtn) {
-      this.activeBtn.classList.remove("active");
-      (_b = (_a = this.getActiveBtnIcon()) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
-    }
-    this.activeBtn = pushedBtn;
-    this.activeBtn.classList.add("active");
-    (_d = (_c = this.getActiveBtnIcon()) == null ? void 0 : _c.classList) == null ? void 0 : _d.toggle("active");
-  }
-  onBtnClick(e) {
-    e.stopPropagation();
-    const btn = e.composedPath().find((el) => el.tagName === "BUTTON");
-    if (btn && this.buttons.includes(btn)) {
-      if (btn !== this.activeBtn) {
-        this.setActive(btn.dataset.name);
-      }
-      this.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: btn.dataset.name }));
-    }
-  }
-}
-customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
-const styles$2 = ":host, .menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n:host {\n  display: grid;\n  grid-template-columns: repeat(3, fit-content(100%));\n  grid-auto-rows: 1fr;\n  width: 100%;\n  gap: 1rem;\n  padding: 1rem;\n}\n\n:host > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  :host {\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
-class Grid extends CustomElement {
-  getElementStyles() {
-    return styles$2.toString();
-  }
-}
-customElements.define(getTagNameByCtor(Grid), Grid);
-const styles$1 = ".menu-btn-close, .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.menu-btn-close, .menu-btn-open, .neu-button {\n  user-select: none;\n}\n\n.menu-btn-close:hover, .menu-btn-open:hover, .neu-button:hover {\n  cursor: pointer;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.menu-btn-close, .menu-btn-open {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  gap: 0.5rem;\n}\n\n:host > .grid-cell > button {\n  font-size: 1.2rem;\n}\n\n@media screen and (max-width: 420px) {\n  :host > .grid-cell > button {\n    width: 100%;\n  }\n}";
-class ButtonOptionsGrid extends Grid {
-  // todo Its not beauty, rework it
-  getElementStyles() {
-    return [
-      super.getElementStyles(),
-      styles$1.toString()
-    ].join("\n\n");
-  }
-  connectedCallback() {
-    const buttons = Array.from(this.shadowRoot.querySelectorAll("button"));
-    for (const button of buttons) {
-      const routeTo = button.dataset.route;
-      if (routeTo) {
-        button.addEventListener("click", () => {
-          this.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: routeTo }));
-        });
-      }
-    }
-  }
-}
-customElements.define(getTagNameByCtor(ButtonOptionsGrid), ButtonOptionsGrid);
-const styles = ':host {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\n:host:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\n:host .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\n:host .indicator .counter {\n  font-size: 1.2rem;\n}\n:host .indicator .percent {\n  font-size: 0.75rem;\n}';
 class Progress extends CustomElement {
   constructor() {
     super();
@@ -18099,11 +18127,22 @@ class Progress extends CustomElement {
     this._indicator = this.shadowRoot.querySelector(".indicator");
   }
   static get observedAttributes() {
-    return ["progress"];
+    return ["progress", "show-percent"];
   }
   attributeChangedCallback(attr, oldValue, newValue) {
-    if (attr === "progress" && oldValue !== newValue) {
-      this.setProgress(JSON.parse(newValue));
+    switch (attr) {
+      case "progress": {
+        if (oldValue !== newValue) {
+          this.setProgress(JSON.parse(newValue));
+        }
+        break;
+      }
+      case "show-percent": {
+        if (oldValue !== newValue && newValue === "false") {
+          this.hidePercents();
+        }
+        break;
+      }
     }
   }
   getTemplateSchema() {
@@ -18114,13 +18153,16 @@ class Progress extends CustomElement {
       }
     ];
   }
+  hidePercents() {
+    this._indicator.querySelector(".percent").style.setProperty("display", "none");
+  }
   getElementStyles() {
-    return styles.toString();
+    return styles$8.toString();
   }
   setProgress({ all, completed }) {
     this._all = all;
     this._completed = completed;
-    this._progress = (this._completed / this._all * 100).toFixed(1);
+    this._progress = formatFraction((this._completed / this._all * 100).toFixed(1));
     this.updatePercent();
     this.updateProgressBar();
   }
@@ -18143,6 +18185,167 @@ class Progress extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Progress), Progress);
+const styles$7 = ":host .menu-btn-open, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n:host .menu-btn-open, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, :host .menu-btn-open, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, :host .menu-btn-open:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n:host .menu-btn-open, .menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host .top-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 0 10px;\n  height: 45px;\n  background-color: #26272b;\n  border-bottom: 1px solid #373a3f;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 10;\n}";
+class TopPanel extends CustomElement {
+  constructor() {
+    super();
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+  connectedCallback() {
+    this.shadowRoot.addEventListener("click", this.onBtnClick);
+  }
+  getTemplateSchema() {
+    return {
+      tagName: "div",
+      cssClasses: "top-panel",
+      children: {
+        tagName: "button",
+        cssClasses: "menu-btn-open",
+        children: { tagName: "x-menu-icon" },
+        events: {
+          click: (e) => {
+            e.target.dispatchEvent(createEvent("toggle-side-panel"));
+          }
+        }
+      }
+    };
+  }
+  getElementStyles() {
+    return styles$7.toString();
+  }
+  onBtnClick(e) {
+    e.stopPropagation();
+  }
+}
+customElements.define(getTagNameByCtor(TopPanel), TopPanel);
+const styles$6 = ".menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n}";
+class Page extends CustomElement {
+  getElementStyles() {
+    return styles$6.toString();
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onOpened() {
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onClosed() {
+  }
+  async open() {
+    await TransitionAnimator.animateBatch({
+      target: this,
+      origin: "top left",
+      animations: [
+        {
+          property: "opacity",
+          time: "0.25s",
+          easing: "ease-out",
+          from: "0",
+          to: "1"
+        },
+        {
+          property: "transform",
+          time: "0.25s",
+          easing: "ease-out",
+          from: "scale(0.75, 0.75)",
+          to: "scale(1, 1)"
+        }
+      ]
+    });
+    this.onOpened();
+  }
+  async close() {
+    await TransitionAnimator.animateBatch({
+      target: this,
+      origin: "top left",
+      animations: [
+        {
+          property: "opacity",
+          time: "0.25s",
+          easing: "ease-out",
+          from: "1",
+          to: "0"
+        },
+        {
+          property: "transform",
+          time: "0.25s",
+          easing: "ease-out",
+          from: "scale(1, 1)",
+          to: "scale(0.75, 0.75)"
+        }
+      ]
+    });
+    this.onClosed();
+    this.remove();
+  }
+}
+customElements.define(getTagNameByCtor(Page), Page);
+const styles$5 = ":host .header {\n  color: #ffffff;\n  font-size: 1.85rem;\n  font-weight: 700;\n}";
+class HomePage extends Page {
+  getElementStyles() {
+    return styles$5.toString();
+  }
+  getTemplateSchema() {
+    return {
+      tagName: "div",
+      cssClasses: "header",
+      children: "Home page"
+    };
+  }
+}
+customElements.define(getTagNameByCtor(HomePage), HomePage);
+class ExercisesPage extends Page {
+  getTemplateSchema() {
+    return {
+      tagName: "x-button-options-grid",
+      children: [
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: "neu-button",
+            attrs: { "data-route": "intervals-exercise-settings" },
+            children: "Intervals"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: "neu-button",
+            attrs: { "data-route": "chords" },
+            children: "Chords"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: "neu-button",
+            attrs: { "data-route": "scales" },
+            children: "Scales"
+          }
+        }
+      ]
+    };
+  }
+}
+customElements.define(getTagNameByCtor(ExercisesPage), ExercisesPage);
+const notes = [
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+  "A",
+  "A#",
+  "B"
+];
 const CACHE_AVAILABLE = "caches" in window;
 const CACHE_AUDIO_NAME = "audio-cache";
 function checkBuffersLoaded(map) {
@@ -18577,9 +18780,792 @@ const initInstruments = async () => {
   console.log("All samplers loaded!");
   return instruments;
 };
-const initSidePanel = (config) => {
+class AudioSettings {
+  constructor() {
+    __publicField(this, "isPlaying", false);
+    __publicField(this, "instruments", {});
+    __publicField(this, "activeInstrument", null);
+    __publicField(this, "activeTonality", "C");
+    __publicField(this, "activeOctave", 4);
+    __publicField(this, "bpm", 140);
+    __publicField(this, "loadInstruments", async () => {
+      this.instruments = await initInstruments();
+    });
+  }
+  setActiveInstrument(instrumentName) {
+    this.activeInstrument = this.instruments[instrumentName];
+  }
+  setActiveTonality(tonalityName) {
+    this.activeTonality = tonalityName;
+  }
+}
+const audioSettings = new AudioSettings();
+window.audioSettings = audioSettings;
+const styles$4 = ".controls {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 10px;\n  padding: 10px;\n  width: 100%;\n  box-sizing: border-box;\n}\n.controls > .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 100%;\n}\n.controls > .control > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n}\n.controls > .control > label {\n  color: #ffffff;\n  font-size: 1.25rem;\n}";
+class SettingsPage extends Page {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_tonalitySelector");
+    __publicField(this, "_instrumentsSelector");
+  }
+  // todo Its not beauty, rework it
+  getElementStyles() {
+    return [
+      super.getElementStyles(),
+      styles$4.toString()
+    ].join("\n\n");
+  }
+  getTemplateSchema() {
+    return {
+      tagName: "div",
+      cssClasses: "controls",
+      children: [
+        {
+          tagName: "div",
+          cssClasses: "control",
+          children: [
+            {
+              tagName: "label",
+              attrs: { for: "tonality-selector" },
+              children: "Tonality"
+            },
+            {
+              tagName: "select",
+              attrs: { id: "tonality-selector" },
+              children: notes.map((note) => ({
+                tagName: "option",
+                attrs: { value: note },
+                children: note
+              }))
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          cssClasses: "control",
+          children: [
+            {
+              tagName: "label",
+              attrs: { for: "instruments-selector" },
+              children: "Instrument"
+            },
+            {
+              tagName: "select",
+              attrs: { id: "instruments-selector" },
+              children: Object.keys(audioSettings.instruments).map((instrumentName) => ({
+                tagName: "option",
+                attrs: { value: instrumentName },
+                children: instrumentName
+              }))
+            }
+          ]
+        }
+      ]
+    };
+  }
+  onTonalityChange(e) {
+    audioSettings.setActiveTonality(e.target.selectedOptions[0].value);
+  }
+  onInstrumentChange(e) {
+    audioSettings.setActiveInstrument(e.target.selectedOptions[0].value);
+  }
+  connectedCallback() {
+    this._tonalitySelector = this.shadowRoot.querySelector("#tonality-selector");
+    this._instrumentsSelector = this.shadowRoot.querySelector("#instruments-selector");
+    this._tonalitySelector.addEventListener("change", this.onTonalityChange);
+    this._instrumentsSelector.addEventListener("change", this.onInstrumentChange);
+  }
+}
+customElements.define(getTagNameByCtor(SettingsPage), SettingsPage);
+const chords = {
+  // Triads
+  Maj3: [0, 4, 7],
+  Maj6: [4, 7, 12],
+  Maj46: [7, 12, 16],
+  Min3: [0, 3, 7],
+  Min6: [3, 7, 12],
+  Min46: [7, 12, 15],
+  Sus2: [0, 2, 7],
+  Sus4: [0, 5, 7],
+  Sus42: [0, 2, 5, 7],
+  Min6th: [0, 3, 7, 9],
+  Maj6th: [0, 4, 7, 9],
+  // Seventh
+  Min7: [0, 3, 7, 10],
+  Min7InvIII: [10, 12, 3, 7],
+  D7: [0, 4, 7, 10],
+  D7InvIII: [10, 12, 4, 7],
+  Maj7: [0, 4, 7, 11],
+  Maj7InvIII: [11, 12, 4, 7],
+  Dim: [0, 3, 6, 9],
+  Min7b5: [0, 3, 6, 10],
+  Aug: [0, 4, 8, 12],
+  // Added steps (9, 11, 13)
+  Maj39: [0, 4, 7, 14],
+  Maj39InvIII: [2, 4, 7, 12],
+  // todo (?)
+  Min39: [0, 3, 7, 14],
+  Min39InvIII: [2, 3, 7, 12],
+  // todo (?)
+  Maj79: [0, 4, 7, 11, 14],
+  Min79: [0, 3, 7, 10, 14],
+  D79: [0, 4, 7, 10, 14],
+  D7b9: [0, 4, 7, 10, 13]
+};
+const createChord = (root, chord) => chord.map((tones) => Frequency(root).transpose(tones).toNote());
+const prepareToStartPlaying = () => {
+  start();
+  if (audioSettings.isPlaying) {
+    audioSettings.isPlaying = false;
+    Transport2.cancel();
+    if (Transport2.state !== "stopped") {
+      Transport2.stop();
+    }
+  }
+  audioSettings.isPlaying = true;
+};
+const playInterval = (intervalNotes, mode) => {
+  prepareToStartPlaying();
+  const interval = createChord(`${audioSettings.activeTonality}${audioSettings.activeOctave}`, intervalNotes);
+  if (mode === "harm") {
+    audioSettings.activeInstrument.triggerAttackRelease(interval, "2n");
+  } else if (mode === "asc") {
+    const sequence = new Sequence(
+      (time, note) => {
+        audioSettings.activeInstrument.triggerAttackRelease(note, "4n", time);
+        if (sequence.progress === 1) {
+          sequence.stop();
+        }
+      },
+      interval,
+      "4n"
+    );
+    sequence.loop = false;
+    sequence.start(0);
+  } else if (mode === "desc") {
+    const sequence = new Sequence(
+      (time, note) => {
+        audioSettings.activeInstrument.triggerAttackRelease(note, "4n", time);
+        if (sequence.progress === 1) {
+          sequence.stop();
+        }
+      },
+      [...interval].reverse(),
+      "4n"
+    );
+    sequence.loop = false;
+    sequence.start(0);
+  }
+  Transport2.start();
+};
+const styles$3 = ":host .chord-buttons-container, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n:host .chord-buttons-container, .menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, :host .chord-buttons-container > button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, :host .chord-buttons-container > button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n:host .chord-buttons-container > button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host .chord-buttons-container > button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\n:host .chord-buttons-container > button {\n  width: 100%;\n  height: 100%;\n}\n\n@media screen and (max-width: 420px) {\n  :host .chord-buttons-container {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}";
+class ChordsExercisePage extends Page {
+  // todo Its not beauty, rework it
+  getElementStyles() {
+    return [
+      super.getElementStyles(),
+      styles$3.toString()
+    ].join("\n\n");
+  }
+  getTemplateSchema() {
+    return {
+      tagName: "div",
+      cssClasses: "chord-buttons-container",
+      children: Object.keys(chords).map((chordName) => ({
+        tagName: "button",
+        cssClasses: ["neu-button"],
+        attrs: { "data-chord": chordName },
+        children: chordName
+      }))
+    };
+  }
+  onChordClick(e) {
+    e.stopPropagation();
+    if (e.target.tagName !== "BUTTON") {
+      return;
+    }
+    prepareToStartPlaying();
+    const chord = createChord(`${audioSettings.activeTonality}${audioSettings.activeOctave}`, chords[e.target.dataset.chord]);
+    audioSettings.activeInstrument.triggerAttackRelease(chord, "2n");
+    Transport2.start();
+  }
+  connectedCallback() {
+    this.shadowRoot.addEventListener("click", this.onChordClick);
+  }
+}
+customElements.define(getTagNameByCtor(ChordsExercisePage), ChordsExercisePage);
+const INTERVAL_EXERCISE_SETTINGS = "interval_exercise_settings";
+const localStorageService = {
+  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
+  write: (key, value) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  },
+  update: (key, value) => {
+    const lastValue = localStorageService.read(key);
+    localStorageService.write(key, Object.assign(lastValue, value));
+  }
+};
+const INTERVAL_NOTES = {
+  unison: [0, 0],
+  min2: [0, 1],
+  maj2: [0, 2],
+  min3: [0, 3],
+  maj3: [0, 4],
+  perf4: [0, 5],
+  tritone: [0, 6],
+  perf5: [0, 7],
+  min6: [0, 8],
+  maj6: [0, 9],
+  min7: [0, 10],
+  maj7: [0, 11],
+  octave: [0, 12]
+};
+const NUMBER_OF_QUESTION_OPTIONS = [
+  {
+    label: "10",
+    value: "10"
+  },
+  {
+    label: "20",
+    value: "20"
+  },
+  {
+    label: "40",
+    value: "40"
+  }
+];
+const PLAYING_MODE_OPTIONS = [
+  {
+    label: "Asc",
+    value: "asc"
+  },
+  {
+    label: "Desc",
+    value: "desc"
+  },
+  {
+    label: "Harm",
+    value: "harm"
+  }
+];
+const INTERVALS_OPTIONS = [
+  {
+    label: "Unison",
+    value: "unison"
+  },
+  {
+    label: "Min2",
+    value: "min2"
+  },
+  {
+    label: "Maj2",
+    value: "maj2"
+  },
+  {
+    label: "Min3",
+    value: "min3"
+  },
+  {
+    label: "Maj3",
+    value: "maj3"
+  },
+  {
+    label: "Perf4",
+    value: "perf4"
+  },
+  {
+    label: "Tritone",
+    value: "tritone"
+  },
+  {
+    label: "Perf5",
+    value: "perf5"
+  },
+  {
+    label: "Min6",
+    value: "min6"
+  },
+  {
+    label: "Maj6",
+    value: "maj6"
+  },
+  {
+    label: "Min7",
+    value: "min7"
+  },
+  {
+    label: "Maj7",
+    value: "maj7"
+  },
+  {
+    label: "Octave",
+    value: "octave"
+  }
+];
+const DEFAULT_SETTINGS = {
+  numberOfQuestions: 10,
+  playingMode: "asc",
+  selectedIntervals: Object.keys(INTERVAL_NOTES)
+};
+const SAVED_SETTINGS = localStorageService.read(INTERVAL_EXERCISE_SETTINGS);
+const intervalsOptionsState = {};
+for (const propName of Object.keys(DEFAULT_SETTINGS)) {
+  const hiddenPropName = `_${propName}`;
+  intervalsOptionsState[hiddenPropName] = SAVED_SETTINGS[propName] || DEFAULT_SETTINGS[propName];
+  Object.defineProperty(intervalsOptionsState, propName, {
+    set(newValue) {
+      this[hiddenPropName] = newValue;
+      this.revalidateOptions();
+    },
+    get() {
+      return this[hiddenPropName];
+    }
+  });
+}
+Object.defineProperty(intervalsOptionsState, "revalidateOptions", {
+  value: function revalidateOptions() {
+    for (const numberOfQuestionsOption of NUMBER_OF_QUESTION_OPTIONS) {
+      numberOfQuestionsOption.isActive = numberOfQuestionsOption.value === intervalsOptionsState.numberOfQuestions.toString();
+    }
+    for (const playingModeOption of PLAYING_MODE_OPTIONS) {
+      playingModeOption.isActive = playingModeOption.value === intervalsOptionsState.playingMode;
+    }
+    for (const intervalOption of INTERVALS_OPTIONS) {
+      intervalOption.isActive = !!intervalsOptionsState.selectedIntervals.includes(intervalOption.value);
+    }
+  }
+});
+intervalsOptionsState.revalidateOptions();
+window.intervalOptionsState = intervalsOptionsState;
+const styles$2 = ":host {\n  grid-auto-rows: fit-content(100%);\n  gap: 1rem;\n}\n:host .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n:host .description {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n:host .button-group-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n:host .button-group-container .button-group-label {\n  font-size: 0.75rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n:host .select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n:host .submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+class IntervalsExerciseSettingsPage extends Page {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_selectIntervalsButton");
+    __publicField(this, "_submitButton");
+  }
+  getTemplateSchema() {
+    return {
+      tagName: "x-grid",
+      children: [
+        {
+          tagName: "style",
+          children: styles$2.toString()
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "span",
+            cssClasses: "title",
+            children: "Intervals recognition"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "span",
+            cssClasses: "description",
+            children: "Two notes will be played. Your goal is to identify the interval between them by ear."
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "div",
+            cssClasses: "button-group-container",
+            children: [
+              {
+                tagName: "span",
+                cssClasses: "button-group-label",
+                children: "Number of questions:"
+              },
+              {
+                tagName: "x-button-group",
+                cssClasses: "row-button-group",
+                attrs: { name: "number-of-questions" },
+                children: NUMBER_OF_QUESTION_OPTIONS.map((elSchema) => ({
+                  tagName: "button",
+                  cssClasses: "neu-button",
+                  attrs: {
+                    "data-value": elSchema.value,
+                    ...elSchema.isActive ? { active: elSchema.isActive } : {}
+                  },
+                  children: elSchema.label
+                }))
+              }
+            ]
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "div",
+            cssClasses: "button-group-container",
+            children: [
+              {
+                tagName: "span",
+                cssClasses: "button-group-label",
+                children: "Playing mode:"
+              },
+              {
+                tagName: "x-button-group",
+                cssClasses: "row-button-group",
+                attrs: { name: "playing-mode" },
+                children: PLAYING_MODE_OPTIONS.map((elSchema) => ({
+                  tagName: "button",
+                  cssClasses: "neu-button",
+                  attrs: {
+                    "data-value": elSchema.value,
+                    ...elSchema.isActive ? { active: elSchema.isActive } : {}
+                  },
+                  children: elSchema.label
+                }))
+              }
+            ]
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: ["neu-button", "select-intervals-button"],
+            children: "Select intervals"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: ["neu-button", "submit-button"],
+            children: "Start!"
+          }
+        }
+      ]
+    };
+  }
+  onSelectIntervalsButtonClick(e) {
+    e.stopPropagation();
+    const onOptionsSelected = (event) => {
+      const { name, value } = event.detail;
+      switch (name) {
+        case "interval-selection":
+          intervalsOptionsState.selectedIntervals = value;
+          localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { selectedIntervals: value });
+          break;
+      }
+    };
+    const dialog = createElTreeFromSchema({ tagName: "x-dialog" });
+    dialog.onOpened(() => {
+      dialog.addEventListener(ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, onOptionsSelected);
+    });
+    dialog.onClosed(() => {
+      dialog.removeEventListener(ButtonGroupMultiple.EVENT_OPTIONS_SELECTED, onOptionsSelected);
+    });
+    dialog.setSlotContent(createElTreeFromSchema({
+      tagName: "x-button-group-multiple",
+      cssClasses: "grid-button-group",
+      attrs: { name: "interval-selection" },
+      children: INTERVALS_OPTIONS.map((interval) => ({
+        tagName: "button",
+        cssClasses: [
+          "neu-button",
+          ...interval.isActive ? ["active"] : []
+        ],
+        attrs: { "data-value": interval.value },
+        children: interval.label
+      }))
+    }));
+    document.body.append(dialog);
+    dialog.open();
+  }
+  onButtonGroupOptionSelect(e) {
+    const { name, value } = e.detail;
+    switch (name) {
+      case "number-of-questions":
+        intervalsOptionsState.numberOfQuestions = parseInt(value, 10);
+        localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { numberOfQuestions: parseInt(value, 10) });
+        break;
+      case "playing-mode":
+        intervalsOptionsState.playingMode = value;
+        localStorageService.update(INTERVAL_EXERCISE_SETTINGS, { playingMode: value });
+        break;
+    }
+  }
+  onStartButtonClick(e) {
+    e.stopPropagation();
+    e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
+  }
+  connectedCallback() {
+    this._grid = this.shadowRoot.querySelector("x-grid");
+    this._selectIntervalsButton = this._grid.shadowRoot.querySelector(".select-intervals-button");
+    this._submitButton = this._grid.shadowRoot.querySelector(".submit-button");
+    this._selectIntervalsButton.addEventListener("click", this.onSelectIntervalsButtonClick);
+    this.addEventListener(ButtonGroup.EVENT_OPTION_SELECTED, this.onButtonGroupOptionSelect);
+    this._submitButton.addEventListener("click", this.onStartButtonClick);
+  }
+}
+customElements.define(getTagNameByCtor(IntervalsExerciseSettingsPage), IntervalsExerciseSettingsPage);
+function between(min, max) {
+  const range2 = max - min;
+  return min + Math.random() * range2;
+}
+function betweenInt(min, max) {
+  return Math.round(between(min, max));
+}
+const getRandomInterval = (audioConfig, options) => {
+  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
+  const intervalName = options.selectedIntervals[intervalValueIndex];
+  const intervalValue = INTERVAL_NOTES[intervalName];
+  return {
+    name: intervalName,
+    notes: intervalValue
+  };
+};
+class IntervalsExerciseState {
+  constructor() {
+    __publicField(this, "numberOfAllQuestions", 0);
+    __publicField(this, "numberOfCompletedQuestions", 0);
+    __publicField(this, "variants", []);
+    __publicField(this, "rightVariant", null);
+    __publicField(this, "selectedVariant", null);
+    __publicField(this, "numberOfWrongAnswers", 0);
+  }
+  isSelectedVariantIsRight() {
+    return this.selectedVariant === this.rightVariant;
+  }
+  isAllQuestionsCompleted() {
+    return this.numberOfCompletedQuestions >= this.numberOfAllQuestions;
+  }
+  reset(options) {
+    const initInterval = getRandomInterval(audioSettings, options);
+    Object.assign(this, {
+      numberOfAllQuestions: options.numberOfQuestions,
+      variants: options.selectedIntervals,
+      numberOfCompletedQuestions: 0,
+      selectedVariant: null,
+      rightVariant: initInterval.name,
+      numberOfWrongAnswers: 0
+    });
+  }
+  update(values) {
+    Object.assign(this, values);
+    if (!this.isSelectedVariantIsRight()) {
+      this.numberOfWrongAnswers++;
+    }
+  }
+}
+const intervalsExerciseState = new IntervalsExerciseState();
+window.intervalsExerciseState = intervalsExerciseState;
+const styles$1 = "@media screen and (max-width: 420px) {\n  :host {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n:host .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n:host .play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n:host .play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
+const DELAY_BEFORE_NEXT_INTERVAL_PLAYING = 1500;
+class IntervalsExercisePage extends Page {
+  constructor() {
+    super();
+    __publicField(this, "_playButton");
+    __publicField(this, "_variantButtons");
+    this.onIntervalSelected = this.onIntervalSelected.bind(this);
+  }
+  getTemplateSchema() {
+    intervalsExerciseState.reset(intervalsOptionsState);
+    return {
+      tagName: "x-grid",
+      children: [
+        {
+          tagName: "style",
+          children: styles$1.toString()
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "span",
+            cssClasses: "intervals-exercise__title",
+            children: "Intervals recognition"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "x-progress",
+            attrs: {
+              progress: JSON.stringify({
+                all: intervalsExerciseState.numberOfAllQuestions,
+                completed: intervalsExerciseState.numberOfCompletedQuestions
+              }),
+              "show-percent": false
+            }
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "button",
+            cssClasses: ["neu-button", "play-button"],
+            children: [
+              {
+                tagName: "x-replay-icon",
+                cssClasses: ["icon", "icon_replay"]
+              }
+            ]
+          }
+        },
+        {
+          tagName: "x-button-group-multiple",
+          cssClasses: "grid-button-group",
+          attrs: {
+            name: "interval-selection",
+            "highlight-active": false
+          },
+          children: intervalsExerciseState.variants.map((intervalValue) => ({
+            tagName: "button",
+            cssClasses: ["neu-button"],
+            attrs: { "data-interval": intervalValue },
+            children: intervalValue
+          }))
+        }
+      ]
+    };
+  }
+  onPlayButtonClick() {
+    playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsOptionsState.playingMode);
+  }
+  onIntervalSelected(event) {
+    event.stopPropagation();
+    if (this._variantButtons.isLocked()) {
+      return;
+    }
+    playInterval(INTERVAL_NOTES[event.target.dataset.interval], intervalsOptionsState.playingMode);
+    intervalsExerciseState.update({
+      numberOfCompletedQuestions: intervalsExerciseState.numberOfCompletedQuestions + 1,
+      selectedVariant: event.target.dataset.interval
+    });
+    for (const button of this._variantButtons.getButtons()) {
+      const { interval } = button.dataset;
+      if (interval === intervalsExerciseState.rightVariant) {
+        button.classList.add("success");
+      } else if (interval === intervalsExerciseState.selectedVariant && !intervalsExerciseState.isSelectedVariantIsRight()) {
+        button.classList.add("failure");
+      } else {
+        button.classList.add("disabled");
+      }
+    }
+    this._progress.setProgress({
+      all: intervalsExerciseState.numberOfAllQuestions,
+      completed: intervalsExerciseState.numberOfCompletedQuestions
+    });
+    this._variantButtons.lock();
+    if (!intervalsExerciseState.isAllQuestionsCompleted()) {
+      window.setTimeout(() => {
+        this._variantButtons.reset();
+        const nextInterval = getRandomInterval(audioSettings, intervalsOptionsState);
+        intervalsExerciseState.update({ rightVariant: nextInterval.name });
+        playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsOptionsState.playingMode);
+      }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
+    } else {
+      window.setTimeout(() => {
+        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals-exercise-results" }));
+      }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
+    }
+  }
+  connectedCallback() {
+    this._grid = this.shadowRoot.querySelector("x-grid");
+    this._playButton = this._grid.shadowRoot.querySelector(".play-button");
+    this._variantButtons = this._grid.shadowRoot.querySelector(".grid-button-group");
+    this._progress = this._grid.shadowRoot.querySelector("x-progress");
+    this._playButton.addEventListener("click", this.onPlayButtonClick);
+    this._variantButtons.shadowRoot.addEventListener("click", this.onIntervalSelected);
+  }
+  onOpened() {
+    playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsOptionsState.playingMode);
+  }
+}
+customElements.define(getTagNameByCtor(IntervalsExercisePage), IntervalsExercisePage);
+const styles = ".menu-btn-close {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\n.neu-button, :host .actions button, .menu-btn-close {\n  user-select: none;\n}\n\n.neu-button:hover, :host .actions button:hover, .menu-btn-close:hover {\n  cursor: pointer;\n}\n\n.menu-btn-close {\n  background-color: transparent;\n}\n\n:host .actions button {\n  width: 80px;\n  height: 80px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n}\n\n:host .actions button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n.neu-button {\n  width: 115px;\n  height: 115px;\n  border: 1px solid #373a3f;\n  border-radius: 20px;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\n.neu-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n  box-shadow: -8px -8px 2em #33363b, 15px 15px 1.5em #26272b;\n}\n\n:host {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n}\n\n:host .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\n:host .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\n:host .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\n:host .score .completed {\n  color: #43cbc5;\n}\n\n:host .score .delimiter {\n  margin: 0 10px;\n}\n\n:host .score .all {\n  font-size: 1.5rem;\n}\n\n:host .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\n:host .actions button {\n  width: 120px;\n  height: 70px;\n}";
+class IntervalsExerciseResultsPage extends Page {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_repeatButton");
+    __publicField(this, "_toSettingsButton");
+  }
+  getElementStyles() {
+    return styles.toString();
+  }
+  getTemplateSchema() {
+    const numberOfSuccessfulQuestions = (intervalsExerciseState.numberOfAllQuestions - intervalsExerciseState.numberOfWrongAnswers).toString();
+    const numberOfFailedQuestions = (intervalsExerciseState.numberOfAllQuestions - intervalsExerciseState.numberOfWrongAnswers).toString();
+    return {
+      tagName: "div",
+      cssClasses: "container",
+      children: [
+        {
+          tagName: "span",
+          cssClasses: "title",
+          children: "Completed!"
+        },
+        {
+          tagName: "span",
+          cssClasses: "score",
+          children: [
+            {
+              tagName: "span",
+              cssClasses: "completed",
+              children: numberOfSuccessfulQuestions
+            },
+            {
+              tagName: "span",
+              cssClasses: "delimiter",
+              children: "/"
+            },
+            {
+              tagName: "span",
+              cssClasses: "all",
+              children: numberOfFailedQuestions
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          cssClasses: "actions",
+          children: [
+            {
+              tagName: "button",
+              cssClasses: ["neu-button", "repeat-button"],
+              children: "Repeat"
+            },
+            {
+              tagName: "button",
+              cssClasses: ["neu-button", "to-settings-button"],
+              children: "To settings"
+            }
+          ]
+        }
+      ]
+    };
+  }
+  onRepeatExerciseClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
+  }
+  onToExerciseSettingsClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals-exercise-settings" }));
+  }
+  connectedCallback() {
+    this._repeatButton = this.shadowRoot.querySelector(".repeat-button");
+    this._toSettingsButton = this.shadowRoot.querySelector(".to-settings-button");
+    this._repeatButton.addEventListener("click", this.onRepeatExerciseClick);
+    this._toSettingsButton.addEventListener("click", this.onToExerciseSettingsClick);
+  }
+}
+customElements.define(getTagNameByCtor(IntervalsExerciseResultsPage), IntervalsExerciseResultsPage);
+const initSidePanel = () => {
   let sidePanelOpened = false;
-  const menuOpenButton = document.querySelector(".menu-btn-open");
   const menuCloseButton = document.querySelector(".menu-btn-close");
   const sidePanelContainer = document.querySelector(".side-panel-container");
   const sidePanelOverlay = document.querySelector(".side-panel-overlay");
@@ -18629,7 +19615,7 @@ const initSidePanel = (config) => {
       sidePanelContainer.style.setProperty("display", "none");
     });
   };
-  menuOpenButton.addEventListener("click", () => {
+  window.addEventListener("toggle-side-panel", () => {
     if (sidePanelOpened) {
       closeSidePanel();
     } else {
@@ -18661,7 +19647,7 @@ const initSidePanel = (config) => {
   });
   const tonalitySelector = tonalityControl.querySelector("#tonality-selector");
   tonalitySelector.addEventListener("change", () => {
-    config.activeTonality = tonalitySelector.selectedOptions[0].value;
+    audioSettings.activeTonality = tonalitySelector.selectedOptions[0].value;
   });
   const instrumentsControl = createElFromSchema({
     tagName: "div",
@@ -18675,7 +19661,7 @@ const initSidePanel = (config) => {
       {
         tagName: "select",
         attrs: { id: "instruments-selector" },
-        children: Object.keys(config.instruments).map((instrumentName) => ({
+        children: Object.keys(audioSettings.instruments).map((instrumentName) => ({
           tagName: "option",
           attrs: { value: instrumentName },
           children: instrumentName
@@ -18685,24 +19671,103 @@ const initSidePanel = (config) => {
   });
   const instrumentsSelector = instrumentsControl.querySelector("#instruments-selector");
   instrumentsSelector.addEventListener("change", () => {
-    config.activeInstrument = config.instruments[instrumentsSelector.selectedOptions[0].value];
+    audioSettings.activeInstrument = audioSettings.instruments[instrumentsSelector.selectedOptions[0].value];
   });
   controlsContainer.append(tonalityControl, instrumentsControl);
-  config.activeInstrument = instrumentsSelector.selectedOptions[0].value;
-  config.activeInstrument = config.instruments[config.activeInstrument];
-  config.activeTonality = tonalitySelector.selectedOptions[0].value;
+  audioSettings.activeInstrument = audioSettings.instruments[instrumentsSelector.selectedOptions[0].value];
+  audioSettings.activeTonality = tonalitySelector.selectedOptions[0].value;
 };
-const audioConfig = {
-  isPlaying: false,
-  instruments: {},
-  activeInstrument: null,
-  activeTonality: "C",
-  activeOctave: 4,
-  bpm: 140
+const setActivePage = (pageContainer, schema) => {
+  const page = createElTreeFromSchema(schema);
+  pageContainer.replaceChildren(page);
+  page.open();
+  return page;
 };
-Transport2.bpm.value = audioConfig.bpm;
-(async () => {
-  audioConfig.instruments = await initInstruments();
-  initSidePanel(audioConfig);
+const initRouter = () => {
+  const pageContainer = document.querySelector(".page-container");
+  const bottomPanel = document.querySelector("x-bottom-panel");
+  window.addEventListener(ROUTER_ROUTE_TO_EVENT, (e) => {
+    const { route } = e.detail;
+    switch (route) {
+      case "home":
+        window.history.pushState({ route: "" }, "", "/");
+        setActivePage(pageContainer, { tagName: "x-home-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
+        break;
+      case "exercises":
+        window.history.pushState({ route: "exercises" }, "", "exercises");
+        setActivePage(pageContainer, { tagName: "x-exercises-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.EXERCISES);
+        break;
+      case "intervals-exercise-settings":
+        window.history.pushState({ route: "intervals-exercise-settings" }, "", "intervals-exercise-settings");
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-settings-page" });
+        break;
+      case "intervals":
+        window.history.pushState({ route: "intervals" }, "", "intervals");
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-page" });
+        break;
+      case "intervals-exercise-results":
+        window.history.pushState({ route: "intervals-exercise-results" }, "", "intervals-exercise-results");
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-results-page" });
+        break;
+      case "chords":
+        window.history.pushState({ route: "chords" }, "", "chords");
+        setActivePage(pageContainer, { tagName: "x-chords-exercise-page" });
+        break;
+      case "scales":
+        break;
+      case "settings":
+        window.history.pushState({ route: "settings" }, "", "settings");
+        setActivePage(pageContainer, { tagName: "x-settings-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.SETTINGS);
+        break;
+      default:
+        window.history.pushState({ route: "" }, "", "/");
+        setActivePage(pageContainer, { tagName: "x-home-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
+        break;
+    }
+  });
+  window.addEventListener("popstate", (e) => {
+    const { state: { route } } = e;
+    switch (route) {
+      case "home":
+        setActivePage(pageContainer, { tagName: "x-home-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
+        break;
+      case "exercises":
+        setActivePage(pageContainer, { tagName: "x-exercises-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.EXERCISES);
+        break;
+      case "intervals-exercise-settings":
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-settings-page" });
+        break;
+      case "intervals":
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-page" });
+        break;
+      case "intervals-exercise-results":
+        setActivePage(pageContainer, { tagName: "x-intervals-exercise-results-page" });
+        break;
+      case "chords":
+        setActivePage(pageContainer, { tagName: "x-settings-page" });
+        break;
+      case "scales":
+        break;
+      case "settings":
+        setActivePage(pageContainer, { tagName: "x-settings-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.SETTINGS);
+        break;
+      default:
+        setActivePage(pageContainer, { tagName: "x-home-page" });
+        bottomPanel == null ? void 0 : bottomPanel.setActive(BOTTOM_MENU_BUTTON_NAMES.HOME);
+    }
+  });
+  setActivePage(pageContainer, { tagName: "x-home-page" });
+};
+window.addEventListener("load", async () => {
+  await audioSettings.loadInstruments();
+  Transport2.bpm.value = audioSettings.bpm;
+  initSidePanel();
   initRouter();
-})();
+});
