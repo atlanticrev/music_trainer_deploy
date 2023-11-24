@@ -1666,6 +1666,8 @@ x-keys-exercise-page .original-key-display {
 }
 
 x-keys-exercise-page .form-field-group {
+  border-bottom: 1px solid #373a3f;
+  padding-bottom: 1rem;
   width: 100%;
 }
 

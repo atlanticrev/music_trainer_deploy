@@ -20284,7 +20284,7 @@ class KeysExerciseState {
 }
 const keysExerciseState = new KeysExerciseState();
 window.keysExerciseState = keysExerciseState;
-const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 1 0 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 1 0 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_SIGNS_QUANTITIES = [
   { value: 0, label: "0" },
   { value: 1, label: "1" },
@@ -20372,7 +20372,7 @@ class KeysExercisePage extends Page {
             tagName: "div",
             attrs: {
               class: "form-field-group",
-              name: "key-signs"
+              name: "original-key-field"
             },
             children: [
               {
@@ -20429,17 +20429,14 @@ class KeysExercisePage extends Page {
         },
         {
           tagName: "div",
-          cssClasses: "divider"
-        },
-        {
-          tagName: "div",
           attrs: {
             class: "grid-cell"
           },
           children: {
             tagName: "div",
             attrs: {
-              class: "form-field-group"
+              class: "form-field-group",
+              name: "parallel-key-field"
             },
             children: [
               {
@@ -20464,14 +20461,13 @@ class KeysExercisePage extends Page {
         },
         {
           tagName: "div",
-          cssClasses: "divider"
-        },
-        {
-          tagName: "div",
           cssClasses: "grid-cell",
           children: {
             tagName: "div",
             cssClasses: "form-field-group",
+            attrs: {
+              name: "same-name-key-field"
+            },
             children: [
               {
                 tagName: "span",
@@ -20527,10 +20523,6 @@ class KeysExercisePage extends Page {
         },
         {
           tagName: "div",
-          cssClasses: "divider"
-        },
-        {
-          tagName: "div",
           attrs: {
             class: "grid-cell"
           },
@@ -20551,23 +20543,18 @@ class KeysExercisePage extends Page {
     switch (event.target.getAttribute("name")) {
       case "key-signs-quantity-control":
         keysExerciseState.setOriginKeyInfo({ numberOfSigns: event.target.value });
-        console.log(keysExerciseState);
         break;
       case "key-signs-quality-control":
         keysExerciseState.setOriginKeyInfo({ quality: event.detail.value });
-        console.log(keysExerciseState);
         break;
       case "parallel-key-control":
         keysExerciseState.setParallelKeyInfo({ name: event.target.value });
-        console.log(keysExerciseState);
         break;
       case "same-name-key-signs-quantity-control":
         keysExerciseState.setSameNameKeyInfo({ numberOfSigns: event.target.value });
-        console.log(keysExerciseState);
         break;
       case "same-name-key-quality-control":
         keysExerciseState.setSameNameKeyInfo({ quality: event.detail.value });
-        console.log(keysExerciseState);
         break;
     }
   }
@@ -20578,13 +20565,26 @@ class KeysExercisePage extends Page {
     this._grid.addEventListener("change", this.onFieldChange);
     this._progress = this._grid.querySelector("x-progress");
     this._originalKeyDisplay = this._grid.querySelector('[name="original-key-display"]');
-    this._keySignsQuantityControl = this._grid.querySelector('[name="key-signs-quantity-control"]');
-    this._keySignsQualityControl = this._grid.querySelector('[name="key-signs-quality-control"]');
-    this._parallelKeyControl = this._grid.querySelector('[name="parallel-key-control"]');
-    this._sameNameKeySignsQuantityControl = this._grid.querySelector('[name="same-name-key-signs-quantity-control"]');
-    this._sameNameKeySignsQualityControl = this._grid.querySelector('[name="same-name-key-quality-control"]');
+    this._originalKeySignsQuantityControl = this._grid.querySelector('[name="key-signs-quantity-control"]');
+    this._originalKeySignsQualityControl = this._grid.querySelector('[name="key-signs-quality-control"]');
+    this._parallelKeyField = this._grid.querySelector('[name="parallel-key-field"]');
+    this._parallelKeyControl = this._parallelKeyField.querySelector('[name="parallel-key-control"]');
+    this._sameNameKeyField = this._grid.querySelector('[name="same-name-key-field"]');
+    this._sameNameKeySignsQuantityControl = this._sameNameKeyField.querySelector('[name="same-name-key-signs-quantity-control"]');
+    this._sameNameKeySignsQualityControl = this._sameNameKeyField.querySelector('[name="same-name-key-quality-control"]');
     this._submitButton = this._grid.querySelector('[name="submit-button"]');
     this._submitButton.addEventListener("click", this.onAnswerClick);
+    this._fieldGroups = [
+      this._parallelKeyField,
+      this._sameNameKeyField
+    ];
+    this._fields = [
+      this._originalKeySignsQuantityControl,
+      this._originalKeySignsQualityControl,
+      this._parallelKeyControl,
+      this._sameNameKeySignsQuantityControl,
+      this._sameNameKeySignsQualityControl
+    ];
     keysExerciseState.resetCommonSettings(keysExerciseOptionsState);
     this.updateForm();
   }
@@ -20597,26 +20597,33 @@ class KeysExercisePage extends Page {
       all: keysExerciseState.numberOfAllQuestions,
       completed: keysExerciseState.numberOfCompletedQuestions
     });
-    this._parallelKeyControl.replaceChildren(
-      createElTreeFromSchema(
-        [
-          {
-            tagName: "option",
-            attrs: {
-              disabled: "true",
-              selected: "selected",
-              value: ""
+    if (!keysExerciseState.originKey.parallel) {
+      this._parallelKeyField.style.setProperty("display", "none");
+    } else {
+      this._parallelKeyControl.replaceChildren(
+        createElTreeFromSchema(
+          [
+            {
+              tagName: "option",
+              attrs: {
+                disabled: "true",
+                selected: "selected",
+                value: ""
+              },
+              children: "Select variant"
             },
-            children: "Select variant"
-          },
-          ...getKeysForSameName(keysExerciseState.originKey).map((key) => ({
-            tagName: "option",
-            attrs: { value: key.value },
-            children: key.label
-          }))
-        ]
-      )
-    );
+            ...getKeysForSameName(keysExerciseState.originKey).map((key) => ({
+              tagName: "option",
+              attrs: { value: key.value },
+              children: key.label
+            }))
+          ]
+        )
+      );
+    }
+    if (!keysExerciseState.originKey.sameName) {
+      this._sameNameKeyField.style.setProperty("display", "none");
+    }
   }
   resetFormField(field) {
     for (const attributeName of ["disabled", "active", "success", "failure"]) {
@@ -20639,6 +20646,7 @@ class KeysExercisePage extends Page {
         }
         break;
       case "key-signs-quality-control":
+        console.log(keysExerciseState.originKeyData.quality, getAnswerKeyQuality(keysExerciseState.originKey));
         if (keysExerciseState.originKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey)) {
           field.setAttribute("success", "true");
         } else {
@@ -20646,50 +20654,46 @@ class KeysExercisePage extends Page {
         }
         break;
       case "parallel-key-control":
-        if (keysExerciseState.parallelKeyData.name === keysExerciseState.originKey.parallel.id) {
-          field.setAttribute("success", "true");
-        } else {
-          field.setAttribute("failure", "true");
+        if (keysExerciseState.originKey.parallel) {
+          if (keysExerciseState.parallelKeyData.name === keysExerciseState.originKey.parallel.id) {
+            field.setAttribute("success", "true");
+          } else {
+            field.setAttribute("failure", "true");
+          }
         }
         break;
       case "same-name-key-signs-quantity-control":
-        if (keysExerciseState.sameNameKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.sameName.signs).toString()) {
-          field.setAttribute("success", "true");
-        } else {
-          field.setAttribute("failure", "true");
+        if (keysExerciseState.originKey.sameName) {
+          if (keysExerciseState.sameNameKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.sameName.signs).toString()) {
+            field.setAttribute("success", "true");
+          } else {
+            field.setAttribute("failure", "true");
+          }
         }
         break;
       case "same-name-key-quality-control":
-        if (keysExerciseState.sameNameKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey.sameName)) {
-          field.setAttribute("success", "true");
-        } else {
-          field.setAttribute("failure", "true");
+        if (keysExerciseState.originKey.sameName) {
+          console.log(keysExerciseState.sameNameKeyData.quality, getAnswerKeyQuality(keysExerciseState.originKey.sameName));
+          if (keysExerciseState.sameNameKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey.sameName)) {
+            field.setAttribute("success", "true");
+          } else {
+            field.setAttribute("failure", "true");
+          }
         }
         break;
     }
   }
   checkFields() {
-    const fields = [
-      this._keySignsQuantityControl,
-      this._keySignsQualityControl,
-      this._parallelKeyControl,
-      this._sameNameKeySignsQuantityControl,
-      this._sameNameKeySignsQualityControl
-    ];
-    for (const field of fields) {
+    for (const field of this._fields) {
       this.checkField(field);
     }
   }
   resetFields() {
-    const fields = [
-      this._keySignsQuantityControl,
-      this._keySignsQualityControl,
-      this._parallelKeyControl,
-      this._sameNameKeySignsQuantityControl,
-      this._sameNameKeySignsQualityControl
-    ];
-    for (const field of fields) {
+    for (const field of this._fields) {
       this.resetFormField(field);
+    }
+    for (const fieldGroup of this._fieldGroups) {
+      fieldGroup.style.setProperty("display", "flex");
     }
   }
   onAnswerClick() {
