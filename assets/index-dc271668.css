@@ -121,9 +121,10 @@ x-button:hover {
 
 x-grid {
   display: grid;
-  grid-template-columns: repeat(3, fit-content(100%));
+  grid-template-columns: repeat(1, fit-content(100%));
   width: 100%;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem;
 }
 
@@ -133,6 +134,7 @@ x-grid > .grid-cell {
 
 @media screen and (max-width: 420px) {
   x-grid {
+    justify-content: unset;
     grid-template-columns: repeat(1, 100%);
   }
 }x-button {
@@ -226,9 +228,10 @@ x-button:hover {
 }
 x-button-options-grid, x-grid {
   display: grid;
-  grid-template-columns: repeat(3, fit-content(100%));
+  grid-template-columns: repeat(1, fit-content(100%));
   width: 100%;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem;
 }
 x-button-options-grid > .grid-cell, x-grid > .grid-cell {
@@ -236,6 +239,7 @@ x-button-options-grid > .grid-cell, x-grid > .grid-cell {
 }
 @media screen and (max-width: 420px) {
   x-button-options-grid, x-grid {
+    justify-content: unset;
     grid-template-columns: repeat(1, 100%);
   }
 }
@@ -1333,6 +1337,7 @@ x-chords-exercise-page .chord-buttons-container > ._option-button {
   font-weight: 700;
   line-height: 140%;
   color: #ffffff;
+  margin: 0 auto;
 }
 
 x-intervals-exercise-settings-page .description {
@@ -1396,6 +1401,7 @@ x-intervals-exercise-settings-page x-button.submit-button {
   font-weight: 700;
   line-height: 140%;
   color: #ffffff;
+  margin: 0 auto;
 }
 
 x-intervals-exercise-page {
@@ -1528,6 +1534,7 @@ x-intervals-exercise-results-page .actions .action {
   font-weight: 700;
   line-height: 140%;
   color: #ffffff;
+  margin: 0 auto;
 }
 
 x-keys-exercise-settings-page .description {
@@ -1591,6 +1598,7 @@ x-keys-exercise-settings-page x-button.submit-button {
   font-weight: 700;
   line-height: 140%;
   color: #ffffff;
+  margin: 0 auto;
 }
 
 x-keys-exercise-page .form-field-group {

@@ -616,14 +616,14 @@ class BottomPanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
-const styles$j = "x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(3, fit-content(100%));\n  width: 100%;\n  gap: 1rem;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
+const styles$j = "x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
 class Grid extends CustomElement {
   getElementStyles() {
     return styles$j.toString();
   }
 }
 customElements.define(getTagNameByCtor(Grid), Grid);
-const styles$i = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(3, fit-content(100%));\n  width: 100%;\n  gap: 1rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
+const styles$i = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
 const _ButtonOptionsGrid = class _ButtonOptionsGrid extends Grid {
   getElementStyles() {
     return styles$i.toString();
@@ -19302,7 +19302,7 @@ const intervalsExerciseOptionsState = {
 defineStateProperties(intervalsExerciseOptionsState, INTERVAL_EXERCISE_DEFAULT_SETTINGS, INTERVAL_EXERCISE_SAVED_SETTINGS);
 intervalsExerciseOptionsState.revalidateOptions();
 window.intervalsExerciseOptionsState = intervalsExerciseOptionsState;
-const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 class IntervalsExerciseSettingsPage extends Page {
   constructor() {
     super(...arguments);
@@ -19530,7 +19530,7 @@ class IntervalsExerciseState {
 }
 const intervalsExerciseState = new IntervalsExerciseState();
 window.intervalsExerciseState = intervalsExerciseState;
-const styles$3 = "x-intervals-exercise-page .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\n@media screen and (max-width: 420px) {\n  x-intervals-exercise-page x-grid {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n\nx-intervals-exercise-page x-button.play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n\nx-intervals-exercise-page x-button.play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
+const styles$3 = "x-intervals-exercise-page .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\n@media screen and (max-width: 420px) {\n  x-intervals-exercise-page x-grid {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n\nx-intervals-exercise-page x-button.play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n\nx-intervals-exercise-page x-button.play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
 const DELAY_BEFORE_NEXT_INTERVAL_PLAYING = 1500;
 class IntervalsExercisePage extends Page {
   constructor() {
@@ -19737,7 +19737,7 @@ class IntervalsExerciseResultsPage extends Page {
   }
 }
 customElements.define(getTagNameByCtor(IntervalsExerciseResultsPage), IntervalsExerciseResultsPage);
-const styles$1 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$1 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS = [
   {
     label: "10",
@@ -20203,14 +20203,44 @@ const MINOR_KEYS = {
     signs: 7
   }
 };
-for (const keyValue of Object.values(MAJOR_KEYS)) {
-  keyValue.sameName = Object.values(MINOR_KEYS).find((key) => key.signs === keyValue.signs - 3);
-  keyValue.parallel = Object.values(MINOR_KEYS).find((key) => key.signs === keyValue.signs);
+const ENHARMONIC_MAJOR_KEYS = {
+  "b-maj": "c-flat-maj",
+  "c-flat-maj": "b-maj",
+  "f-sharp-maj": "g-flat-maj",
+  "g-flat-maj": "f-sharp-maj",
+  "c-sharp-maj": "d-flat-maj",
+  "d-flat-maj": "c-sharp-maj"
+};
+const ENHARMONIC_MINOR_KEYS = {
+  "g-sharp-min": "a-flat-min",
+  "a-flat-min": "g-sharp-min",
+  "d-sharp-min": "e-flat-min",
+  "e-flat-min": "d-sharp-min",
+  "a-sharp-min": "b-flat-min",
+  "b-flat-min": "a-sharp-min"
+};
+for (const keyEntity of Object.values(MAJOR_KEYS)) {
+  keyEntity.sameName = Object.values(MINOR_KEYS).find((key) => key.signs === keyEntity.signs - 3);
+  keyEntity.parallel = Object.values(MINOR_KEYS).find((key) => key.signs === keyEntity.signs);
+  if (ENHARMONIC_MAJOR_KEYS[keyEntity.id]) {
+    keyEntity.enharmonic = ENHARMONIC_MAJOR_KEYS[keyEntity.id];
+  }
 }
-for (const keyValue of Object.values(MINOR_KEYS)) {
-  keyValue.sameName = Object.values(MAJOR_KEYS).find((key) => key.signs === keyValue.signs + 3);
-  keyValue.parallel = Object.values(MAJOR_KEYS).find((key) => key.signs === keyValue.signs);
+for (const keyEntity of Object.values(MINOR_KEYS)) {
+  keyEntity.sameName = Object.values(MAJOR_KEYS).find((key) => key.signs === keyEntity.signs + 3);
+  keyEntity.parallel = Object.values(MAJOR_KEYS).find((key) => key.signs === keyEntity.signs);
+  if (ENHARMONIC_MINOR_KEYS[keyEntity.id]) {
+    keyEntity.enharmonic = MINOR_KEYS[keyEntity.id];
+  }
 }
+const keyIsMajor = (keyEntity) => keyEntity.name.includes("maj");
+const getKeysForSameName = (keyEntity) => {
+  const keys = keyIsMajor(keyEntity) ? MINOR_KEYS : MAJOR_KEYS;
+  return Object.entries(keys).map(([minorKeyName, minorKeyEntity]) => ({
+    value: minorKeyName,
+    label: minorKeyEntity.name
+  }));
+};
 const ALL_KEYS = { ...MAJOR_KEYS, ...MINOR_KEYS };
 const getKeysByOptions = (options) => Object.keys(ALL_KEYS).reduce((acc, curr) => {
   const isMajorKey = curr.includes("maj");
@@ -20229,37 +20259,45 @@ class KeysExerciseState {
     __publicField(this, "numberOfWrongAnswers", 0);
     __publicField(this, "allKeys", []);
     __publicField(this, "originKey", null);
-    __publicField(this, "originKeyData", {
+    __publicField(this, "selectedOriginKeyData", {
       numberOfSigns: null,
       quality: null
     });
-    __publicField(this, "parallelKeyData", {
+    __publicField(this, "selectedParallelKeyData", {
       name: null
     });
-    __publicField(this, "sameNameKeyData", {
+    __publicField(this, "selectedSameNameKeyData", {
       numberOfSigns: null,
       quality: null
+    });
+    __publicField(this, "selectedEnharmonicKeyData", {
+      name: null
     });
   }
   setOriginKeyInfo({ numberOfSigns, quality }) {
     if (numberOfSigns !== void 0) {
-      this.originKeyData.numberOfSigns = numberOfSigns;
+      this.selectedOriginKeyData.numberOfSigns = numberOfSigns;
     }
     if (quality !== void 0) {
-      this.originKeyData.quality = quality;
+      this.selectedOriginKeyData.quality = quality;
     }
   }
   setParallelKeyInfo({ name }) {
     if (name !== void 0) {
-      this.parallelKeyData.name = name;
+      this.selectedParallelKeyData.name = name;
     }
   }
   setSameNameKeyInfo({ numberOfSigns, quality }) {
     if (numberOfSigns !== void 0) {
-      this.sameNameKeyData.numberOfSigns = numberOfSigns;
+      this.selectedSameNameKeyData.numberOfSigns = numberOfSigns;
     }
     if (quality !== void 0) {
-      this.sameNameKeyData.quality = quality;
+      this.selectedSameNameKeyData.quality = quality;
+    }
+  }
+  setEnharmonicKeyInfo({ name }) {
+    if (name !== void 0) {
+      this.selectedEnharmonicKeyData.name = name;
     }
   }
   isAllQuestionsCompleted() {
@@ -20284,7 +20322,7 @@ class KeysExerciseState {
 }
 const keysExerciseState = new KeysExerciseState();
 window.keysExerciseState = keysExerciseState;
-const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 1 0 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 1 0 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_SIGNS_QUANTITIES = [
   { value: 0, label: "0" },
   { value: 1, label: "1" },
@@ -20299,16 +20337,11 @@ const KEYS_QUALITIES = [
   { value: "flat", label: "b" },
   { value: "sharp", label: "#" }
 ];
-const NEXT_QUESTION_TIMEOUT = 5e3;
-const keyIsMajor = (keyEntity) => keyEntity.name.includes("maj");
-const getKeysForSameName = (keyEntity) => {
-  const keys = keyIsMajor(keyEntity) ? MINOR_KEYS : MAJOR_KEYS;
-  return Object.entries(keys).map(([minorKeyName, minorKeyEntity]) => ({
-    value: minorKeyName,
-    label: minorKeyEntity.name
-  }));
-};
+const NEXT_QUESTION_TIMEOUT = 3e3;
 const getAnswerKeyQuality = (key) => {
+  if (!key.signs) {
+    return null;
+  }
   if (Math.sign(key.signs) < 0) {
     return "flat";
   }
@@ -20527,6 +20560,54 @@ class KeysExercisePage extends Page {
             class: "grid-cell"
           },
           children: {
+            tagName: "div",
+            attrs: {
+              class: "form-field-group",
+              name: "enharmonic-key-field"
+            },
+            children: [
+              {
+                tagName: "span",
+                cssClasses: "form-field-group-label",
+                children: "What is the enharmonic key?"
+              },
+              {
+                tagName: "div",
+                cssClasses: "form-field-group-content",
+                children: [
+                  {
+                    tagName: "select",
+                    attrs: {
+                      name: "enharmonic-key-control"
+                    },
+                    children: [
+                      {
+                        tagName: "option",
+                        attrs: {
+                          disabled: "true",
+                          selected: "selected",
+                          value: ""
+                        },
+                        children: "Select variant"
+                      },
+                      ...Object.values(ALL_KEYS).map((keyEntity) => ({
+                        tagName: "option",
+                        attrs: { value: keyEntity.id },
+                        children: keyEntity.name
+                      }))
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          tagName: "div",
+          attrs: {
+            class: "grid-cell"
+          },
+          children: {
             tagName: "x-button",
             attrs: {
               name: "submit-button",
@@ -20556,7 +20637,11 @@ class KeysExercisePage extends Page {
       case "same-name-key-quality-control":
         keysExerciseState.setSameNameKeyInfo({ quality: event.detail.value });
         break;
+      case "enharmonic-key-control":
+        keysExerciseState.setEnharmonicKeyInfo({ name: event.target.value });
+        break;
     }
+    console.log("after onFieldChange:", keysExerciseState);
   }
   connectedCallback() {
     super.connectedCallback();
@@ -20572,18 +20657,22 @@ class KeysExercisePage extends Page {
     this._sameNameKeyField = this._grid.querySelector('[name="same-name-key-field"]');
     this._sameNameKeySignsQuantityControl = this._sameNameKeyField.querySelector('[name="same-name-key-signs-quantity-control"]');
     this._sameNameKeySignsQualityControl = this._sameNameKeyField.querySelector('[name="same-name-key-quality-control"]');
+    this._enharmonicKeyField = this._grid.querySelector('[name="enharmonic-key-field"]');
+    this._enharmonicKeyControl = this._enharmonicKeyField.querySelector('[name="enharmonic-key-control"]');
     this._submitButton = this._grid.querySelector('[name="submit-button"]');
     this._submitButton.addEventListener("click", this.onAnswerClick);
     this._fieldGroups = [
       this._parallelKeyField,
-      this._sameNameKeyField
+      this._sameNameKeyField,
+      this._enharmonicKeyField
     ];
     this._fields = [
       this._originalKeySignsQuantityControl,
       this._originalKeySignsQualityControl,
       this._parallelKeyControl,
       this._sameNameKeySignsQuantityControl,
-      this._sameNameKeySignsQualityControl
+      this._sameNameKeySignsQualityControl,
+      this._enharmonicKeyControl
     ];
     keysExerciseState.resetCommonSettings(keysExerciseOptionsState);
     this.updateForm();
@@ -20624,6 +20713,9 @@ class KeysExercisePage extends Page {
     if (!keysExerciseState.originKey.sameName) {
       this._sameNameKeyField.style.setProperty("display", "none");
     }
+    if (!keysExerciseState.originKey.enharmonic) {
+      this._enharmonicKeyField.style.setProperty("display", "none");
+    }
   }
   resetFormField(field) {
     for (const attributeName of ["disabled", "active", "success", "failure"]) {
@@ -20639,15 +20731,14 @@ class KeysExercisePage extends Page {
   checkField(field) {
     switch (field.getAttribute("name")) {
       case "key-signs-quantity-control":
-        if (keysExerciseState.originKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.signs).toString()) {
+        if (keysExerciseState.selectedOriginKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.signs).toString()) {
           field.setAttribute("success", "true");
         } else {
           field.setAttribute("failure", "true");
         }
         break;
       case "key-signs-quality-control":
-        console.log(keysExerciseState.originKeyData.quality, getAnswerKeyQuality(keysExerciseState.originKey));
-        if (keysExerciseState.originKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey)) {
+        if (keysExerciseState.selectedOriginKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey)) {
           field.setAttribute("success", "true");
         } else {
           field.setAttribute("failure", "true");
@@ -20655,7 +20746,7 @@ class KeysExercisePage extends Page {
         break;
       case "parallel-key-control":
         if (keysExerciseState.originKey.parallel) {
-          if (keysExerciseState.parallelKeyData.name === keysExerciseState.originKey.parallel.id) {
+          if (keysExerciseState.selectedParallelKeyData.name === keysExerciseState.originKey.parallel.id) {
             field.setAttribute("success", "true");
           } else {
             field.setAttribute("failure", "true");
@@ -20664,7 +20755,7 @@ class KeysExercisePage extends Page {
         break;
       case "same-name-key-signs-quantity-control":
         if (keysExerciseState.originKey.sameName) {
-          if (keysExerciseState.sameNameKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.sameName.signs).toString()) {
+          if (keysExerciseState.selectedSameNameKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.sameName.signs).toString()) {
             field.setAttribute("success", "true");
           } else {
             field.setAttribute("failure", "true");
@@ -20673,8 +20764,16 @@ class KeysExercisePage extends Page {
         break;
       case "same-name-key-quality-control":
         if (keysExerciseState.originKey.sameName) {
-          console.log(keysExerciseState.sameNameKeyData.quality, getAnswerKeyQuality(keysExerciseState.originKey.sameName));
-          if (keysExerciseState.sameNameKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey.sameName)) {
+          if (keysExerciseState.selectedSameNameKeyData.quality === getAnswerKeyQuality(keysExerciseState.originKey.sameName)) {
+            field.setAttribute("success", "true");
+          } else {
+            field.setAttribute("failure", "true");
+          }
+        }
+        break;
+      case "enharmonic-key-control":
+        if (keysExerciseState.originKey.enharmonic) {
+          if (keysExerciseState.selectedEnharmonicKeyData.name === keysExerciseState.originKey.enharmonic.id) {
             field.setAttribute("success", "true");
           } else {
             field.setAttribute("failure", "true");
