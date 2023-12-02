@@ -623,7 +623,7 @@ class Grid extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Grid), Grid);
-const styles$i = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
+const styles$i = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
 const _ButtonOptionsGrid = class _ButtonOptionsGrid extends Grid {
   getElementStyles() {
     return styles$i.toString();
@@ -647,7 +647,7 @@ customElements.define(getTagNameByCtor(ButtonOptionsGrid), ButtonOptionsGrid);
 class Button extends CustomElement {
 }
 customElements.define(getTagNameByCtor(Button), Button);
-const styles$h = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button-group {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\nx-button-group[variant=grid] > ._option-button {\n  transition: color ease-out 0.15s;\n}";
+const styles$h = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\nx-button-group[variant=grid] > ._option-button {\n  transition: color ease-out 0.15s;\n}";
 const _ButtonGroup = class _ButtonGroup extends CustomElement {
   constructor() {
     super();
@@ -717,7 +717,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
 __publicField(_ButtonGroup, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ButtonGroup = _ButtonGroup;
 customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
-const styles$g = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button-group-multiple[variant=grid], x-button-group-multiple[variant=row] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group-multiple[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n  transition: color ease-out 0.15s;\n}";
+const styles$g = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group-multiple[variant=grid], x-button-group-multiple[variant=row] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group-multiple[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n  transition: color ease-out 0.15s;\n}";
 class Lockable extends CustomElement {
   constructor() {
     super(...arguments);
@@ -1321,10 +1321,10 @@ class Page extends CustomElement {
     this.onClosed();
     this.remove();
   }
-  activate() {
+  activatePage() {
     this.classList.remove("inactive");
   }
-  deactivate() {
+  deactivatePage() {
     this.classList.add("inactive");
   }
 }
@@ -19118,7 +19118,7 @@ const playInterval = (intervalNotes, mode) => {
   }
   Transport2.start();
 };
-const styles$5 = "x-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.75rem 1.5rem;\n  font-size: 0.85rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-chords-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  border-radius: 1.25rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page .chord-buttons-container {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}";
+const styles$5 = "x-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-chords-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  border-radius: 1.25rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page .chord-buttons-container {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}";
 const _ChordsExercisePage = class _ChordsExercisePage extends Page {
   getElementStyles() {
     return styles$5.toString();
@@ -19157,16 +19157,6 @@ const _ChordsExercisePage = class _ChordsExercisePage extends Page {
 __publicField(_ChordsExercisePage, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ChordsExercisePage = _ChordsExercisePage;
 customElements.define(getTagNameByCtor(ChordsExercisePage), ChordsExercisePage);
-const localStorageService = {
-  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
-  write: (key, value) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  },
-  update: (key, value) => {
-    const lastValue = localStorageService.read(key);
-    localStorageService.write(key, Object.assign(lastValue, value));
-  }
-};
 const INTERVAL_NOTES = {
   unison: [0, 0],
   min2: [0, 1],
@@ -19182,13 +19172,26 @@ const INTERVAL_NOTES = {
   maj7: [0, 11],
   octave: [0, 12]
 };
-const defineStateProperties = (stateObject, defaultSettings, savedSettings) => {
+const localStorageService = {
+  read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
+  write: (key, value) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  },
+  update: (key, value) => {
+    const lastValue = localStorageService.read(key);
+    localStorageService.write(key, Object.assign(lastValue, value));
+  }
+};
+const defineStateProperties = ({ stateObject, defaultSettings, savedSettings, localStorageKey }) => {
   for (const propName of Object.keys(defaultSettings)) {
     const hiddenPropName = `_${propName}`;
     stateObject[hiddenPropName] = savedSettings[propName] || defaultSettings[propName];
     Object.defineProperty(stateObject, propName, {
       set(newValue) {
         this[hiddenPropName] = newValue;
+        if (typeof localStorageKey === "string" && localStorageKey.length > 0) {
+          localStorageService.update(localStorageKey, { [propName]: newValue });
+        }
         this.revalidateOptions();
       },
       get() {
@@ -19299,15 +19302,23 @@ const intervalsExerciseOptionsState = {
     }
   }
 };
-defineStateProperties(intervalsExerciseOptionsState, INTERVAL_EXERCISE_DEFAULT_SETTINGS, INTERVAL_EXERCISE_SAVED_SETTINGS);
+defineStateProperties({
+  stateObject: intervalsExerciseOptionsState,
+  defaultSettings: INTERVAL_EXERCISE_DEFAULT_SETTINGS,
+  savedSettings: INTERVAL_EXERCISE_SAVED_SETTINGS,
+  localStorageKey: INTERVAL_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY
+});
 intervalsExerciseOptionsState.revalidateOptions();
 window.intervalsExerciseOptionsState = intervalsExerciseOptionsState;
 const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 class IntervalsExerciseSettingsPage extends Page {
   constructor() {
-    super(...arguments);
+    super();
     __publicField(this, "_selectIntervalsButton");
     __publicField(this, "_submitButton");
+    __publicField(this, "_intervalsSelectionDialog");
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.onSelectIntervalsButtonClick = this.onSelectIntervalsButtonClick.bind(this);
   }
   getElementStyles() {
     return styles$4.toString();
@@ -19415,19 +19426,36 @@ class IntervalsExerciseSettingsPage extends Page {
       ]
     };
   }
-  onSelectIntervalsButtonClick(e) {
-    e.stopPropagation();
-    const onOptionsSelected = (event) => {
-      const { name, value } = event.detail;
-      switch (name) {
-        case "interval-selection":
-          intervalsExerciseOptionsState.selectedIntervals = value;
-          localStorageService.update(INTERVAL_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY, { selectedIntervals: value });
-          break;
-      }
-    };
-    const dialog = createElTreeFromSchema({ tagName: "x-alert-dialog" });
-    dialog.setParent(document.body).setContent(createElTreeFromSchema({
+  onSelectIntervalsButtonClick(event) {
+    event.stopPropagation();
+    this._intervalsSelectionDialog.open();
+  }
+  onFieldChange(event) {
+    event.stopPropagation();
+    const { name, value } = event.detail;
+    switch (name) {
+      case "number-of-questions":
+        intervalsExerciseOptionsState.numberOfQuestions = parseInt(value, 10);
+        break;
+      case "playing-mode":
+        intervalsExerciseOptionsState.playingMode = value;
+        break;
+      case "interval-selection":
+        intervalsExerciseOptionsState.selectedIntervals = value;
+        break;
+    }
+  }
+  onSubmitClick(event) {
+    event.stopPropagation();
+    event.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA.intervals.route }));
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._grid = this.querySelector("x-grid");
+    this._grid.addEventListener("change", this.onFieldChange);
+    this._selectIntervalsButton = this._grid.querySelector(".select-intervals-button");
+    this._selectIntervalsButton.addEventListener("click", this.onSelectIntervalsButtonClick);
+    this._intervalsSelectionDialog = createElTreeFromSchema({ tagName: "x-alert-dialog" }).setParent(document.body).setContent(createElTreeFromSchema({
       tagName: "x-button-group-multiple",
       attrs: {
         name: "interval-selection",
@@ -19441,33 +19469,9 @@ class IntervalsExerciseSettingsPage extends Page {
         },
         children: elSchema.label
       }))
-    })).onOpened(() => dialog.addEventListener("change", onOptionsSelected)).onClosed(() => dialog.removeEventListener("change", onOptionsSelected)).open();
-  }
-  onButtonGroupOptionSelect(e) {
-    const { name, value } = e.detail;
-    switch (name) {
-      case "number-of-questions":
-        intervalsExerciseOptionsState.numberOfQuestions = parseInt(value, 10);
-        localStorageService.update(INTERVAL_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY, { numberOfQuestions: parseInt(value, 10) });
-        break;
-      case "playing-mode":
-        intervalsExerciseOptionsState.playingMode = value;
-        localStorageService.update(INTERVAL_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY, { playingMode: value });
-        break;
-    }
-  }
-  onStartButtonClick(e) {
-    e.stopPropagation();
-    e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
-  }
-  connectedCallback() {
-    super.connectedCallback();
-    this._grid = this.querySelector("x-grid");
-    this._selectIntervalsButton = this._grid.querySelector(".select-intervals-button");
+    })).onOpened(() => this._intervalsSelectionDialog.addEventListener("change", this.onFieldChange)).onClosed(() => this._intervalsSelectionDialog.removeEventListener("change", this.onFieldChange));
     this._submitButton = this._grid.querySelector(".submit-button");
-    this._selectIntervalsButton.addEventListener("click", this.onSelectIntervalsButtonClick);
-    this.addEventListener("change", this.onButtonGroupOptionSelect);
-    this._submitButton.addEventListener("click", this.onStartButtonClick);
+    this._submitButton.addEventListener("click", this.onSubmitClick);
   }
 }
 customElements.define(getTagNameByCtor(IntervalsExerciseSettingsPage), IntervalsExerciseSettingsPage);
@@ -19642,7 +19646,7 @@ class IntervalsExercisePage extends Page {
       }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
     } else {
       window.setTimeout(() => {
-        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals-exercise-results" }));
+        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["intervals-exercise-results"].route }));
       }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
     }
   }
@@ -19723,10 +19727,10 @@ class IntervalsExerciseResultsPage extends Page {
     };
   }
   onRepeatExerciseClick() {
-    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals" }));
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA.intervals.route }));
   }
   onToExerciseSettingsClick() {
-    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "intervals-exercise-settings" }));
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["intervals-exercise-settings"].route }));
   }
   connectedCallback() {
     super.connectedCallback();
@@ -19772,10 +19776,36 @@ const KEYS_EXERCISE_SHARP_FLAT_KEYS_OPTIONS = [
     value: "flat"
   }
 ];
+const KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS = [
+  {
+    label: "Paral.",
+    value: "parallel"
+  },
+  {
+    label: "Same name",
+    value: "sameName"
+  },
+  {
+    label: "Enharm.",
+    value: "nnharmonic"
+  }
+];
+const KEYS_EXERCISE_KEY_SIGNS_OPTIONS = [
+  { value: "0", label: "0" },
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+  { value: "7", label: "7" }
+];
 const KEYS_EXERCISE_DEFAULT_SETTINGS = {
   numberOfQuestions: KEYS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS[0].value,
   minorMajorKeys: Object.values(KEYS_EXERCISE_MINOR_MAJOR_KEYS_OPTIONS).map((key) => key.value),
-  sharpFlatKeys: Object.values(KEYS_EXERCISE_SHARP_FLAT_KEYS_OPTIONS).map((key) => key.value)
+  sharpFlatKeys: Object.values(KEYS_EXERCISE_SHARP_FLAT_KEYS_OPTIONS).map((key) => key.value),
+  satelliteKeys: Object.values(KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS).map((key) => key.value),
+  signsQuantity: Object.values(KEYS_EXERCISE_KEY_SIGNS_OPTIONS).map((key) => key.value)
 };
 const KEYS_EXERCISE_LOCAL_STORAGE_KEY = "keys_exercise_settings";
 const KEYS_EXERCISE_SAVED_SETTINGS = localStorageService.read(KEYS_EXERCISE_LOCAL_STORAGE_KEY);
@@ -19790,9 +19820,20 @@ const keysExerciseOptionsState = {
     for (const sharpFlatKey of KEYS_EXERCISE_SHARP_FLAT_KEYS_OPTIONS) {
       sharpFlatKey.isActive = keysExerciseOptionsState.sharpFlatKeys.includes(sharpFlatKey.value);
     }
+    for (const satelliteKey of KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS) {
+      satelliteKey.isActive = keysExerciseOptionsState.satelliteKeys.includes(satelliteKey.value);
+    }
+    for (const keySigns of KEYS_EXERCISE_KEY_SIGNS_OPTIONS) {
+      keySigns.isActive = keysExerciseOptionsState.signsQuantity.includes(keySigns.value);
+    }
   }
 };
-defineStateProperties(keysExerciseOptionsState, KEYS_EXERCISE_DEFAULT_SETTINGS, KEYS_EXERCISE_SAVED_SETTINGS);
+defineStateProperties({
+  stateObject: keysExerciseOptionsState,
+  defaultSettings: KEYS_EXERCISE_DEFAULT_SETTINGS,
+  savedSettings: KEYS_EXERCISE_SAVED_SETTINGS,
+  localStorageKey: "keys_exercise_settings"
+});
 keysExerciseOptionsState.revalidateOptions();
 window.keysExerciseOptionsState = keysExerciseOptionsState;
 class KeysExerciseSettingsPage extends Page {
@@ -19844,6 +19885,66 @@ class KeysExerciseSettingsPage extends Page {
                   attrs: {
                     "data-value": elSchema.value,
                     ...elSchema.value === keysExerciseOptionsState.numberOfQuestions.toString() ? { active: true } : {}
+                  },
+                  children: elSchema.label
+                }))
+              }
+            ]
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "div",
+            cssClasses: "form-field-group",
+            children: [
+              {
+                tagName: "span",
+                cssClasses: "form-field-group-label",
+                children: "Key signs quantity:"
+              },
+              {
+                tagName: "x-button-group-multiple",
+                attrs: {
+                  name: "key-signs-quantity",
+                  variant: "row"
+                },
+                children: KEYS_EXERCISE_KEY_SIGNS_OPTIONS.map((elSchema) => ({
+                  tagName: "x-button",
+                  attrs: {
+                    "data-value": elSchema.value,
+                    ...elSchema.isActive ? { active: elSchema.isActive } : {}
+                  },
+                  children: elSchema.label
+                }))
+              }
+            ]
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "div",
+            cssClasses: "form-field-group",
+            children: [
+              {
+                tagName: "span",
+                cssClasses: "form-field-group-label",
+                children: "Satellite keys:"
+              },
+              {
+                tagName: "x-button-group-multiple",
+                attrs: {
+                  name: "satellite-keys",
+                  variant: "row"
+                },
+                children: KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS.map((elSchema) => ({
+                  tagName: "x-button",
+                  attrs: {
+                    "data-value": elSchema.value,
+                    ...elSchema.isActive ? { active: elSchema.isActive } : {}
                   },
                   children: elSchema.label
                 }))
@@ -19923,36 +20024,43 @@ class KeysExerciseSettingsPage extends Page {
       ]
     };
   }
-  onOptionsSelected(event) {
+  onFieldChange(event) {
     const { name, value } = event.detail;
     switch (name) {
       case "number-of-questions":
         keysExerciseOptionsState.numberOfQuestions = parseInt(value, 10);
-        localStorageService.update(KEYS_EXERCISE_LOCAL_STORAGE_KEY, { numberOfQuestions: parseInt(value, 10) });
         break;
       case "minor-major-keys":
         keysExerciseOptionsState.minorMajorKeys = value;
-        localStorageService.update(KEYS_EXERCISE_LOCAL_STORAGE_KEY, { minorMajorKeys: value });
         break;
       case "sharp-flat-keys":
         keysExerciseOptionsState.sharpFlatKeys = value;
-        localStorageService.update(KEYS_EXERCISE_LOCAL_STORAGE_KEY, { sharpFlatKeys: value });
+        break;
+      case "satellite-keys":
+        keysExerciseOptionsState.satelliteKeys = value;
+        break;
+      case "key-signs-quantity":
+        keysExerciseOptionsState.signsQuantity = value;
         break;
     }
   }
   onStartButtonClick(e) {
     e.stopPropagation();
-    e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: "keys-exercise" }));
+    e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise"].route }));
   }
   connectedCallback() {
     super.connectedCallback();
     this._grid = this.querySelector("x-grid");
-    this._minorMajorKeys = this.querySelector('x-button-group-multiple[name="minor-major-keys"]');
-    this._minorMajorKeys.addEventListener("change", this.onOptionsSelected);
-    this._sharpFlatKeys = this.querySelector('x-button-group-multiple[name="sharp-flat-keys"]');
-    this._sharpFlatKeys.addEventListener("change", this.onOptionsSelected);
-    this._numberOfQuestions = this.querySelector('x-button-group[name="number-of-questions"]');
-    this._numberOfQuestions.addEventListener("change", this.onOptionsSelected);
+    this._keySignsQuantity = this.querySelector('[name="key-signs-quantity"]');
+    this._keySignsQuantity.addEventListener("change", this.onFieldChange);
+    this._satelliteKeys = this.querySelector('[name="satellite-keys"]');
+    this._satelliteKeys.addEventListener("change", this.onFieldChange);
+    this._minorMajorKeys = this.querySelector('[name="minor-major-keys"]');
+    this._minorMajorKeys.addEventListener("change", this.onFieldChange);
+    this._sharpFlatKeys = this.querySelector('[name="sharp-flat-keys"]');
+    this._sharpFlatKeys.addEventListener("change", this.onFieldChange);
+    this._numberOfQuestions = this.querySelector('[name="number-of-questions"]');
+    this._numberOfQuestions.addEventListener("change", this.onFieldChange);
     this._submitButton = this._grid.querySelector(".submit-button");
     this._submitButton.addEventListener("click", this.onStartButtonClick);
   }
@@ -20223,22 +20331,24 @@ for (const keyEntity of Object.values(MAJOR_KEYS)) {
   keyEntity.sameName = Object.values(MINOR_KEYS).find((key) => key.signs === keyEntity.signs - 3);
   keyEntity.parallel = Object.values(MINOR_KEYS).find((key) => key.signs === keyEntity.signs);
   if (ENHARMONIC_MAJOR_KEYS[keyEntity.id]) {
-    keyEntity.enharmonic = ENHARMONIC_MAJOR_KEYS[keyEntity.id];
+    const enharmonicKeyName = ENHARMONIC_MAJOR_KEYS[keyEntity.id];
+    keyEntity.enharmonic = MAJOR_KEYS[enharmonicKeyName];
   }
 }
 for (const keyEntity of Object.values(MINOR_KEYS)) {
   keyEntity.sameName = Object.values(MAJOR_KEYS).find((key) => key.signs === keyEntity.signs + 3);
   keyEntity.parallel = Object.values(MAJOR_KEYS).find((key) => key.signs === keyEntity.signs);
   if (ENHARMONIC_MINOR_KEYS[keyEntity.id]) {
-    keyEntity.enharmonic = MINOR_KEYS[keyEntity.id];
+    const enharmonicKeyName = ENHARMONIC_MINOR_KEYS[keyEntity.id];
+    keyEntity.enharmonic = MINOR_KEYS[enharmonicKeyName];
   }
 }
 const keyIsMajor = (keyEntity) => keyEntity.name.includes("maj");
 const getKeysForSameName = (keyEntity) => {
-  const keys = keyIsMajor(keyEntity) ? MINOR_KEYS : MAJOR_KEYS;
-  return Object.entries(keys).map(([minorKeyName, minorKeyEntity]) => ({
-    value: minorKeyName,
-    label: minorKeyEntity.name
+  const availableKeys = keyIsMajor(keyEntity) ? MINOR_KEYS : MAJOR_KEYS;
+  return Object.entries(availableKeys).map(([availableKeyName, availableKeyEntity]) => ({
+    value: availableKeyName,
+    label: availableKeyEntity.name
   }));
 };
 const ALL_KEYS = { ...MAJOR_KEYS, ...MINOR_KEYS };
@@ -20246,7 +20356,8 @@ const getKeysByOptions = (options) => Object.keys(ALL_KEYS).reduce((acc, curr) =
   const isMajorKey = curr.includes("maj");
   const isSharpKey = curr.includes("sharp");
   const isFlatKey = curr.includes("flat");
-  if (!options.minorMajorKeys.includes("maj") && isMajorKey || !options.minorMajorKeys.includes("min") && !isMajorKey || !options.sharpFlatKeys.includes("sharp") && isSharpKey || !options.sharpFlatKeys.includes("flat") && isFlatKey) {
+  const isAvailableBySigns = options.signsQuantity.includes(Math.abs(ALL_KEYS[curr].signs).toString());
+  if (!isAvailableBySigns || !options.minorMajorKeys.includes("maj") && isMajorKey || !options.minorMajorKeys.includes("min") && !isMajorKey || !options.sharpFlatKeys.includes("sharp") && isSharpKey || !options.sharpFlatKeys.includes("flat") && isFlatKey) {
     return acc;
   }
   acc[curr] = ALL_KEYS[curr];
@@ -20257,8 +20368,9 @@ class KeysExerciseState {
     __publicField(this, "numberOfAllQuestions", 0);
     __publicField(this, "numberOfCompletedQuestions", 0);
     __publicField(this, "numberOfWrongAnswers", 0);
-    __publicField(this, "allKeys", []);
+    __publicField(this, "availableKeys", []);
     __publicField(this, "originKey", null);
+    // Selected data entities
     __publicField(this, "selectedOriginKeyData", {
       numberOfSigns: null,
       quality: null
@@ -20274,6 +20386,7 @@ class KeysExerciseState {
       name: null
     });
   }
+  // Selected data setters
   setOriginKeyInfo({ numberOfSigns, quality }) {
     if (numberOfSigns !== void 0) {
       this.selectedOriginKeyData.numberOfSigns = numberOfSigns;
@@ -20300,20 +20413,35 @@ class KeysExerciseState {
       this.selectedEnharmonicKeyData.name = name;
     }
   }
+  resetSelectedData() {
+    Object.assign(this, {
+      originKey: ALL_KEYS[randomInArray(Object.keys(this.availableKeys))],
+      selectedOriginKeyData: {
+        numberOfSigns: null,
+        quality: null
+      },
+      selectedParallelKeyData: {
+        name: null
+      },
+      selectedSameNameKeyData: {
+        numberOfSigns: null,
+        quality: null
+      },
+      selectedEnharmonicKeyData: {
+        name: null
+      }
+    });
+  }
+  // Common quiz state
   isAllQuestionsCompleted() {
     return this.numberOfCompletedQuestions >= this.numberOfAllQuestions;
   }
-  resetCommonSettings(options) {
+  setCommonSettings(options) {
     Object.assign(this, {
       numberOfAllQuestions: options.numberOfQuestions,
-      allKeys: getKeysByOptions(options),
+      availableKeys: getKeysByOptions(options),
       numberOfCompletedQuestions: 0,
       numberOfWrongAnswers: 0
-    });
-  }
-  resetOriginKey() {
-    Object.assign(this, {
-      originKey: ALL_KEYS[randomInArray(Object.keys(ALL_KEYS))]
     });
   }
   updateNumberOfCompletedQuestions() {
@@ -20351,6 +20479,10 @@ const getAnswerKeyQuality = (key) => {
   return null;
 };
 class KeysExercisePage extends Page {
+  constructor() {
+    super();
+    this.onSubmitClick = this.onSubmitClick.bind(this);
+  }
   getElementStyles() {
     return styles.toString();
   }
@@ -20641,11 +20773,9 @@ class KeysExercisePage extends Page {
         keysExerciseState.setEnharmonicKeyInfo({ name: event.target.value });
         break;
     }
-    console.log("after onFieldChange:", keysExerciseState);
   }
   connectedCallback() {
     super.connectedCallback();
-    this.onAnswerClick = this.onAnswerClick.bind(this);
     this._grid = this.querySelector("x-grid");
     this._grid.addEventListener("change", this.onFieldChange);
     this._progress = this._grid.querySelector("x-progress");
@@ -20659,8 +20789,6 @@ class KeysExercisePage extends Page {
     this._sameNameKeySignsQualityControl = this._sameNameKeyField.querySelector('[name="same-name-key-quality-control"]');
     this._enharmonicKeyField = this._grid.querySelector('[name="enharmonic-key-field"]');
     this._enharmonicKeyControl = this._enharmonicKeyField.querySelector('[name="enharmonic-key-control"]');
-    this._submitButton = this._grid.querySelector('[name="submit-button"]');
-    this._submitButton.addEventListener("click", this.onAnswerClick);
     this._fieldGroups = [
       this._parallelKeyField,
       this._sameNameKeyField,
@@ -20674,11 +20802,20 @@ class KeysExercisePage extends Page {
       this._sameNameKeySignsQualityControl,
       this._enharmonicKeyControl
     ];
-    keysExerciseState.resetCommonSettings(keysExerciseOptionsState);
+    this._submitButton = this._grid.querySelector('[name="submit-button"]');
+    this._submitButton.addEventListener("click", this.onSubmitClick);
+    this.initState();
     this.updateForm();
   }
+  initState() {
+    keysExerciseState.setCommonSettings(keysExerciseOptionsState);
+  }
+  resetSelectedData() {
+    keysExerciseState.resetSelectedData();
+  }
+  // todo Common mechanism to exclude hidden fields
   updateForm() {
-    keysExerciseState.resetOriginKey();
+    this.resetSelectedData();
     this._originalKeyDisplay.replaceChildren(
       createElTreeFromSchema(keysExerciseState.originKey.name)
     );
@@ -20717,6 +20854,7 @@ class KeysExercisePage extends Page {
       this._enharmonicKeyField.style.setProperty("display", "none");
     }
   }
+  // todo FormField component should implement .reset method
   resetFormField(field) {
     for (const attributeName of ["disabled", "active", "success", "failure"]) {
       field.removeAttribute(attributeName);
@@ -20728,7 +20866,8 @@ class KeysExercisePage extends Page {
       field.options[0].selected = true;
     }
   }
-  checkField(field) {
+  // todo FormField component should has a validator
+  validateField(field) {
     switch (field.getAttribute("name")) {
       case "key-signs-quantity-control":
         if (keysExerciseState.selectedOriginKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.signs).toString()) {
@@ -20782,9 +20921,9 @@ class KeysExercisePage extends Page {
         break;
     }
   }
-  checkFields() {
+  validateFields() {
     for (const field of this._fields) {
-      this.checkField(field);
+      this.validateField(field);
     }
   }
   resetFields() {
@@ -20795,14 +20934,14 @@ class KeysExercisePage extends Page {
       fieldGroup.style.setProperty("display", "flex");
     }
   }
-  onAnswerClick() {
-    this.deactivate();
-    this.checkFields();
+  onSubmitClick() {
+    this.deactivatePage();
+    this.validateFields();
     setTimeout(() => {
       keysExerciseState.updateNumberOfCompletedQuestions();
       this.resetFields();
       this.updateForm();
-      this.activate();
+      this.activatePage();
     }, NEXT_QUESTION_TIMEOUT);
   }
 }

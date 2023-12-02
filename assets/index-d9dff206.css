@@ -168,8 +168,8 @@ x-button-options-grid > .grid-cell > ._option-button {
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button-options-grid, x-grid {
   margin: 0;
@@ -209,8 +209,8 @@ x-button-options-grid > .grid-cell > ._option-button {
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button {
   display: flex;
@@ -281,8 +281,8 @@ x-button-options-grid > .grid-cell > ._option-button {
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button {
   display: flex;
@@ -339,8 +339,8 @@ x-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button-group {
   margin: 0;
@@ -380,8 +380,8 @@ x-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button {
   display: flex;
@@ -450,8 +450,8 @@ x-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button-group-multiple[variant=grid], x-button-group-multiple[variant=row] {
   margin: 0;
@@ -491,8 +491,8 @@ x-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 x-button {
   display: flex;
@@ -1230,8 +1230,8 @@ x-chords-exercise-page .chord-buttons-container > ._option-button {
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 
 x-chords-exercise-page .chord-buttons-container {
@@ -1279,8 +1279,8 @@ x-chords-exercise-page .chord-buttons-container > ._option-button {
   height: unset;
   border: 0;
   border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
 }
 
 x-button {
