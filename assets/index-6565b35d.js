@@ -45,7 +45,7 @@ var __publicField = (obj, key, value) => {
     fetch(link.href, fetchOpts);
   }
 })();
-const styles$l = "x-icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\nx-icon.active svg path {\n  fill: #43cbc5;\n}\nsvg {\n  width: 100%;\n  height: 100%;\n}\nsvg path {\n  fill: #636363;\n  transition: all ease-out 0.25s;\n}";
+const styles$C = "";
 const _utilElContainer = document.createElement("div");
 const parser = new DOMParser();
 const createElFromString = (schema) => {
@@ -161,6 +161,10 @@ class TransitionAnimator {
 }
 __publicField(TransitionAnimator, "enqueueAnimation", (fn) => requestAnimationFrame(() => requestAnimationFrame(fn)));
 class CustomElement extends HTMLElement {
+  static getTagName() {
+    const name = this.name.split(/(?=[A-Z])|\b/).filter((namePart) => !namePart.includes("_")).map((word) => word.toLowerCase()).join("-");
+    return `x-${name}`;
+  }
   connectedCallback() {
     this.applyStyles();
     this.applyTemplate();
@@ -188,9 +192,10 @@ class Icon extends CustomElement {
     return super.getTemplateSchema();
   }
   getElementStyles() {
-    return styles$l.toString();
+    return styles$C.toString();
   }
 }
+const styles$B = "x-profile-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-profile-icon.active svg path {\n  fill: #43cbc5;\n}\nx-profile-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-profile-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ProfileIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -205,10 +210,11 @@ class ProfileIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$B.toString();
   }
 }
 customElements.define(getTagNameByCtor(ProfileIcon), ProfileIcon);
+const styles$A = "x-create-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-create-icon.active svg path {\n  fill: #43cbc5;\n}\nx-create-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-create-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class CreateIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -221,10 +227,11 @@ class CreateIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$A.toString();
   }
 }
-customElements.define(getTagNameByCtor(CreateIcon), CreateIcon);
+customElements.define(CreateIcon.getTagName(), CreateIcon);
+const styles$z = "x-favourites-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-favourites-icon.active svg path {\n  fill: #43cbc5;\n}\nx-favourites-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-favourites-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class FavouritesIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -235,10 +242,11 @@ class FavouritesIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$z.toString();
   }
 }
-customElements.define(getTagNameByCtor(FavouritesIcon), FavouritesIcon);
+customElements.define(FavouritesIcon.getTagName(), FavouritesIcon);
+const styles$y = "x-home-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-home-icon.active svg path {\n  fill: #43cbc5;\n}\nx-home-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-home-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class HomeIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -253,10 +261,11 @@ class HomeIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$y.toString();
   }
 }
 customElements.define(getTagNameByCtor(HomeIcon), HomeIcon);
+const styles$x = "x-search-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-search-icon.active svg path {\n  fill: #43cbc5;\n}\nx-search-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-search-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class SearchIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -267,10 +276,11 @@ class SearchIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$x.toString();
   }
 }
-customElements.define(getTagNameByCtor(SearchIcon), SearchIcon);
+customElements.define(SearchIcon.getTagName(), SearchIcon);
+const styles$w = "x-menu-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-menu-icon.active svg path {\n  fill: #43cbc5;\n}\nx-menu-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-menu-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class MenuIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -286,10 +296,11 @@ class MenuIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$w.toString();
   }
 }
-customElements.define(getTagNameByCtor(MenuIcon), MenuIcon);
+customElements.define(MenuIcon.getTagName(), MenuIcon);
+const styles$v = "x-exercises-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-exercises-icon.active svg path {\n  fill: #43cbc5;\n}\nx-exercises-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-exercises-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ExercisesIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -304,10 +315,11 @@ class ExercisesIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$v.toString();
   }
 }
-customElements.define(getTagNameByCtor(ExercisesIcon), ExercisesIcon);
+customElements.define(ExercisesIcon.getTagName(), ExercisesIcon);
+const styles$u = "x-utils-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-utils-icon.active svg path {\n  fill: #43cbc5;\n}\nx-utils-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-utils-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class UtilsIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -322,10 +334,11 @@ class UtilsIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$u.toString();
   }
 }
-customElements.define(getTagNameByCtor(UtilsIcon), UtilsIcon);
+customElements.define(UtilsIcon.getTagName(), UtilsIcon);
+const styles$t = "x-settings-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-settings-icon.active svg path {\n  fill: #43cbc5;\n}\nx-settings-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-settings-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class SettingsIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -340,10 +353,11 @@ class SettingsIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$t.toString();
   }
 }
-customElements.define(getTagNameByCtor(SettingsIcon), SettingsIcon);
+customElements.define(SettingsIcon.getTagName(), SettingsIcon);
+const styles$s = "x-cross-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-cross-icon.active svg path {\n  fill: #43cbc5;\n}\nx-cross-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-cross-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class CrossIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -358,10 +372,11 @@ class CrossIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$s.toString();
   }
 }
-customElements.define(getTagNameByCtor(CrossIcon), CrossIcon);
+customElements.define(CrossIcon.getTagName(), CrossIcon);
+const styles$r = "x-play-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-play-icon.active svg path {\n  fill: #43cbc5;\n}\nx-play-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-play-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class PlayIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -376,10 +391,11 @@ class PlayIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$r.toString();
   }
 }
-customElements.define(getTagNameByCtor(PlayIcon), PlayIcon);
+customElements.define(PlayIcon.getTagName(), PlayIcon);
+const styles$q = "x-pause-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-pause-icon.active svg path {\n  fill: #43cbc5;\n}\nx-pause-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-pause-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class PauseIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -394,10 +410,11 @@ class PauseIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$q.toString();
   }
 }
-customElements.define(getTagNameByCtor(PauseIcon), PauseIcon);
+customElements.define(PauseIcon.getTagName(), PauseIcon);
+const styles$p = "x-replay-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-replay-icon.active svg path {\n  fill: #43cbc5;\n}\nx-replay-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-replay-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ReplayIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -412,10 +429,11 @@ class ReplayIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$p.toString();
   }
 }
-customElements.define(getTagNameByCtor(ReplayIcon), ReplayIcon);
+customElements.define(ReplayIcon.getTagName(), ReplayIcon);
+const styles$o = "x-flat-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-flat-icon.active svg path {\n  fill: #43cbc5;\n}\nx-flat-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-flat-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class FlatIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -438,11 +456,49 @@ class FlatIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return super.getElementStyles();
+    return styles$o.toString();
   }
 }
 customElements.define(getTagNameByCtor(FlatIcon), FlatIcon);
-const styles$k = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-bottom-panel button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-bottom-panel button:hover, x-button:hover {\n  cursor: pointer;\n}\nx-bottom-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n@media screen and (min-width: 1200px) {\n  x-bottom-panel x-bottom-panel {\n    display: none;\n  }\n}\nx-bottom-panel button {\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\nx-bottom-panel button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\nx-bottom-panel button > img > svg {\n  width: 100%;\n  height: 100%;\n}\nx-bottom-panel button.active {\n  color: #43cbc5;\n}\nx-bottom-panel button.active svg path {\n  fill: #43cbc5;\n}";
+const styles$n = "x-plus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-plus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-plus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-plus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-plus-icon {\n  --icon-size: 1.15rem;\n}";
+class PlusIcon extends Icon {
+  getTemplateSchema() {
+    return `
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+            >
+                <path fill="currentColor" d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+            </svg>
+        `;
+  }
+  getElementStyles() {
+    return styles$n.toString();
+  }
+}
+customElements.define(PlusIcon.getTagName(), PlusIcon);
+const styles$m = "x-minus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-minus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-minus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-minus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-minus-icon {\n  --icon-size: 1.15rem;\n}";
+class MinusIcon extends Icon {
+  getTemplateSchema() {
+    return `
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+            >
+                <path fill="currentColor" d="M200-440v-80h560v80H200Z" />
+            </svg>
+        `;
+  }
+  getElementStyles() {
+    return styles$m.toString();
+  }
+}
+customElements.define(MinusIcon.getTagName(), MinusIcon);
+const styles$l = "x-bottom-panel button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-bottom-panel button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-bottom-panel button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-bottom-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n\n@media screen and (min-width: 1200px) {\n  x-bottom-panel x-bottom-panel {\n    display: none;\n  }\n}\n\nx-bottom-panel button {\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\n\nx-bottom-panel button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\n\nx-bottom-panel button > img > svg {\n  width: 100%;\n  height: 100%;\n}\n\nx-bottom-panel button.active {\n  color: #43cbc5;\n}\n\nx-bottom-panel button.active svg path {\n  fill: #43cbc5;\n}";
 const BOTTOM_MENU_BUTTON_NAMES = {
   HOME: "home",
   EXERCISES: "exercises",
@@ -588,7 +644,7 @@ class BottomPanel extends CustomElement {
     ];
   }
   getElementStyles() {
-    return styles$k.toString();
+    return styles$l.toString();
   }
   getActiveBtnIcon() {
     return Array.from(this.activeBtn.children).find((child) => child instanceof Icon);
@@ -616,17 +672,17 @@ class BottomPanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
-const styles$j = "x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
+const styles$k = "x-grid, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
 class Grid extends CustomElement {
   getElementStyles() {
-    return styles$j.toString();
+    return styles$k.toString();
   }
 }
 customElements.define(getTagNameByCtor(Grid), Grid);
-const styles$i = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
+const styles$j = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-options-grid, x-grid, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button {\n  text-align: center;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  width: 100%;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button {\n  text-align: center;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
 const _ButtonOptionsGrid = class _ButtonOptionsGrid extends Grid {
   getElementStyles() {
-    return styles$i.toString();
+    return styles$j.toString();
   }
   connectedCallback() {
     super.connectedCallback();
@@ -647,7 +703,7 @@ customElements.define(getTagNameByCtor(ButtonOptionsGrid), ButtonOptionsGrid);
 class Button extends CustomElement {
 }
 customElements.define(getTagNameByCtor(Button), Button);
-const styles$h = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\nx-button-group[variant=grid] > ._option-button {\n  transition: color ease-out 0.15s;\n}";
+const styles$i = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group[variant=grid] > [active]._option-button, x-button-group[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group[variant=grid] > [success]._option-button, x-button-group[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group[variant=grid] > [failure]._option-button, x-button-group[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group[variant=grid] > [disabled]._option-button, x-button-group[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group[variant=grid] > ._option-button, x-button-group[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button {\n  text-align: center;\n}\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\nx-button-group[variant=grid] > ._option-button {\n  transition: color ease-out 0.15s;\n}";
 const _ButtonGroup = class _ButtonGroup extends CustomElement {
   constructor() {
     super();
@@ -668,7 +724,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
     }
   }
   getElementStyles() {
-    return styles$h.toString();
+    return styles$i.toString();
   }
   getActiveBtnIcon() {
     return Array.from(this.activeButton.children).find((child) => child instanceof Icon);
@@ -717,7 +773,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
 __publicField(_ButtonGroup, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ButtonGroup = _ButtonGroup;
 customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
-const styles$g = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group-multiple[variant=grid], x-button-group-multiple[variant=row] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group-multiple[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n}\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n  transition: color ease-out 0.15s;\n}";
+const styles$h = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group-multiple[variant=grid], x-button-group-multiple[variant=row], x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple[variant=grid] > [active]._option-button, x-button-group-multiple[variant=row] > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [success]._option-button, x-button-group-multiple[variant=row] > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple[variant=grid] > [failure]._option-button, x-button-group-multiple[variant=row] > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple[variant=grid] > [disabled]._option-button, x-button-group-multiple[variant=row] > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple[variant=grid] > ._option-button, x-button-group-multiple[variant=row] > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button {\n  text-align: center;\n}\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: stretch;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group-multiple[variant=row] > ._option-button {\n  transition: color ease-out 0.15s;\n  flex: 1 1 100%;\n}\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n  transition: color ease-out 0.15s;\n}";
 class Lockable extends CustomElement {
   constructor() {
     super(...arguments);
@@ -758,7 +814,7 @@ const _ButtonGroupMultiple = class _ButtonGroupMultiple extends Lockable {
     this.addEventListener("click", this.onBtnClick);
   }
   getElementStyles() {
-    return styles$g.toString();
+    return styles$h.toString();
   }
   getPushedButtonIcon(pushedButton) {
     return Array.from(pushedButton.children).find((child) => child instanceof Icon);
@@ -805,7 +861,7 @@ const _ButtonGroupMultiple = class _ButtonGroupMultiple extends Lockable {
 __publicField(_ButtonGroupMultiple, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ButtonGroupMultiple = _ButtonGroupMultiple;
 customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
-const styles$f = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}";
+const styles$g = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}";
 class Dialog extends CustomElement {
   constructor() {
     super();
@@ -892,7 +948,7 @@ class Dialog extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$f.toString();
+    return styles$g.toString();
   }
   setContent(el) {
     this._dialogContent.replaceChildren(el);
@@ -921,10 +977,10 @@ class Dialog extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Dialog), Dialog);
-const styles$e = "x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .dialog-header .dialog-close-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-modal-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-modal-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-modal-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-modal-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\nx-modal-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-modal-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$f = "x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-modal-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-modal-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-modal-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-modal-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-modal-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-modal-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class ModalDialog extends Dialog {
   getElementStyles() {
-    return styles$e.toString();
+    return styles$f.toString();
   }
   playOpenAnimation() {
     return Promise.all([
@@ -968,10 +1024,10 @@ class ModalDialog extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(ModalDialog), ModalDialog);
-const styles$d = "x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .dialog-header .dialog-close-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-alert-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-alert-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-alert-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-alert-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\nx-alert-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-alert-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-alert-dialog .container .content {\n  width: 100%;\n  height: 80%;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  transform: translate(0, 100%);\n}";
+const styles$e = "x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-alert-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-alert-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-alert-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-alert-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-alert-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-alert-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-alert-dialog .container .content {\n  width: 100%;\n  height: 80%;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  transform: translate(0, 100%);\n}";
 class AlertDialog extends Dialog {
   getElementStyles() {
-    return styles$d.toString();
+    return styles$e.toString();
   }
   async playOpenAnimation() {
     return Promise.all([
@@ -1015,10 +1071,10 @@ class AlertDialog extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(AlertDialog), AlertDialog);
-const styles$c = "x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .dialog-header .dialog-close-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-drawer .container .content .controls, x-drawer .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-drawer .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-drawer .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-drawer .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-drawer .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button {\n  background-color: transparent;\n}\n\nx-drawer .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-drawer .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-drawer .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-drawer .container {\n  height: 100vh;\n  touch-action: none;\n}\n\nx-drawer .container .content {\n  width: 300px;\n  height: 100%;\n  border-right: 1px solid #373a3f;\n  transform: translate(-100%, 0);\n}\n\nx-drawer .container .content .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 120px;\n}\n\nx-drawer .container .content .control > select {\n  width: 100%;\n}\n\nx-drawer .container .content .control > label {\n  color: #ffffff;\n}";
+const styles$d = "x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-drawer .container .content .controls, x-drawer .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n  box-sizing: border-box;\n}\n\nx-drawer .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-drawer .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-drawer .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-drawer .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-drawer .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-drawer .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-drawer .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-drawer .container {\n  height: 100vh;\n  touch-action: none;\n}\n\nx-drawer .container .content {\n  width: 300px;\n  height: 100%;\n  border-right: 1px solid #373a3f;\n  transform: translate(-100%, 0);\n}\n\nx-drawer .container .content .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 120px;\n}\n\nx-drawer .container .content .control > select {\n  width: 100%;\n}\n\nx-drawer .container .content .control > label {\n  color: #ffffff;\n}";
 class Drawer extends Dialog {
   getElementStyles() {
-    return styles$c.toString();
+    return styles$d.toString();
   }
   async playOpenAnimation() {
     return Promise.all([
@@ -1062,7 +1118,7 @@ class Drawer extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(Drawer), Drawer);
-const styles$b = 'x-progress {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\nx-progress:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\nx-progress .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\nx-progress .indicator .counter {\n  font-size: 1.2rem;\n}\nx-progress .indicator .percent {\n  font-size: 0.75rem;\n}';
+const styles$c = 'x-progress {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\nx-progress:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\nx-progress .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\nx-progress .indicator .counter {\n  font-size: 1.2rem;\n}\nx-progress .indicator .percent {\n  font-size: 0.75rem;\n}';
 const formatFraction = (fractionNumberStr) => {
   const [integerPart, fractionPart] = fractionNumberStr.split(".");
   return `${integerPart}${fractionPart > 0 ? `.${fractionPart}` : ""}`;
@@ -1100,7 +1156,7 @@ class Progress extends CustomElement {
     (_b = (_a = this._indicator.querySelector(".percent")) == null ? void 0 : _a.style) == null ? void 0 : _b.setProperty("display", "none");
   }
   getElementStyles() {
-    return styles$b.toString();
+    return styles$c.toString();
   }
   setProgress({ all, completed }) {
     this._all = all;
@@ -1128,7 +1184,7 @@ class Progress extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Progress), Progress);
-const styles$a = "x-top-panel .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-top-panel .menu-btn-open {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-top-panel .menu-btn-open, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-top-panel .menu-btn-open:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-top-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 0 10px;\n  height: 45px;\n  background-color: #26272b;\n  border-bottom: 1px solid #373a3f;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 10;\n}\n\nx-top-panel .menu-btn-open {\n  background-color: transparent;\n}";
+const styles$b = "x-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-top-panel .menu-btn-open, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-top-panel .menu-btn-open:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-top-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 0 10px;\n  height: 45px;\n  background-color: #26272b;\n  border-bottom: 1px solid #373a3f;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 10;\n}\n\nx-top-panel .menu-btn-open {\n  background-color: transparent;\n  color: #636363;\n}";
 class TopPanel extends CustomElement {
   constructor() {
     super();
@@ -1148,7 +1204,7 @@ class TopPanel extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$a.toString();
+    return styles$b.toString();
   }
   onBtnClick(e) {
     e.stopPropagation();
@@ -1156,7 +1212,7 @@ class TopPanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(TopPanel), TopPanel);
-const styles$9 = "x-sheet-notes .sheet-notes-container {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  position: relative;\n}\nx-sheet-notes .sheet-notes-container > svg {\n  width: 100%;\n  height: 100%;\n}\nx-sheet-notes .sheet-notes-container .sign {\n  position: absolute;\n  width: 25px;\n  height: 45px;\n}";
+const styles$a = "x-sheet-notes .sheet-notes-container {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  position: relative;\n}\nx-sheet-notes .sheet-notes-container > svg {\n  width: 100%;\n  height: 100%;\n}\nx-sheet-notes .sheet-notes-container .sign {\n  position: absolute;\n  width: 25px;\n  height: 45px;\n}";
 const svgSheetLines = `
 	<svg
 	   xmlns="http://www.w3.org/2000/svg"
@@ -1215,7 +1271,7 @@ const svgSheetLines = `
 `;
 class SheetNotes extends CustomElement {
   getElementStyles() {
-    return styles$9.toString();
+    return styles$a.toString();
   }
   getTemplateSchema() {
     return {
@@ -1267,6 +1323,89 @@ class SheetNotes extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(SheetNotes), SheetNotes);
+const clamp$1 = (value, min, max) => Math.max(min, Math.min(value, max));
+const styles$9 = "x-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\n:root {\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n  line-height: 1.5;\n  font-weight: 400;\n  font-size: 16px;\n  font-synthesis: none;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-text-size-adjust: 100%;\n  -webkit-tap-highlight-color: transparent;\n}\n\nhtml {\n  width: 100%;\n  height: 100%;\n}\n\nbody {\n  width: 100%;\n  height: 100%;\n}\n\n#app {\n  display: flex;\n  flex-flow: column nowrap;\n  padding-top: 45px;\n  padding-bottom: 50px;\n  width: 100%;\n  height: 100%;\n}\n\n#app .page-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  background-color: #2b2e33;\n}\n\nx-number-input input {\n  text-align: center;\n  vertical-align: top;\n  /* Chrome, Safari, Edge, Opera */\n  /* Firefox */\n}\n\nx-number-input input::-webkit-outer-spin-button, x-number-input input::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\nx-number-input input[type=number] {\n  -moz-appearance: textfield;\n}";
+class NumberInput extends CustomElement {
+  constructor() {
+    super();
+    __publicField(this, "_input");
+    __publicField(this, "_min");
+    __publicField(this, "_max");
+    this.onIncreaseButtonClick = this.onIncreaseButtonClick.bind(this);
+    this.onDecreaseButtonClick = this.onDecreaseButtonClick.bind(this);
+  }
+  getElementStyles() {
+    return styles$9.toString();
+  }
+  getTemplateSchema() {
+    return [
+      {
+        tagName: "x-button",
+        attrs: {
+          name: "decrease-button"
+        },
+        children: {
+          tagName: "x-minus-icon"
+        }
+      },
+      {
+        tagName: "input",
+        attrs: {
+          type: "number"
+        }
+      },
+      {
+        tagName: "x-button",
+        attrs: {
+          name: "increase-button"
+        },
+        children: {
+          tagName: "x-plus-icon"
+        }
+      }
+    ];
+  }
+  _updateValue(type = "increment") {
+    const incValue = type === "increment" ? 1 : -1;
+    const oldValue = parseInt(this._input.value, 10);
+    const newValue = clamp$1(oldValue + incValue, this._min, this._max);
+    this._input.value = newValue.toString();
+  }
+  onIncreaseButtonClick() {
+    this._updateValue("increment");
+    this.dispatchEvent(
+      createEvent("change", { value: this._input.value })
+    );
+  }
+  onDecreaseButtonClick() {
+    this._updateValue("decrement");
+    this.dispatchEvent(
+      createEvent("change", { value: this._input.value })
+    );
+  }
+  reset() {
+    this._input.value = this._min.toString();
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._min = this.getAttribute("min") ?? 0;
+    this._max = this.getAttribute("max") ?? 10;
+    this._step = this.getAttribute("step") ?? 1;
+    this._input = this.querySelector("input");
+    Object.assign(this._input, {
+      readonly: this.hasAttribute("readonly"),
+      value: this.getAttribute("value") ?? "0",
+      min: this._min.toString(),
+      max: this._max.toString(),
+      step: this._step.toString()
+    });
+    this._increaseButton = this.querySelector('[name="increase-button"]');
+    this._increaseButton.addEventListener("click", this.onIncreaseButtonClick);
+    this._decreaseButton = this.querySelector('[name="decrease-button"]');
+    this._decreaseButton.addEventListener("click", this.onDecreaseButtonClick);
+  }
+}
+customElements.define(NumberInput.getTagName(), NumberInput);
 class Page extends CustomElement {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onOpened() {
@@ -19118,7 +19257,7 @@ const playInterval = (intervalNotes, mode) => {
   }
   Transport2.start();
 };
-const styles$5 = "x-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-chords-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  border-radius: 1.25rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page .chord-buttons-container {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}";
+const styles$5 = "x-chords-exercise-page .chord-buttons-container, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-chords-exercise-page .chord-buttons-container, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-chords-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  border-radius: 1.25rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page .chord-buttons-container {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}";
 const _ChordsExercisePage = class _ChordsExercisePage extends Page {
   getElementStyles() {
     return styles$5.toString();
@@ -19310,7 +19449,7 @@ defineStateProperties({
 });
 intervalsExerciseOptionsState.revalidateOptions();
 window.intervalsExerciseOptionsState = intervalsExerciseOptionsState;
-const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 class IntervalsExerciseSettingsPage extends Page {
   constructor() {
     super();
@@ -19664,7 +19803,7 @@ class IntervalsExercisePage extends Page {
   }
 }
 customElements.define(getTagNameByCtor(IntervalsExercisePage), IntervalsExercisePage);
-const styles$2 = "x-button {\n  width: 115px;\n  height: 115px;\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\nx-intervals-exercise-results-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n}\nx-intervals-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\nx-intervals-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\nx-intervals-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\nx-intervals-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\nx-intervals-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\nx-intervals-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\nx-intervals-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\nx-intervals-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
+const styles$2 = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button {\n  text-align: center;\n}\n\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-intervals-exercise-results-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n}\n\nx-intervals-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\nx-intervals-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\n\nx-intervals-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\n\nx-intervals-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\n\nx-intervals-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\nx-intervals-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
 class IntervalsExerciseResultsPage extends Page {
   constructor() {
     super(...arguments);
@@ -19741,7 +19880,7 @@ class IntervalsExerciseResultsPage extends Page {
   }
 }
 customElements.define(getTagNameByCtor(IntervalsExerciseResultsPage), IntervalsExerciseResultsPage);
-const styles$1 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$1 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-settings-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-keys-exercise-settings-page .form-field-group > [name=key-signs-quantity] {\n  width: 100%;\n}\n\nx-keys-exercise-settings-page .form-field-group > [name=satellite-keys] {\n  width: 100%;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS = [
   {
     label: "10",
@@ -19787,7 +19926,7 @@ const KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS = [
   },
   {
     label: "Enharm.",
-    value: "nnharmonic"
+    value: "enharmonic"
   }
 ];
 const KEYS_EXERCISE_KEY_SIGNS_OPTIONS = [
@@ -20450,17 +20589,7 @@ class KeysExerciseState {
 }
 const keysExerciseState = new KeysExerciseState();
 window.keysExerciseState = keysExerciseState;
-const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 1 0 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
-const KEYS_SIGNS_QUANTITIES = [
-  { value: 0, label: "0" },
-  { value: 1, label: "1" },
-  { value: 2, label: "2" },
-  { value: 3, label: "3" },
-  { value: 4, label: "4" },
-  { value: 5, label: "5" },
-  { value: 6, label: "6" },
-  { value: 7, label: "7" }
-];
+const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n}\n\nx-keys-exercise-page.inactive {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 0 1 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_QUALITIES = [
   { value: "flat", label: "b" },
   { value: "sharp", label: "#" }
@@ -20550,26 +20679,15 @@ class KeysExercisePage extends Page {
                 cssClasses: "form-field-group-content",
                 children: [
                   {
-                    tagName: "select",
+                    tagName: "x-number-input",
                     attrs: {
-                      name: "key-signs-quantity-control"
-                    },
-                    children: [
-                      {
-                        tagName: "option",
-                        attrs: {
-                          disabled: "true",
-                          selected: "selected",
-                          value: ""
-                        },
-                        children: "Select variant"
-                      },
-                      ...KEYS_SIGNS_QUANTITIES.map((signsQty) => ({
-                        tagName: "option",
-                        attrs: { value: signsQty.value },
-                        children: signsQty.label
-                      }))
-                    ]
+                      name: "key-signs-quantity-control",
+                      readonly: "true",
+                      max: "7",
+                      min: "0",
+                      step: "1",
+                      value: "0"
+                    }
                   },
                   {
                     tagName: "x-button-group",
@@ -20644,26 +20762,15 @@ class KeysExercisePage extends Page {
                 cssClasses: "form-field-group-content",
                 children: [
                   {
-                    tagName: "select",
+                    tagName: "x-number-input",
                     attrs: {
-                      name: "same-name-key-signs-quantity-control"
-                    },
-                    children: [
-                      {
-                        tagName: "option",
-                        attrs: {
-                          disabled: "true",
-                          selected: "selected",
-                          value: ""
-                        },
-                        children: "Select variant"
-                      },
-                      ...KEYS_SIGNS_QUANTITIES.map((signsQty) => ({
-                        tagName: "option",
-                        attrs: { value: signsQty.value },
-                        children: signsQty.label
-                      }))
-                    ]
+                      name: "same-name-key-signs-quantity-control",
+                      readonly: "true",
+                      max: "7",
+                      min: "0",
+                      step: "1",
+                      value: "0"
+                    }
                   },
                   {
                     tagName: "x-button-group",
@@ -20755,7 +20862,7 @@ class KeysExercisePage extends Page {
     event.stopPropagation();
     switch (event.target.getAttribute("name")) {
       case "key-signs-quantity-control":
-        keysExerciseState.setOriginKeyInfo({ numberOfSigns: event.target.value });
+        keysExerciseState.setOriginKeyInfo({ numberOfSigns: event.detail.value });
         break;
       case "key-signs-quality-control":
         keysExerciseState.setOriginKeyInfo({ quality: event.detail.value });
@@ -20764,7 +20871,7 @@ class KeysExercisePage extends Page {
         keysExerciseState.setParallelKeyInfo({ name: event.target.value });
         break;
       case "same-name-key-signs-quantity-control":
-        keysExerciseState.setSameNameKeyInfo({ numberOfSigns: event.target.value });
+        keysExerciseState.setSameNameKeyInfo({ numberOfSigns: event.detail.value });
         break;
       case "same-name-key-quality-control":
         keysExerciseState.setSameNameKeyInfo({ quality: event.detail.value });
@@ -20823,7 +20930,7 @@ class KeysExercisePage extends Page {
       all: keysExerciseState.numberOfAllQuestions,
       completed: keysExerciseState.numberOfCompletedQuestions
     });
-    if (!keysExerciseState.originKey.parallel) {
+    if (!keysExerciseState.originKey.parallel || !keysExerciseOptionsState.satelliteKeys.includes(KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS[0].value)) {
       this._parallelKeyField.style.setProperty("display", "none");
     } else {
       this._parallelKeyControl.replaceChildren(
@@ -20847,10 +20954,10 @@ class KeysExercisePage extends Page {
         )
       );
     }
-    if (!keysExerciseState.originKey.sameName) {
+    if (!keysExerciseState.originKey.sameName || !keysExerciseOptionsState.satelliteKeys.includes(KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS[1].value)) {
       this._sameNameKeyField.style.setProperty("display", "none");
     }
-    if (!keysExerciseState.originKey.enharmonic) {
+    if (!keysExerciseState.originKey.enharmonic || !keysExerciseOptionsState.satelliteKeys.includes(KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS[2].value)) {
       this._enharmonicKeyField.style.setProperty("display", "none");
     }
   }
@@ -20859,7 +20966,7 @@ class KeysExercisePage extends Page {
     for (const attributeName of ["disabled", "active", "success", "failure"]) {
       field.removeAttribute(attributeName);
     }
-    if (field instanceof ButtonGroup) {
+    if (field instanceof ButtonGroup || field instanceof NumberInput) {
       field.reset();
     }
     if (field instanceof HTMLSelectElement) {
