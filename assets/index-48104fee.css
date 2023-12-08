@@ -1533,6 +1533,12 @@ body {
   height: 100%;
 }
 
+@media screen and (min-width: 1200px) {
+  #app {
+    padding-bottom: 0;
+  }
+}
+
 #app .page-container {
   display: flex;
   flex-flow: column nowrap;
@@ -2287,6 +2293,12 @@ body {
   padding-bottom: 50px;
   width: 100%;
   height: 100%;
+}
+
+@media screen and (min-width: 1200px) {
+  #app {
+    padding-bottom: 0;
+  }
 }
 
 #app .page-container {
