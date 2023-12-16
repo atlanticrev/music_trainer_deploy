@@ -45,7 +45,7 @@ var __publicField = (obj, key, value) => {
     fetch(link.href, fetchOpts);
   }
 })();
-const styles$D = "";
+const styles$H = "";
 const _utilElContainer = document.createElement("div");
 const parser = new DOMParser();
 const elString = (schema) => {
@@ -192,10 +192,10 @@ class Icon extends CustomElement {
     return super.getTemplateSchema();
   }
   getElementStyles() {
-    return styles$D.toString();
+    return styles$H.toString();
   }
 }
-const styles$C = "x-profile-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-profile-icon.active svg path {\n  fill: #43cbc5;\n}\nx-profile-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-profile-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$G = "x-profile-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-profile-icon.active svg path {\n  fill: #43cbc5;\n}\nx-profile-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-profile-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ProfileIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -210,11 +210,11 @@ class ProfileIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$C.toString();
+    return styles$G.toString();
   }
 }
 customElements.define(ProfileIcon.getTagName(), ProfileIcon);
-const styles$B = "x-create-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-create-icon.active svg path {\n  fill: #43cbc5;\n}\nx-create-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-create-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$F = "x-create-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-create-icon.active svg path {\n  fill: #43cbc5;\n}\nx-create-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-create-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class CreateIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -227,11 +227,11 @@ class CreateIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$B.toString();
+    return styles$F.toString();
   }
 }
 customElements.define(CreateIcon.getTagName(), CreateIcon);
-const styles$A = "x-favourites-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-favourites-icon.active svg path {\n  fill: #43cbc5;\n}\nx-favourites-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-favourites-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$E = "x-favourites-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-favourites-icon.active svg path {\n  fill: #43cbc5;\n}\nx-favourites-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-favourites-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class FavouritesIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -242,11 +242,11 @@ class FavouritesIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$A.toString();
+    return styles$E.toString();
   }
 }
 customElements.define(FavouritesIcon.getTagName(), FavouritesIcon);
-const styles$z = "x-home-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-home-icon.active svg path {\n  fill: #43cbc5;\n}\nx-home-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-home-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$D = "x-home-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-home-icon.active svg path {\n  fill: #43cbc5;\n}\nx-home-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-home-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class HomeIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -261,11 +261,11 @@ class HomeIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$z.toString();
+    return styles$D.toString();
   }
 }
 customElements.define(HomeIcon.getTagName(), HomeIcon);
-const styles$y = "x-search-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-search-icon.active svg path {\n  fill: #43cbc5;\n}\nx-search-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-search-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$C = "x-search-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-search-icon.active svg path {\n  fill: #43cbc5;\n}\nx-search-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-search-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class SearchIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -276,11 +276,11 @@ class SearchIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$y.toString();
+    return styles$C.toString();
   }
 }
 customElements.define(SearchIcon.getTagName(), SearchIcon);
-const styles$x = "x-menu-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-menu-icon.active svg path {\n  fill: #43cbc5;\n}\nx-menu-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-menu-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$B = "x-menu-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-menu-icon.active svg path {\n  fill: #43cbc5;\n}\nx-menu-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-menu-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class MenuIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -296,11 +296,11 @@ class MenuIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$x.toString();
+    return styles$B.toString();
   }
 }
 customElements.define(MenuIcon.getTagName(), MenuIcon);
-const styles$w = "x-exercises-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-exercises-icon.active svg path {\n  fill: #43cbc5;\n}\nx-exercises-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-exercises-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$A = "x-exercises-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-exercises-icon.active svg path {\n  fill: #43cbc5;\n}\nx-exercises-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-exercises-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ExercisesIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -315,11 +315,11 @@ class ExercisesIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$w.toString();
+    return styles$A.toString();
   }
 }
 customElements.define(ExercisesIcon.getTagName(), ExercisesIcon);
-const styles$v = "x-utils-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-utils-icon.active svg path {\n  fill: #43cbc5;\n}\nx-utils-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-utils-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$z = "x-utils-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-utils-icon.active svg path {\n  fill: #43cbc5;\n}\nx-utils-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-utils-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class UtilsIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -334,11 +334,11 @@ class UtilsIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$v.toString();
+    return styles$z.toString();
   }
 }
 customElements.define(UtilsIcon.getTagName(), UtilsIcon);
-const styles$u = "x-settings-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-settings-icon.active svg path {\n  fill: #43cbc5;\n}\nx-settings-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-settings-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$y = "x-settings-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-settings-icon.active svg path {\n  fill: #43cbc5;\n}\nx-settings-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-settings-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class SettingsIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -353,11 +353,11 @@ class SettingsIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$u.toString();
+    return styles$y.toString();
   }
 }
 customElements.define(SettingsIcon.getTagName(), SettingsIcon);
-const styles$t = "x-cross-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-cross-icon.active svg path {\n  fill: #43cbc5;\n}\nx-cross-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-cross-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$x = "x-cross-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-cross-icon.active svg path {\n  fill: #43cbc5;\n}\nx-cross-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-cross-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class CrossIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -372,11 +372,11 @@ class CrossIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$t.toString();
+    return styles$x.toString();
   }
 }
 customElements.define(CrossIcon.getTagName(), CrossIcon);
-const styles$s = "x-play-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-play-icon.active svg path {\n  fill: #43cbc5;\n}\nx-play-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-play-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$w = "x-play-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-play-icon.active svg path {\n  fill: #43cbc5;\n}\nx-play-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-play-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class PlayIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -391,11 +391,11 @@ class PlayIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$s.toString();
+    return styles$w.toString();
   }
 }
 customElements.define(PlayIcon.getTagName(), PlayIcon);
-const styles$r = "x-pause-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-pause-icon.active svg path {\n  fill: #43cbc5;\n}\nx-pause-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-pause-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$v = "x-pause-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-pause-icon.active svg path {\n  fill: #43cbc5;\n}\nx-pause-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-pause-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class PauseIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -410,11 +410,11 @@ class PauseIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$r.toString();
+    return styles$v.toString();
   }
 }
 customElements.define(PauseIcon.getTagName(), PauseIcon);
-const styles$q = "x-replay-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-replay-icon.active svg path {\n  fill: #43cbc5;\n}\nx-replay-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-replay-icon svg path {\n  transition: all ease-out 0.25s;\n}";
+const styles$u = "x-replay-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-replay-icon.active svg path {\n  fill: #43cbc5;\n}\nx-replay-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-replay-icon svg path {\n  transition: all ease-out 0.25s;\n}";
 class ReplayIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -429,11 +429,11 @@ class ReplayIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$q.toString();
+    return styles$u.toString();
   }
 }
 customElements.define(ReplayIcon.getTagName(), ReplayIcon);
-const styles$p = "x-plus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-plus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-plus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-plus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-plus-icon {\n  --icon-size: 1.15rem;\n}";
+const styles$t = "x-plus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-plus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-plus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-plus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-plus-icon {\n  --icon-size: 1.15rem;\n}";
 class PlusIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -448,11 +448,11 @@ class PlusIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$p.toString();
+    return styles$t.toString();
   }
 }
 customElements.define(PlusIcon.getTagName(), PlusIcon);
-const styles$o = "x-minus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-minus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-minus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-minus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-minus-icon {\n  --icon-size: 1.15rem;\n}";
+const styles$s = "x-minus-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-minus-icon.active svg path {\n  fill: #43cbc5;\n}\nx-minus-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-minus-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-minus-icon {\n  --icon-size: 1.15rem;\n}";
 class MinusIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -467,11 +467,11 @@ class MinusIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$o.toString();
+    return styles$s.toString();
   }
 }
 customElements.define(MinusIcon.getTagName(), MinusIcon);
-const styles$n = "x-flat-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-flat-icon.active svg path {\n  fill: #43cbc5;\n}\nx-flat-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-flat-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-flat-icon {\n  --icon-size: 1rem;\n}";
+const styles$r = "x-flat-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-flat-icon.active svg path {\n  fill: #43cbc5;\n}\nx-flat-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-flat-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-flat-icon {\n  --icon-size: 1rem;\n}";
 class FlatIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -490,11 +490,11 @@ class FlatIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$n.toString();
+    return styles$r.toString();
   }
 }
 customElements.define(FlatIcon.getTagName(), FlatIcon);
-const styles$m = "x-sharp-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-sharp-icon.active svg path {\n  fill: #43cbc5;\n}\nx-sharp-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-sharp-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-sharp-icon {\n  --icon-size: 1rem;\n}";
+const styles$q = "x-sharp-icon {\n  --icon-size: 1.5rem;\n  display: block;\n  width: var(--icon-size);\n  height: var(--icon-size);\n}\nx-sharp-icon.active svg path {\n  fill: #43cbc5;\n}\nx-sharp-icon svg {\n  width: 100%;\n  height: 100%;\n}\nx-sharp-icon svg path {\n  transition: all ease-out 0.25s;\n}\nx-sharp-icon {\n  --icon-size: 1rem;\n}";
 class SharpIcon extends Icon {
   getTemplateSchema() {
     return `
@@ -513,11 +513,11 @@ class SharpIcon extends Icon {
         `;
   }
   getElementStyles() {
-    return styles$m.toString();
+    return styles$q.toString();
   }
 }
 customElements.define(SharpIcon.getTagName(), SharpIcon);
-const styles$l = "x-bottom-panel button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-bottom-panel button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-bottom-panel button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-bottom-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n\n@media screen and (min-width: 1200px) {\n  x-bottom-panel {\n    display: none;\n  }\n}\n\nx-bottom-panel button {\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\n\nx-bottom-panel button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\n\nx-bottom-panel button > img > svg {\n  width: 100%;\n  height: 100%;\n}\n\nx-bottom-panel button.active {\n  color: #43cbc5;\n}\n\nx-bottom-panel button.active svg path {\n  fill: #43cbc5;\n}";
+const styles$p = "x-bottom-panel button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-bottom-panel button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-bottom-panel button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-bottom-panel button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-bottom-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-evenly;\n  align-items: stretch;\n  width: 100%;\n  position: fixed;\n  bottom: 0;\n  z-index: 10;\n  height: 50px;\n  background-color: #26272b;\n  border-top: 1px solid #373a3f;\n}\n\n@media screen and (min-width: 1200px) {\n  x-bottom-panel {\n    display: none;\n  }\n}\n\nx-bottom-panel button {\n  width: 0;\n  flex: 1 1 0;\n  background-color: transparent;\n  color: #636363;\n  font-size: 0.75rem;\n  text-shadow: gray;\n  text-align: center;\n  transition: color ease-out 0.25s;\n}\n\nx-bottom-panel button > img {\n  width: 18px;\n  height: 18px;\n  margin-bottom: 4px;\n}\n\nx-bottom-panel button > img > svg {\n  width: 100%;\n  height: 100%;\n}\n\nx-bottom-panel button.active {\n  color: #43cbc5;\n}\n\nx-bottom-panel button.active svg path {\n  fill: #43cbc5;\n}";
 const BOTTOM_MENU_BUTTON_NAMES = {
   HOME: "home",
   EXERCISES: "exercises",
@@ -554,10 +554,20 @@ const ROUTES_SCHEMA = {
     route: "intervals-exercise-results",
     component: "x-intervals-exercise-results-page"
   },
-  chords: {
-    url: "chords",
-    route: "chords",
+  "chords-exercise": {
+    url: "chords-exercise",
+    route: "chords-exercise",
     component: "x-chords-exercise-page"
+  },
+  "chords-exercise-settings": {
+    url: "chords-exercise-settings",
+    route: "chords-exercise-settings",
+    component: "x-chords-exercise-settings-page"
+  },
+  "chords-exercise-results": {
+    url: "chords-exercise-results",
+    route: "chords-exercise-results",
+    component: "x-chords-exercise-results-page"
   },
   "keys-exercise": {
     url: "keys-exercise",
@@ -568,6 +578,11 @@ const ROUTES_SCHEMA = {
     url: "keys-exercise-settings",
     route: "keys-exercise-settings",
     component: "x-keys-exercise-settings-page"
+  },
+  "keys-exercise-results": {
+    url: "keys-exercise-results",
+    route: "keys-exercise-results",
+    component: "x-keys-exercise-results-page"
   },
   settings: {
     url: "settings",
@@ -663,7 +678,7 @@ class BottomPanel extends CustomElement {
     ];
   }
   getElementStyles() {
-    return styles$l.toString();
+    return styles$p.toString();
   }
   getActiveBtnIcon() {
     return Array.from(this.activeBtn.children).find((child) => child instanceof Icon);
@@ -691,17 +706,17 @@ class BottomPanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
-const styles$k = "x-grid, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 0.5rem;\n  width: 100%;\n  justify-content: center;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
+const styles$o = "x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 1rem;\n  width: 100%;\n  padding: 1rem;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
 class Grid extends CustomElement {
   getElementStyles() {
-    return styles$k.toString();
+    return styles$o.toString();
   }
 }
 customElements.define(Grid.getTagName(), Grid);
-const styles$j = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-options-grid, x-grid, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 0.5rem;\n  width: 100%;\n  justify-content: center;\n  padding: 1rem;\n}\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    justify-content: unset;\n    grid-template-columns: repeat(1, 100%);\n  }\n}\nx-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
+const styles$n = "x-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 1rem;\n  width: 100%;\n  padding: 1rem;\n}\n\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}\n\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 1rem;\n  width: 100%;\n  padding: 1rem;\n}\n\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}\n\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button, x-button-options-grid, x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-options-grid, x-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 1rem;\n  width: 100%;\n  padding: 1rem;\n}\n\nx-button-options-grid > .grid-cell, x-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-button-options-grid, x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}\n\nx-button-options-grid > .grid-cell > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-options-grid > .grid-cell > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-options-grid > .grid-cell > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-options-grid > .grid-cell > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button-options-grid {\n  padding: 1rem;\n  gap: 0.5rem;\n  grid-auto-rows: 80px;\n}\n\nx-button-options-grid > .grid-cell > ._option-button {\n  width: 100%;\n  height: 100%;\n  font-size: 1.2rem;\n  border-radius: 1.25rem;\n}";
 const _ButtonOptionsGrid = class _ButtonOptionsGrid extends Grid {
   getElementStyles() {
-    return styles$j.toString();
+    return styles$n.toString();
   }
   connectedCallback() {
     super.connectedCallback();
@@ -722,7 +737,7 @@ customElements.define(getTagNameByCtor(ButtonOptionsGrid), ButtonOptionsGrid);
 class Button extends CustomElement {
 }
 customElements.define(getTagNameByCtor(Button), Button);
-const styles$i = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\nx-button-group > ._option-button {\n  transition: color ease-out 0.15s;\n}";
+const styles$m = "x-button-group, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-group > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button-group, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button-group, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-group > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button-group[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\n\nx-button-group[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\nx-button-group > ._option-button {\n  transition: color ease-out 0.15s;\n}";
 const _ButtonGroup = class _ButtonGroup extends CustomElement {
   constructor() {
     super();
@@ -743,7 +758,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
     }
   }
   getElementStyles() {
-    return styles$i.toString();
+    return styles$m.toString();
   }
   getActiveBtnIcon() {
     return Array.from(this.activeButton.children).find((child) => child instanceof Icon);
@@ -792,7 +807,7 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
 __publicField(_ButtonGroup, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ButtonGroup = _ButtonGroup;
 customElements.define(getTagNameByCtor(ButtonGroup), ButtonGroup);
-const styles$h = "x-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button-group-multiple, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\nx-button-group-multiple > [active]._option-button {\n  color: #43cbc5;\n}\nx-button-group-multiple > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-button-group-multiple > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\nx-button-group-multiple > [disabled]._option-button {\n  opacity: 0.2;\n}\nx-button-group-multiple > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\nx-button:hover {\n  cursor: pointer;\n}\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: stretch;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\nx-button-group-multiple[variant=row] > ._option-button {\n  flex: 1 1 100%;\n}\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n}\nx-button-group-multiple > ._option-button {\n  transition: color ease-out 0.15s;\n}";
+const styles$l = "x-button-group-multiple, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-group-multiple > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-group-multiple > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-group-multiple > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-group-multiple > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-group-multiple > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button-group-multiple, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button-group-multiple, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button-group-multiple > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-button-group-multiple > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-button-group-multiple > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-button-group-multiple > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-button-group-multiple > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-button-group-multiple[variant=row] {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: stretch;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  overflow: hidden;\n}\n\nx-button-group-multiple[variant=row] > ._option-button {\n  flex: 1 1 100%;\n}\n\nx-button-group-multiple[variant=grid] {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  gap: 0.3rem;\n  width: 100%;\n}\n\n@media screen and (max-width: 420px) {\n  x-button-group-multiple[variant=grid] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-button-group-multiple[variant=grid] > ._option-button {\n  width: 100%;\n  height: 100%;\n  border-radius: 1.25rem;\n}\n\nx-button-group-multiple > ._option-button {\n  transition: color ease-out 0.15s;\n}";
 class Lockable extends CustomElement {
   constructor() {
     super(...arguments);
@@ -833,7 +848,7 @@ const _ButtonGroupMultiple = class _ButtonGroupMultiple extends Lockable {
     this.addEventListener("click", this.onBtnClick);
   }
   getElementStyles() {
-    return styles$h.toString();
+    return styles$l.toString();
   }
   getPushedButtonIcon(pushedButton) {
     return Array.from(pushedButton.children).find((child) => child instanceof Icon);
@@ -880,7 +895,7 @@ const _ButtonGroupMultiple = class _ButtonGroupMultiple extends Lockable {
 __publicField(_ButtonGroupMultiple, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
 let ButtonGroupMultiple = _ButtonGroupMultiple;
 customElements.define(getTagNameByCtor(ButtonGroupMultiple), ButtonGroupMultiple);
-const styles$g = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}";
+const styles$k = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}";
 class Dialog extends CustomElement {
   constructor() {
     super();
@@ -967,7 +982,7 @@ class Dialog extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$g.toString();
+    return styles$k.toString();
   }
   setContent(el) {
     this._dialogContent.replaceChildren(el);
@@ -996,10 +1011,10 @@ class Dialog extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Dialog), Dialog);
-const styles$f = "x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-modal-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-modal-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-modal-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-modal-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-modal-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-modal-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
+const styles$j = "x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-modal-dialog .container .content .dialog-content, x-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header, x-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-modal-dialog .container .content .controls, x-modal-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-modal-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-modal-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-modal-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-modal-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-modal-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-modal-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 1rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-modal-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-modal-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-modal-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}";
 class ModalDialog extends Dialog {
   getElementStyles() {
-    return styles$f.toString();
+    return styles$j.toString();
   }
   playOpenAnimation() {
     return Promise.all([
@@ -1043,10 +1058,10 @@ class ModalDialog extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(ModalDialog), ModalDialog);
-const styles$e = "x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-alert-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-alert-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-alert-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-alert-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-alert-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-alert-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-alert-dialog .container .content {\n  width: 100%;\n  height: 80%;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  transform: translate(0, 100%);\n}";
+const styles$i = "x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-alert-dialog .container .content .dialog-content, x-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header, x-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-alert-dialog .container .content .controls, x-alert-dialog .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-alert-dialog .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-alert-dialog .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-alert-dialog .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-alert-dialog .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-alert-dialog .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-alert-dialog .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 1rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-alert-dialog .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-alert-dialog .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-alert-dialog .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-alert-dialog .container .content {\n  width: 100%;\n  height: 80%;\n  border-top: 1px solid #373a3f;\n  border-top-left-radius: 24px;\n  border-top-right-radius: 24px;\n  transform: translate(0, 100%);\n}";
 class AlertDialog extends Dialog {
   getElementStyles() {
-    return styles$e.toString();
+    return styles$i.toString();
   }
   async playOpenAnimation() {
     return Promise.all([
@@ -1090,10 +1105,10 @@ class AlertDialog extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(AlertDialog), AlertDialog);
-const styles$d = "x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .controls, x-drawer .container .content .dialog-header, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .controls, x-drawer .container .content .dialog-header, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-drawer .container .content .controls, x-drawer .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-drawer .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-drawer .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-drawer .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-drawer .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-drawer .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-drawer .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-drawer .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-drawer .container {\n  height: 100vh;\n  touch-action: none;\n}\n\nx-drawer .container .content {\n  width: 300px;\n  height: 100%;\n  border-right: 1px solid #373a3f;\n  transform: translate(-100%, 0);\n}\n\nx-drawer .container .content .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 120px;\n}\n\nx-drawer .container .content .control > select {\n  width: 100%;\n}\n\nx-drawer .container .content .control > label {\n  color: #ffffff;\n}";
+const styles$h = "x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .controls, x-drawer .container .content .dialog-header, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .controls, x-drawer .container .content .dialog-header, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer .container .content .dialog-content, x-drawer .container .content .controls, x-drawer .container .content .dialog-header, x-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-drawer .container .content .controls, x-drawer .container .content .dialog-header {\n  padding: 0 3rem;\n  width: 100%;\n}\n\nx-drawer .container {\n  display: none;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%;\n  z-index: 15;\n}\n\nx-drawer .container .overlay {\n  width: 100%;\n  height: 100%;\n  opacity: 0.75;\n  z-index: 1;\n  background-color: #000000;\n}\n\nx-drawer .container .content {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #26272b;\n  z-index: 2;\n}\n\nx-drawer .container .content .dialog-header {\n  padding: 0.5rem 0.85rem;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-end;\n  align-items: center;\n  border-bottom: 1px solid #373a3f;\n}\n\nx-drawer .container .content .dialog-header .dialog-close-button {\n  color: #636363;\n  background-color: transparent;\n}\n\nx-drawer .container .content .dialog-content {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 1rem;\n  padding: 0.85rem;\n  overflow: auto;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 70px;\n  justify-content: center;\n  gap: 0.25rem;\n  width: 100%;\n}\n\nx-drawer .container .content .dialog-content .intervals-option-buttons > button {\n  width: 100%;\n  height: 100%;\n  font-size: 0.85rem;\n}\n\n@media screen and (max-width: 420px) {\n  x-drawer .container .content .dialog-content .intervals-option-buttons {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n\nx-drawer .container .content .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 10px;\n  width: 100%;\n  padding: 20px 10px;\n}\n\nx-drawer .container {\n  height: 100vh;\n  touch-action: none;\n}\n\nx-drawer .container .content {\n  width: 300px;\n  height: 100%;\n  border-right: 1px solid #373a3f;\n  transform: translate(-100%, 0);\n}\n\nx-drawer .container .content .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 120px;\n}\n\nx-drawer .container .content .control > select {\n  width: 100%;\n}\n\nx-drawer .container .content .control > label {\n  color: #ffffff;\n}";
 class Drawer extends Dialog {
   getElementStyles() {
-    return styles$d.toString();
+    return styles$h.toString();
   }
   async playOpenAnimation() {
     return Promise.all([
@@ -1137,7 +1152,7 @@ class Drawer extends Dialog {
   }
 }
 customElements.define(getTagNameByCtor(Drawer), Drawer);
-const styles$c = 'x-progress {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\nx-progress:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\nx-progress .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\nx-progress .indicator .counter {\n  font-size: 1.2rem;\n}\nx-progress .indicator .percent {\n  font-size: 0.75rem;\n}';
+const styles$g = 'x-progress {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid #373a3f;\n  border-radius: 1.25rem;\n  background-color: #2b2e33;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  height: 40px;\n}\nx-progress:after {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: var(--progress);\n  background-color: #43cbc5;\n  z-index: 1;\n  transition: width ease-out 0.25s;\n}\nx-progress .indicator {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: baseline;\n  gap: 0.25rem;\n  z-index: 2;\n  color: #ffffff;\n  text-shadow: 2px 2px 4px #000000;\n}\nx-progress .indicator .counter {\n  font-size: 1.2rem;\n}\nx-progress .indicator .percent {\n  font-size: 0.75rem;\n}';
 const formatFraction = (fractionNumberStr) => {
   const [integerPart, fractionPart] = fractionNumberStr.split(".");
   return `${integerPart}${fractionPart > 0 ? `.${fractionPart}` : ""}`;
@@ -1175,7 +1190,7 @@ class Progress extends CustomElement {
     (_b = (_a = this._indicator.querySelector(".percent")) == null ? void 0 : _a.style) == null ? void 0 : _b.setProperty("display", "none");
   }
   getElementStyles() {
-    return styles$c.toString();
+    return styles$g.toString();
   }
   setProgress({ all, completed }) {
     this._all = all;
@@ -1203,7 +1218,7 @@ class Progress extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Progress), Progress);
-const styles$b = "x-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-top-panel .menu-btn-open, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-top-panel .menu-btn-open:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-top-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 0 10px;\n  height: 45px;\n  background-color: #26272b;\n  border-bottom: 1px solid #373a3f;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 10;\n}\n\nx-top-panel .menu-btn-open {\n  background-color: transparent;\n  color: #636363;\n}";
+const styles$f = "x-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-top-panel .menu-btn-open, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-top-panel .menu-btn-open, x-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-top-panel .menu-btn-open:hover, x-button:hover {\n  cursor: pointer;\n}\n\nx-top-panel {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 0 10px;\n  height: 45px;\n  background-color: #26272b;\n  border-bottom: 1px solid #373a3f;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 10;\n}\n\nx-top-panel .menu-btn-open {\n  background-color: transparent;\n  color: #636363;\n}";
 class TopPanel extends CustomElement {
   constructor() {
     super();
@@ -1223,7 +1238,7 @@ class TopPanel extends CustomElement {
     };
   }
   getElementStyles() {
-    return styles$b.toString();
+    return styles$f.toString();
   }
   onBtnClick(e) {
     e.stopPropagation();
@@ -1231,7 +1246,7 @@ class TopPanel extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(TopPanel), TopPanel);
-const styles$a = "x-sheet-notes .sheet-notes-container {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  position: relative;\n}\nx-sheet-notes .sheet-notes-container > svg {\n  width: 100%;\n  height: 100%;\n}\nx-sheet-notes .sheet-notes-container .sign {\n  position: absolute;\n  width: 25px;\n  height: 45px;\n}";
+const styles$e = "x-sheet-notes .sheet-notes-container {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 200px;\n  height: 200px;\n  position: relative;\n}\nx-sheet-notes .sheet-notes-container > svg {\n  width: 100%;\n  height: 100%;\n}\nx-sheet-notes .sheet-notes-container .sign {\n  position: absolute;\n  width: 25px;\n  height: 45px;\n}";
 const svgSheetLines = `
 	<svg
 	   xmlns="http://www.w3.org/2000/svg"
@@ -1290,7 +1305,7 @@ const svgSheetLines = `
 `;
 class SheetNotes extends CustomElement {
   getElementStyles() {
-    return styles$a.toString();
+    return styles$e.toString();
   }
   getTemplateSchema() {
     return {
@@ -1343,7 +1358,7 @@ class SheetNotes extends CustomElement {
 }
 customElements.define(getTagNameByCtor(SheetNotes), SheetNotes);
 const clamp$1 = (value, min, max) => Math.max(min, Math.min(value, max));
-const styles$9 = "x-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\n:root {\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n  line-height: 1.5;\n  font-weight: 400;\n  font-size: 16px;\n  font-synthesis: none;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-text-size-adjust: 100%;\n  -webkit-tap-highlight-color: transparent;\n}\n\nhtml {\n  width: 100%;\n  height: 100%;\n}\n\nbody {\n  width: 100%;\n  height: 100%;\n}\n\n#app {\n  display: flex;\n  flex-flow: column nowrap;\n  padding-top: 45px;\n  padding-bottom: 50px;\n  width: 100%;\n  height: 100%;\n}\n\n@media screen and (min-width: 1200px) {\n  #app {\n    padding-bottom: 0;\n  }\n}\n\n#app .page-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  background-color: #2b2e33;\n}\n\nx-number-input input {\n  text-align: center;\n  vertical-align: top;\n  /* Chrome, Safari, Edge, Opera */\n  /* Firefox */\n}\n\nx-number-input input::-webkit-outer-spin-button, x-number-input input::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\nx-number-input input[type=number] {\n  -moz-appearance: textfield;\n}";
+const styles$d = "x-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-number-input x-button, x-number-input input, x-number-input, #app, body, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-number-input[active] {\n  color: #43cbc5;\n}\n\nx-number-input[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-number-input[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-number-input[disabled] {\n  opacity: 0.2;\n}\n\nx-number-input {\n  display: grid;\n  grid-template-columns: repeat(3, 40px);\n  grid-template-rows: 35px;\n  border-radius: 1.25rem;\n}\n\nx-number-input input {\n  line-height: 35px;\n  background-color: #373a3f;\n  color: #ffffff;\n  padding: 0.25rem;\n  font-size: 1rem;\n  font-weight: bold;\n}\n\nx-number-input x-button {\n  border: 1px solid #373a3f;\n  color: #ffffff;\n}\n\nx-number-input x-button[name=increase-button] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\nx-number-input x-button[name=decrease-button] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\n:root {\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n  line-height: 1.5;\n  font-weight: 400;\n  font-size: 16px;\n  font-synthesis: none;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-text-size-adjust: 100%;\n  -webkit-tap-highlight-color: transparent;\n}\n\nhtml {\n  width: 100%;\n  height: 100%;\n}\n\nbody {\n  width: 100%;\n  height: 100%;\n  overscroll-behavior: none;\n}\n\n#app {\n  display: flex;\n  flex-flow: column nowrap;\n  padding-top: 45px;\n  padding-bottom: 50px;\n  width: 100%;\n  height: 100%;\n}\n\n@media screen and (min-width: 1200px) {\n  #app {\n    padding-bottom: 0;\n  }\n}\n\n#app .page-container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  background-color: #2b2e33;\n}\n\nx-number-input input {\n  text-align: center;\n  vertical-align: top;\n  /* Chrome, Safari, Edge, Opera */\n  /* Firefox */\n}\n\nx-number-input input::-webkit-outer-spin-button, x-number-input input::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\nx-number-input input[type=number] {\n  -moz-appearance: textfield;\n}";
 class NumberInput extends CustomElement {
   constructor() {
     super();
@@ -1355,7 +1370,7 @@ class NumberInput extends CustomElement {
     this.onDecreaseButtonClick = this.onDecreaseButtonClick.bind(this);
   }
   getElementStyles() {
-    return styles$9.toString();
+    return styles$d.toString();
   }
   getTemplateSchema() {
     return [
@@ -1426,6 +1441,33 @@ class NumberInput extends CustomElement {
   }
 }
 customElements.define(NumberInput.getTagName(), NumberInput);
+const styles$c = "x-preset-card [name=title], x-preset-card {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-preset-card [name=title], x-preset-card {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-preset-card [name=title] {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-preset-card {\n  display: grid;\n  grid-template-columns: repeat(1, 100%);\n  overflow: hidden;\n}\n\nx-preset-card {\n  width: 100%;\n  background-color: #373a3f;\n  border: 1px solid #636363;\n  border-radius: 1.25rem;\n}\n\nx-preset-card [name=title] {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 50px;\n  font-size: 0.95rem;\n  padding: 0.5rem;\n  border-bottom: 1px solid #636363;\n}\n\nx-preset-card [name=content] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  padding: 0.5rem;\n  gap: 0.25rem;\n  color: #ffffff;\n}\n\nx-preset-card [name=content] > .chip {\n  border: 1px solid #636363;\n  border-radius: 1.25rem;\n  color: #ffffff;\n  background-color: #2b2e33;\n  padding: 0.5rem 0.75rem;\n  font-size: 0.75rem;\n}\n\nx-preset-card [name=action] {\n  width: 100%;\n  border: 0;\n  border-radius: 0;\n  height: 40px;\n  border-top: 1px solid #636363;\n}";
+const _PresetCard = class _PresetCard extends CustomElement {
+  constructor() {
+    super();
+    this.onCardActionClick = this.onCardActionClick.bind(this);
+  }
+  getElementStyles() {
+    return styles$c.toString();
+  }
+  onCardActionClick() {
+    this.dispatchEvent(
+      createEvent(_PresetCard.EVENT_PRESET_CARD_ACTION, {
+        name: this.getAttribute("name") ?? ""
+      })
+    );
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    const cardAction = this.querySelector('[name="action"]');
+    if (cardAction) {
+      cardAction.addEventListener("click", this.onCardActionClick);
+    }
+  }
+};
+__publicField(_PresetCard, "EVENT_PRESET_CARD_ACTION", "EVENT_PRESET_CARD_ACTION");
+let PresetCard = _PresetCard;
+customElements.define(PresetCard.getTagName(), PresetCard);
 class Page extends CustomElement {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onOpened() {
@@ -1488,24 +1530,26 @@ class Page extends CustomElement {
   }
 }
 customElements.define(getTagNameByCtor(Page), Page);
-const styles$8 = "x-home-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\nx-home-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\nx-home-page .header {\n  color: #ffffff;\n  font-size: 1.85rem;\n  font-weight: 700;\n  padding: 1rem 0;\n}";
+const styles$b = "x-home-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\nx-home-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\nx-home-page .header {\n  color: #ffffff;\n  font-size: 1.85rem;\n  font-weight: 700;\n  padding: 1rem 0;\n}";
 class HomePage extends Page {
   getElementStyles() {
-    return styles$8.toString();
+    return styles$b.toString();
   }
   getTemplateSchema() {
-    return {
-      tagName: "div",
-      cssClasses: "header",
-      children: "Home page"
-    };
+    return [
+      {
+        tagName: "div",
+        cssClasses: "header",
+        children: "Home page"
+      }
+    ];
   }
 }
-customElements.define(getTagNameByCtor(HomePage), HomePage);
-const styles$7 = "x-exercises-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\nx-exercises-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}";
+customElements.define(HomePage.getTagName(), HomePage);
+const styles$a = "x-exercises-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\nx-exercises-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}";
 class ExercisesPage extends Page {
   getElementStyles() {
-    return styles$7.toString();
+    return styles$a.toString();
   }
   getTemplateSchema() {
     return {
@@ -1528,7 +1572,7 @@ class ExercisesPage extends Page {
           children: {
             tagName: "x-button",
             attrs: {
-              "data-route": "chords"
+              "data-route": "chords-exercise-settings"
             },
             children: "Chords"
           }
@@ -1559,7 +1603,7 @@ class ExercisesPage extends Page {
     };
   }
 }
-customElements.define(getTagNameByCtor(ExercisesPage), ExercisesPage);
+customElements.define(ExercisesPage.getTagName(), ExercisesPage);
 const NOTES = [
   "C",
   "C#",
@@ -19123,7 +19167,7 @@ class AudioSettings {
 }
 const audioSettings = new AudioSettings();
 window.audioSettings = audioSettings;
-const styles$6 = "x-settings-page .controls > .control > select[active] {\n  color: #43cbc5;\n}\nx-settings-page .controls > .control > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\nx-settings-page .controls > .control > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\nx-settings-page .controls > .control > select[disabled] {\n  opacity: 0.2;\n}\nx-settings-page .controls > .control > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\nx-settings-page .controls {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\nx-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\nx-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\nx-settings-page .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 10px;\n  padding: 10px;\n  width: 100%;\n}\nx-settings-page .controls > .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 100%;\n}\nx-settings-page .controls > .control > label {\n  color: #ffffff;\n  font-size: 1.25rem;\n}";
+const styles$9 = "x-settings-page .controls {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-settings-page .controls > .control > select[active] {\n  color: #43cbc5;\n}\n\nx-settings-page .controls > .control > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-settings-page .controls > .control > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-settings-page .controls > .control > select[disabled] {\n  opacity: 0.2;\n}\n\nx-settings-page .controls > .control > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-settings-page .controls {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-settings-page .controls {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 10px;\n  padding: 10px;\n  width: 100%;\n}\n\nx-settings-page .controls > .control {\n  display: inline-flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 4px;\n  width: 100%;\n}\n\nx-settings-page .controls > .control > label {\n  color: #ffffff;\n  font-size: 1.25rem;\n}";
 class SettingsPage extends Page {
   constructor() {
     super(...arguments);
@@ -19131,7 +19175,7 @@ class SettingsPage extends Page {
     __publicField(this, "_instrumentsSelector");
   }
   getElementStyles() {
-    return styles$6.toString();
+    return styles$9.toString();
   }
   getTemplateSchema() {
     return {
@@ -19211,21 +19255,24 @@ const CHORD_NOTES = {
   Maj6th: [0, 4, 7, 9],
   // Seventh
   Min7: [0, 3, 7, 10],
-  Min7InvIII: [10, 12, 3, 7],
+  Min72: [10, 12, 3, 7],
   D7: [0, 4, 7, 10],
-  D7InvIII: [10, 12, 4, 7],
+  D65: [4, 7, 10, 12],
+  D43: [7, 10, 12, 14],
+  D2: [10, 12, 14, 16],
+  // todo recheck
   Maj7: [0, 4, 7, 11],
-  Maj7InvIII: [11, 12, 4, 7],
-  Dim: [0, 3, 6, 9],
+  Maj72: [11, 12, 4, 7],
   Min7b5: [0, 3, 6, 10],
+  Dim: [0, 3, 6, 9],
   Aug: [0, 4, 8, 12],
-  // Added steps (9, 11, 13)
+  // More octave
   Maj39: [0, 4, 7, 14],
   Maj39InvIII: [2, 4, 7, 12],
-  // todo (?)
+  // todo recheck
   Min39: [0, 3, 7, 14],
   Min39InvIII: [2, 3, 7, 12],
-  // todo (?)
+  // todo recheck
   Maj79: [0, 4, 7, 11, 14],
   Min79: [0, 3, 7, 10, 14],
   D79: [0, 4, 7, 10, 14],
@@ -19243,12 +19290,13 @@ const prepareToStartPlaying = () => {
   }
   audioSettings.isPlaying = true;
 };
-const playInterval = (intervalNotes, mode) => {
+const playNotes = (notes, mode) => {
   prepareToStartPlaying();
-  const interval = createChord(`${audioSettings.activeTonality}${audioSettings.activeOctave}`, intervalNotes);
+  const notesToPLay = createChord(`${audioSettings.activeTonality}${audioSettings.activeOctave}`, notes);
   if (mode === "harm") {
-    audioSettings.activeInstrument.triggerAttackRelease(interval, "2n");
-  } else if (mode === "asc") {
+    audioSettings.activeInstrument.triggerAttackRelease(notesToPLay, "2n");
+  } else {
+    const orderedNotes = mode === "asc" ? notesToPLay : [...notesToPLay].reverse();
     const sequence = new Sequence(
       (time, note) => {
         audioSettings.activeInstrument.triggerAttackRelease(note, "4n", time);
@@ -19256,20 +19304,7 @@ const playInterval = (intervalNotes, mode) => {
           sequence.stop();
         }
       },
-      interval,
-      "4n"
-    );
-    sequence.loop = false;
-    sequence.start(0);
-  } else if (mode === "desc") {
-    const sequence = new Sequence(
-      (time, note) => {
-        audioSettings.activeInstrument.triggerAttackRelease(note, "4n", time);
-        if (sequence.progress === 1) {
-          sequence.stop();
-        }
-      },
-      [...interval].reverse(),
+      orderedNotes,
       "4n"
     );
     sequence.loop = false;
@@ -19277,59 +19312,11 @@ const playInterval = (intervalNotes, mode) => {
   }
   Transport2.start();
 };
-const styles$5 = "x-chords-exercise-page .chord-buttons-container, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-chords-exercise-page .chord-buttons-container, x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .chord-buttons-container > [active]._option-button {\n  color: #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [success]._option-button {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-chords-exercise-page .chord-buttons-container > [failure]._option-button {\n  color: red;\n  border: 1px solid red;\n}\n\nx-chords-exercise-page .chord-buttons-container > [disabled]._option-button {\n  opacity: 0.2;\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  width: unset;\n  height: unset;\n  border: 0;\n  border-radius: 0;\n  padding: 0.5rem 1rem;\n  font-size: 0.7rem;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-chords-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-page .chord-buttons-container {\n  display: inline-grid;\n  grid-template-columns: repeat(6, 1fr);\n  grid-auto-rows: 80px;\n  justify-content: center;\n  grid-gap: 4px;\n  padding: 10px;\n  width: 100%;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page .chord-buttons-container {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n\nx-chords-exercise-page .chord-buttons-container > ._option-button {\n  border-radius: 1.25rem;\n}";
-const _ChordsExercisePage = class _ChordsExercisePage extends Page {
-  getElementStyles() {
-    return styles$5.toString();
-  }
-  getTemplateSchema() {
-    return {
-      tagName: "div",
-      cssClasses: "chord-buttons-container",
-      children: Object.keys(CHORD_NOTES).map((chordName) => ({
-        tagName: "x-button",
-        cssClasses: "_option-button",
-        attrs: { "data-chord": chordName },
-        children: chordName
-      }))
-    };
-  }
-  onChordClick(e) {
-    e.stopPropagation();
-    if (!e.target.classList.contains("_option-button")) {
-      return;
-    }
-    prepareToStartPlaying();
-    const chord = createChord(`${audioSettings.activeTonality}${audioSettings.activeOctave}`, CHORD_NOTES[e.target.dataset.chord]);
-    audioSettings.activeInstrument.triggerAttackRelease(chord, "2n");
-    Transport2.start();
-  }
-  connectedCallback() {
-    super.connectedCallback();
-    const buttons = Array.from(this.children).filter((el) => el.tagName !== "STYLE");
-    for (const button of buttons) {
-      button.classList.add(_ChordsExercisePage.BUTTON_OPTION_INNER_SELECTOR);
-    }
-    this.addEventListener("click", this.onChordClick);
-  }
+const playInterval = (intervalNotes, mode) => {
+  playNotes(intervalNotes, mode);
 };
-__publicField(_ChordsExercisePage, "BUTTON_OPTION_INNER_SELECTOR", "_option-button");
-let ChordsExercisePage = _ChordsExercisePage;
-customElements.define(getTagNameByCtor(ChordsExercisePage), ChordsExercisePage);
-const INTERVAL_NOTES = {
-  unison: [0, 0],
-  min2: [0, 1],
-  maj2: [0, 2],
-  min3: [0, 3],
-  maj3: [0, 4],
-  perf4: [0, 5],
-  tritone: [0, 6],
-  perf5: [0, 7],
-  min6: [0, 8],
-  maj6: [0, 9],
-  min7: [0, 10],
-  maj7: [0, 11],
-  octave: [0, 12]
+const playChord = (chordNotes, mode) => {
+  playNotes(chordNotes, mode);
 };
 const localStorageService = {
   read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
@@ -19359,6 +19346,458 @@ const defineStateProperties = ({ stateObject, defaultSettings, savedSettings, lo
     });
   }
 };
+const CHORDS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS = [
+  {
+    label: "10",
+    value: "10"
+  },
+  {
+    label: "20",
+    value: "20"
+  },
+  {
+    label: "40",
+    value: "40"
+  }
+];
+const CHORDS_EXERCISE_PLAYING_MODE_OPTIONS = [
+  {
+    label: "Asc",
+    value: "asc"
+  },
+  {
+    label: "Desc",
+    value: "desc"
+  },
+  {
+    label: "Harm",
+    value: "harm"
+  }
+];
+const CHORDS_EXERCISE_DEFAULT_SETTINGS = {
+  numberOfQuestions: CHORDS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS[0].value,
+  playingMode: CHORDS_EXERCISE_PLAYING_MODE_OPTIONS[0].value,
+  selectedChords: Object.keys(CHORD_NOTES)
+};
+const CHORDS_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY = "chords_exercise_settings";
+const CHORDS_EXERCISE_SAVED_SETTINGS = localStorageService.read(CHORDS_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY);
+const chordsExerciseOptionsState = {
+  revalidateOptions() {
+    for (const numberOfQuestionsOption of CHORDS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS) {
+      numberOfQuestionsOption.isActive = numberOfQuestionsOption.value === chordsExerciseOptionsState.numberOfQuestions.toString();
+    }
+    for (const playingModeOption of CHORDS_EXERCISE_PLAYING_MODE_OPTIONS) {
+      playingModeOption.isActive = playingModeOption.value === chordsExerciseOptionsState.playingMode;
+    }
+  }
+};
+defineStateProperties({
+  stateObject: chordsExerciseOptionsState,
+  defaultSettings: CHORDS_EXERCISE_DEFAULT_SETTINGS,
+  savedSettings: CHORDS_EXERCISE_SAVED_SETTINGS,
+  localStorageKey: CHORDS_EXERCISE_SETTINGS_LOCAL_STORAGE_KEY
+});
+chordsExerciseOptionsState.revalidateOptions();
+window.chordsExerciseOptionsState = chordsExerciseOptionsState;
+const INTERVAL_NOTES = {
+  unison: [0, 0],
+  min2: [0, 1],
+  maj2: [0, 2],
+  min3: [0, 3],
+  maj3: [0, 4],
+  perf4: [0, 5],
+  tritone: [0, 6],
+  perf5: [0, 7],
+  min6: [0, 8],
+  maj6: [0, 9],
+  min7: [0, 10],
+  maj7: [0, 11],
+  octave: [0, 12]
+};
+function between(min, max) {
+  const range2 = max - min;
+  return min + Math.random() * range2;
+}
+function betweenInt(min, max) {
+  return Math.round(between(min, max));
+}
+const randomInArray = (arr) => {
+  const randomKey = betweenInt(0, arr.length - 1);
+  return arr[randomKey];
+};
+const getRandomInterval = (audioConfig, options) => {
+  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
+  const intervalName = options.selectedIntervals[intervalValueIndex];
+  const intervalValue = INTERVAL_NOTES[intervalName];
+  return {
+    name: intervalName,
+    notes: intervalValue
+  };
+};
+const getRandomChord = (audioConfig, options) => {
+  const chordValueIndex = betweenInt(0, options.selectedChords.length - 1);
+  const chordName = options.selectedChords[chordValueIndex];
+  const chordValue = CHORD_NOTES[chordName];
+  return {
+    name: chordName,
+    notes: chordValue
+  };
+};
+class QuizState {
+  constructor() {
+    __publicField(this, "numberOfAllQuestions", 0);
+    __publicField(this, "numberOfCompletedQuestions", 0);
+    __publicField(this, "numberOfWrongAnswers", 0);
+  }
+  isAllQuestionsCompleted() {
+    return this.numberOfCompletedQuestions >= this.numberOfAllQuestions;
+  }
+  reset(options) {
+    Object.assign(this, {
+      numberOfAllQuestions: options.numberOfQuestions,
+      numberOfCompletedQuestions: 0,
+      numberOfWrongAnswers: 0
+    });
+  }
+}
+__publicField(QuizState, "NEXT_QUESTION_TIMEOUT", 1500);
+class ChordsExerciseState extends QuizState {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "variants", []);
+    __publicField(this, "rightVariant", null);
+    __publicField(this, "selectedVariant", null);
+  }
+  isSelectedVariantIsRight() {
+    return this.selectedVariant === this.rightVariant;
+  }
+  reset(options) {
+    super.reset(options);
+    const initChord = getRandomChord(audioSettings, options);
+    Object.assign(this, {
+      variants: options.selectedChords,
+      rightVariant: initChord.name,
+      selectedVariant: null
+    });
+  }
+  updateSelectedVariant(variant) {
+    this.selectedVariant = variant;
+    this.numberOfCompletedQuestions++;
+    if (!this.isSelectedVariantIsRight()) {
+      this.numberOfWrongAnswers++;
+    }
+  }
+  updateRightVariant(variant) {
+    this.rightVariant = variant;
+  }
+}
+const chordsExerciseState = new ChordsExerciseState();
+window.chordsExerciseState = chordsExerciseState;
+const styles$8 = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-chords-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-chords-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\n@media screen and (max-width: 420px) {\n  x-chords-exercise-page x-grid {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n\nx-chords-exercise-page x-button.play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n\nx-chords-exercise-page x-button.play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
+class ChordsExercisePage extends Page {
+  constructor() {
+    super();
+    this.onChordSelected = this.onChordSelected.bind(this);
+  }
+  getElementStyles() {
+    return styles$8.toString();
+  }
+  getTemplateSchema() {
+    chordsExerciseState.reset(chordsExerciseOptionsState);
+    return {
+      tagName: "x-grid",
+      children: [
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "span",
+            cssClasses: "title",
+            children: "What chord playing?"
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "x-progress",
+            attrs: {
+              progress: JSON.stringify({
+                all: chordsExerciseState.numberOfAllQuestions,
+                completed: chordsExerciseState.numberOfCompletedQuestions
+              }),
+              "show-percent": false
+            }
+          }
+        },
+        {
+          tagName: "div",
+          cssClasses: "grid-cell",
+          children: {
+            tagName: "x-button",
+            cssClasses: "play-button",
+            children: [
+              {
+                tagName: "x-replay-icon",
+                cssClasses: ["icon", "icon_replay"]
+              }
+            ]
+          }
+        },
+        {
+          tagName: "x-button-group-multiple",
+          attrs: {
+            name: "chords-selection",
+            variant: "grid",
+            "highlight-active": false
+          },
+          children: chordsExerciseState.variants.map((intervalValue) => ({
+            tagName: "x-button",
+            attrs: {
+              "data-value": intervalValue
+            },
+            children: intervalValue
+          }))
+        }
+      ]
+    };
+  }
+  onPlayButtonClick() {
+    playChord(CHORD_NOTES[chordsExerciseState.rightVariant], chordsExerciseOptionsState.playingMode);
+  }
+  highlightRightWrongVariants() {
+    for (const button of this._variantButtons.getButtons()) {
+      const { value } = button.dataset;
+      if (value === chordsExerciseState.rightVariant) {
+        button.setAttribute("success", "true");
+      } else if (value === chordsExerciseState.selectedVariant && !chordsExerciseState.isSelectedVariantIsRight()) {
+        button.setAttribute("failure", "true");
+      } else {
+        button.setAttribute("disabled", "true");
+      }
+    }
+  }
+  updateProgressBar() {
+    this._progress.setProgress({
+      all: chordsExerciseState.numberOfAllQuestions,
+      completed: chordsExerciseState.numberOfCompletedQuestions
+    });
+  }
+  onChordSelected(event) {
+    event.stopPropagation();
+    if (this._variantButtons.isLocked()) {
+      return;
+    }
+    this.blockPageUi();
+    playChord(CHORD_NOTES[chordsExerciseState.rightVariant], chordsExerciseOptionsState.playingMode);
+    chordsExerciseState.updateSelectedVariant(event.target.dataset.value);
+    this.highlightRightWrongVariants();
+    this.updateProgressBar();
+    this._variantButtons.lock();
+    if (!chordsExerciseState.isAllQuestionsCompleted()) {
+      window.setTimeout(() => {
+        this._variantButtons.reset();
+        const nextInterval = getRandomChord(audioSettings, chordsExerciseOptionsState);
+        chordsExerciseState.updateRightVariant(nextInterval.name);
+        playChord(CHORD_NOTES[chordsExerciseState.rightVariant], chordsExerciseOptionsState.playingMode);
+        this.unblockPageUi();
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
+    } else {
+      window.setTimeout(() => {
+        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["chords-exercise-results"].route }));
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
+    }
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._grid = this.querySelector("x-grid");
+    this._progress = this._grid.querySelector("x-progress");
+    this._playButton = this._grid.querySelector(".play-button");
+    this._playButton.addEventListener("click", this.onPlayButtonClick);
+    this._variantButtons = this._grid.querySelector("x-button-group-multiple");
+    this._variantButtons.addEventListener("click", this.onChordSelected);
+  }
+  onOpened() {
+    playChord(CHORD_NOTES[chordsExerciseState.rightVariant], chordsExerciseOptionsState.playingMode);
+  }
+}
+customElements.define(getTagNameByCtor(ChordsExercisePage), ChordsExercisePage);
+const styles$7 = "x-chords-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-chords-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  width: 100%;\n}\n\nx-chords-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-chords-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-chords-exercise-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}";
+const PRESETS = [
+  {
+    name: "triads",
+    label: "Major and Minor triads",
+    chords: ["Maj3", "Min3"]
+  },
+  {
+    name: "triadsInversions",
+    label: "Major and Minor triad inversions",
+    chords: ["Maj3", "Maj6", "Maj46", "Min3", "Min6", "Min46"]
+  },
+  {
+    name: "sevenths",
+    label: "Sevenths chords",
+    chords: ["Maj7", "Min7", "D7", "Min7b5", "Aug", "Dim"]
+  },
+  {
+    name: "dominantSeventhInversions",
+    label: "Dominant seventh inversions",
+    chords: ["D7", "D65", "D43", "D2"]
+  }
+];
+class ChordsExerciseSettingsPage extends Page {
+  constructor() {
+    super();
+    this.onPresetSelected = this.onPresetSelected.bind(this);
+  }
+  getElementStyles() {
+    return styles$7.toString();
+  }
+  getTemplateSchema() {
+    return [
+      {
+        tagName: "x-grid",
+        children: [
+          {
+            tagName: "div",
+            cssClasses: "grid-cell",
+            children: {
+              tagName: "span",
+              cssClasses: "title",
+              children: "Setup chords exercise:"
+            }
+          },
+          {
+            tagName: "div",
+            cssClasses: "grid-cell",
+            children: {
+              tagName: "div",
+              cssClasses: "form-field-group",
+              children: [
+                {
+                  tagName: "span",
+                  cssClasses: "form-field-group-label",
+                  children: "Number of questions:"
+                },
+                {
+                  tagName: "x-button-group",
+                  attrs: {
+                    name: "number-of-questions",
+                    variant: "row"
+                  },
+                  children: CHORDS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS.map((elSchema2) => ({
+                    tagName: "x-button",
+                    attrs: {
+                      "data-value": elSchema2.value,
+                      ...elSchema2.isActive ? { active: elSchema2.isActive } : {}
+                    },
+                    children: elSchema2.label
+                  }))
+                }
+              ]
+            }
+          },
+          {
+            tagName: "div",
+            cssClasses: "grid-cell",
+            children: {
+              tagName: "div",
+              cssClasses: "form-field-group",
+              children: [
+                {
+                  tagName: "span",
+                  cssClasses: "form-field-group-label",
+                  children: "Playing mode:"
+                },
+                {
+                  tagName: "x-button-group",
+                  attrs: {
+                    name: "playing-mode",
+                    variant: "row"
+                  },
+                  children: CHORDS_EXERCISE_PLAYING_MODE_OPTIONS.map((elSchema2) => ({
+                    tagName: "x-button",
+                    attrs: {
+                      "data-value": elSchema2.value,
+                      ...elSchema2.isActive ? { active: elSchema2.isActive } : {}
+                    },
+                    children: elSchema2.label
+                  }))
+                }
+              ]
+            }
+          },
+          ...PRESETS.map((preset) => ({
+            tagName: "div",
+            cssClasses: "grid-cell",
+            children: {
+              tagName: "x-preset-card",
+              attrs: {
+                name: preset.name
+              },
+              children: [
+                {
+                  tagName: "div",
+                  attrs: {
+                    name: "title"
+                  },
+                  children: preset.label
+                },
+                {
+                  tagName: "div",
+                  attrs: {
+                    name: "content"
+                  },
+                  children: preset.chords.map((chord) => ({
+                    tagName: "div",
+                    cssClasses: "chip",
+                    children: chord
+                  }))
+                },
+                {
+                  tagName: "x-button",
+                  attrs: {
+                    name: "action"
+                  },
+                  children: "Start"
+                }
+              ]
+            }
+          }))
+        ]
+      }
+    ];
+  }
+  onSubmit() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["chords-exercise"].route }));
+  }
+  onPresetSelected(event) {
+    for (const preset of PRESETS) {
+      if (event.detail.name === preset.name) {
+        chordsExerciseOptionsState.selectedChords = preset.chords;
+      }
+    }
+    this.onSubmit();
+  }
+  onFieldChange(event) {
+    event.stopPropagation();
+    switch (event.target.getAttribute("name")) {
+      case "number-of-questions":
+        chordsExerciseOptionsState.numberOfQuestions = event.detail.value;
+        break;
+      case "playing-mode":
+        chordsExerciseOptionsState.playingMode = event.detail.value;
+        break;
+    }
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    const form = this.querySelector("x-grid");
+    form.addEventListener(PresetCard.EVENT_PRESET_CARD_ACTION, this.onPresetSelected);
+    form.addEventListener("change", this.onFieldChange);
+  }
+}
+customElements.define(ChordsExerciseSettingsPage.getTagName(), ChordsExerciseSettingsPage);
 const INTERVAL_EXERCISE_NUMBER_OF_QUESTION_OPTIONS = [
   {
     label: "10",
@@ -19469,7 +19908,7 @@ defineStateProperties({
 });
 intervalsExerciseOptionsState.revalidateOptions();
 window.intervalsExerciseOptionsState = intervalsExerciseOptionsState;
-const styles$4 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$6 = "x-intervals-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-intervals-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  width: 100%;\n}\n\nx-intervals-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 1rem;\n}\n\nx-intervals-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-intervals-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 class IntervalsExerciseSettingsPage extends Page {
   constructor() {
     super();
@@ -19480,7 +19919,7 @@ class IntervalsExerciseSettingsPage extends Page {
     this.onSelectIntervalsButtonClick = this.onSelectIntervalsButtonClick.bind(this);
   }
   getElementStyles() {
-    return styles$4.toString();
+    return styles$6.toString();
   }
   getTemplateSchema() {
     return {
@@ -19492,7 +19931,7 @@ class IntervalsExerciseSettingsPage extends Page {
           children: {
             tagName: "span",
             cssClasses: "title",
-            children: "Intervals recognition"
+            children: "Setup intervals exercise:"
           }
         },
         {
@@ -19633,50 +20072,23 @@ class IntervalsExerciseSettingsPage extends Page {
   }
 }
 customElements.define(getTagNameByCtor(IntervalsExerciseSettingsPage), IntervalsExerciseSettingsPage);
-function between(min, max) {
-  const range2 = max - min;
-  return min + Math.random() * range2;
-}
-function betweenInt(min, max) {
-  return Math.round(between(min, max));
-}
-const randomInArray = (arr) => {
-  const randomKey = betweenInt(0, arr.length - 1);
-  return arr[randomKey];
-};
-const getRandomInterval = (audioConfig, options) => {
-  const intervalValueIndex = betweenInt(0, options.selectedIntervals.length - 1);
-  const intervalName = options.selectedIntervals[intervalValueIndex];
-  const intervalValue = INTERVAL_NOTES[intervalName];
-  return {
-    name: intervalName,
-    notes: intervalValue
-  };
-};
-class IntervalsExerciseState {
+class IntervalsExerciseState extends QuizState {
   constructor() {
-    __publicField(this, "numberOfAllQuestions", 0);
-    __publicField(this, "numberOfCompletedQuestions", 0);
+    super(...arguments);
     __publicField(this, "variants", []);
     __publicField(this, "rightVariant", null);
     __publicField(this, "selectedVariant", null);
-    __publicField(this, "numberOfWrongAnswers", 0);
   }
   isSelectedVariantIsRight() {
     return this.selectedVariant === this.rightVariant;
   }
-  isAllQuestionsCompleted() {
-    return this.numberOfCompletedQuestions >= this.numberOfAllQuestions;
-  }
   reset(options) {
+    super.reset(options);
     const initInterval = getRandomInterval(audioSettings, options);
     Object.assign(this, {
-      numberOfAllQuestions: options.numberOfQuestions,
       variants: options.selectedIntervals,
-      numberOfCompletedQuestions: 0,
-      selectedVariant: null,
       rightVariant: initInterval.name,
-      numberOfWrongAnswers: 0
+      selectedVariant: null
     });
   }
   updateSelectedVariant(variant) {
@@ -19692,8 +20104,7 @@ class IntervalsExerciseState {
 }
 const intervalsExerciseState = new IntervalsExerciseState();
 window.intervalsExerciseState = intervalsExerciseState;
-const styles$3 = "x-intervals-exercise-page .intervals-exercise__title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-intervals-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\n@media screen and (max-width: 420px) {\n  x-intervals-exercise-page x-grid {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n\nx-intervals-exercise-page x-button.play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n\nx-intervals-exercise-page x-button.play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
-const DELAY_BEFORE_NEXT_INTERVAL_PLAYING = 1500;
+const styles$5 = "x-intervals-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\n@media screen and (max-width: 420px) {\n  x-intervals-exercise-page x-grid {\n    grid-auto-rows: fit-content(100%);\n    gap: 1.5rem;\n  }\n}\n\nx-intervals-exercise-page x-button.play-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  margin: 0 auto;\n  width: 85px;\n  height: 85px;\n}\n\nx-intervals-exercise-page x-button.play-button .icon {\n  width: 35px;\n  height: 35px;\n  color: #ffffff;\n}";
 class IntervalsExercisePage extends Page {
   constructor() {
     super();
@@ -19702,7 +20113,7 @@ class IntervalsExercisePage extends Page {
     this.onIntervalSelected = this.onIntervalSelected.bind(this);
   }
   getElementStyles() {
-    return styles$3.toString();
+    return styles$5.toString();
   }
   getTemplateSchema() {
     intervalsExerciseState.reset(intervalsExerciseOptionsState);
@@ -19714,8 +20125,8 @@ class IntervalsExercisePage extends Page {
           cssClasses: "grid-cell",
           children: {
             tagName: "span",
-            cssClasses: "intervals-exercise__title",
-            children: "Intervals recognition"
+            cssClasses: "title",
+            children: "What interval playing?"
           }
         },
         {
@@ -19756,7 +20167,7 @@ class IntervalsExercisePage extends Page {
           children: intervalsExerciseState.variants.map((intervalValue) => ({
             tagName: "x-button",
             attrs: {
-              "data-interval": intervalValue
+              "data-value": intervalValue
             },
             children: intervalValue
           }))
@@ -19769,10 +20180,10 @@ class IntervalsExercisePage extends Page {
   }
   highlightRightWrongVariants() {
     for (const button of this._variantButtons.getButtons()) {
-      const { interval } = button.dataset;
-      if (interval === intervalsExerciseState.rightVariant) {
+      const { value } = button.dataset;
+      if (value === intervalsExerciseState.rightVariant) {
         button.setAttribute("success", "true");
-      } else if (interval === intervalsExerciseState.selectedVariant && !intervalsExerciseState.isSelectedVariantIsRight()) {
+      } else if (value === intervalsExerciseState.selectedVariant && !intervalsExerciseState.isSelectedVariantIsRight()) {
         button.setAttribute("failure", "true");
       } else {
         button.setAttribute("disabled", "true");
@@ -19790,8 +20201,9 @@ class IntervalsExercisePage extends Page {
     if (this._variantButtons.isLocked()) {
       return;
     }
-    playInterval(INTERVAL_NOTES[event.target.dataset.interval], intervalsExerciseOptionsState.playingMode);
-    intervalsExerciseState.updateSelectedVariant(event.target.dataset.interval);
+    this.blockPageUi();
+    playInterval(INTERVAL_NOTES[event.target.dataset.value], intervalsExerciseOptionsState.playingMode);
+    intervalsExerciseState.updateSelectedVariant(event.target.dataset.value);
     this.highlightRightWrongVariants();
     this.updateProgressBar();
     this._variantButtons.lock();
@@ -19801,19 +20213,20 @@ class IntervalsExercisePage extends Page {
         const nextInterval = getRandomInterval(audioSettings, intervalsExerciseOptionsState);
         intervalsExerciseState.updateRightVariant(nextInterval.name);
         playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsExerciseOptionsState.playingMode);
-      }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
+        this.unblockPageUi();
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
     } else {
       window.setTimeout(() => {
         window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["intervals-exercise-results"].route }));
-      }, DELAY_BEFORE_NEXT_INTERVAL_PLAYING);
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
     }
   }
   connectedCallback() {
     super.connectedCallback();
     this._grid = this.querySelector("x-grid");
+    this._progress = this._grid.querySelector("x-progress");
     this._playButton = this._grid.querySelector(".play-button");
     this._playButton.addEventListener("click", this.onPlayButtonClick);
-    this._progress = this._grid.querySelector("x-progress");
     this._variantButtons = this._grid.querySelector("x-button-group-multiple");
     this._variantButtons.addEventListener("click", this.onIntervalSelected);
   }
@@ -19821,8 +20234,8 @@ class IntervalsExercisePage extends Page {
     playInterval(INTERVAL_NOTES[intervalsExerciseState.rightVariant], intervalsExerciseOptionsState.playingMode);
   }
 }
-customElements.define(getTagNameByCtor(IntervalsExercisePage), IntervalsExercisePage);
-const styles$2 = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-results-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n}\n\nx-intervals-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\nx-intervals-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\n\nx-intervals-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\n\nx-intervals-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\n\nx-intervals-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\nx-intervals-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
+customElements.define(IntervalsExercisePage.getTagName(), IntervalsExercisePage);
+const styles$4 = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-intervals-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-intervals-exercise-results-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-intervals-exercise-results-page {\n  justify-content: center;\n}\n\nx-intervals-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\nx-intervals-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-intervals-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\n\nx-intervals-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\n\nx-intervals-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\n\nx-intervals-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\nx-intervals-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
 class IntervalsExerciseResultsPage extends Page {
   constructor() {
     super(...arguments);
@@ -19830,7 +20243,7 @@ class IntervalsExerciseResultsPage extends Page {
     __publicField(this, "_toSettingsButton");
   }
   getElementStyles() {
-    return styles$2.toString();
+    return styles$4.toString();
   }
   getTemplateSchema() {
     const numberOfSuccessfulQuestions = (intervalsExerciseState.numberOfAllQuestions - intervalsExerciseState.numberOfWrongAnswers).toString();
@@ -19871,12 +20284,18 @@ class IntervalsExerciseResultsPage extends Page {
           children: [
             {
               tagName: "x-button",
-              cssClasses: ["action", "repeat-button"],
+              attrs: {
+                name: "repeat-button"
+              },
+              cssClasses: "action",
               children: "Repeat"
             },
             {
               tagName: "x-button",
-              cssClasses: ["action", "to-settings-button"],
+              attrs: {
+                name: "to-settings-button"
+              },
+              cssClasses: "action",
               children: "To settings"
             }
           ]
@@ -19892,14 +20311,14 @@ class IntervalsExerciseResultsPage extends Page {
   }
   connectedCallback() {
     super.connectedCallback();
-    this._repeatButton = this.querySelector(".repeat-button");
-    this._toSettingsButton = this.querySelector(".to-settings-button");
+    this._repeatButton = this.querySelector('[name="repeat-button"]');
     this._repeatButton.addEventListener("click", this.onRepeatExerciseClick);
+    this._toSettingsButton = this.querySelector('[name="to-settings-button"]');
     this._toSettingsButton.addEventListener("click", this.onToExerciseSettingsClick);
   }
 }
-customElements.define(getTagNameByCtor(IntervalsExerciseResultsPage), IntervalsExerciseResultsPage);
-const styles$1 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-keys-exercise-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 0.5rem;\n}\n\nx-keys-exercise-settings-page .form-field-group > [name=key-signs-quantity] {\n  width: 100%;\n}\n\nx-keys-exercise-settings-page .form-field-group > [name=satellite-keys] {\n  width: 100%;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+customElements.define(IntervalsExerciseResultsPage.getTagName(), IntervalsExerciseResultsPage);
+const styles$3 = "x-keys-exercise-settings-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page .description {\n  font-size: 0.95rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #636363;\n}\n\nx-keys-exercise-settings-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  width: 100%;\n}\n\nx-keys-exercise-settings-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-settings-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-keys-exercise-settings-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-settings-page x-grid {\n  grid-auto-rows: fit-content(100%);\n  gap: 1rem;\n}\n\nx-keys-exercise-settings-page .form-field-group > [name=key-signs-quantity], x-keys-exercise-settings-page .form-field-group > [name=satellite-keys], x-keys-exercise-settings-page .form-field-group > [name=minor-major-keys], x-keys-exercise-settings-page .form-field-group > [name=sharp-flat-keys] {\n  width: 100%;\n}\n\nx-keys-exercise-settings-page x-button.select-intervals-button {\n  padding: 1rem;\n  height: unset;\n  font-size: 0.85rem;\n  margin-top: 1rem;\n  width: unset;\n}\n\nx-keys-exercise-settings-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_EXERCISE_NUMBER_OF_QUESTION_OPTIONS = [
   {
     label: "10",
@@ -19996,7 +20415,7 @@ keysExerciseOptionsState.revalidateOptions();
 window.keysExerciseOptionsState = keysExerciseOptionsState;
 class KeysExerciseSettingsPage extends Page {
   getElementStyles() {
-    return styles$1.toString();
+    return styles$3.toString();
   }
   getTemplateSchema() {
     return {
@@ -20008,7 +20427,7 @@ class KeysExerciseSettingsPage extends Page {
           children: {
             tagName: "span",
             cssClasses: "title",
-            children: "Key signatures"
+            children: "Setup keys exercise:"
           }
         },
         {
@@ -20512,11 +20931,9 @@ const getKeysByOptions = (options) => Object.keys(ALL_KEYS).reduce((acc, curr) =
   acc[curr] = ALL_KEYS[curr];
   return acc;
 }, {});
-class KeysExerciseState {
+class KeysExerciseState extends QuizState {
   constructor() {
-    __publicField(this, "numberOfAllQuestions", 0);
-    __publicField(this, "numberOfCompletedQuestions", 0);
-    __publicField(this, "numberOfWrongAnswers", 0);
+    super(...arguments);
     __publicField(this, "availableKeys", []);
     __publicField(this, "originKey", null);
     // Selected data entities
@@ -20562,9 +20979,12 @@ class KeysExerciseState {
       this.selectedEnharmonicKeyData.name = name;
     }
   }
+  resetOriginKey() {
+    this.originKey = ALL_KEYS[randomInArray(Object.keys(this.availableKeys))];
+  }
   resetSelectedData() {
+    this.resetOriginKey();
     Object.assign(this, {
-      originKey: ALL_KEYS[randomInArray(Object.keys(this.availableKeys))],
       selectedOriginKeyData: {
         numberOfSigns: null,
         quality: null
@@ -20581,25 +21001,14 @@ class KeysExerciseState {
       }
     });
   }
-  // Common quiz state
-  isAllQuestionsCompleted() {
-    return this.numberOfCompletedQuestions >= this.numberOfAllQuestions;
-  }
   setCommonSettings(options) {
-    Object.assign(this, {
-      numberOfAllQuestions: options.numberOfQuestions,
-      availableKeys: getKeysByOptions(options),
-      numberOfCompletedQuestions: 0,
-      numberOfWrongAnswers: 0
-    });
-  }
-  updateNumberOfCompletedQuestions() {
-    this.numberOfCompletedQuestions++;
+    this.reset(options);
+    this.availableKeys = getKeysByOptions(options);
   }
 }
 const keysExerciseState = new KeysExerciseState();
 window.keysExerciseState = keysExerciseState;
-const styles = "x-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n  margin: 0 auto;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  padding-top: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-keys-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 0 1 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
+const styles$2 = "x-keys-exercise-page .form-field-group .form-field-group-content > select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-keys-exercise-page .title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: flex-start;\n  gap: 0.5rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-label {\n  font-size: 0.85rem;\n  font-weight: 400;\n  line-height: 120%;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[active] {\n  color: #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[success] {\n  color: #43cbc5;\n  border: 1px solid #43cbc5;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {\n  color: red;\n  border: 1px solid red;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {\n  opacity: 0.2;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  width: 100%;\n  height: 40px;\n  background-color: #373a3f;\n  border: 1px solid #373a3f;\n  outline: 1px solid #373a3f;\n  color: #ffffff;\n  font-size: 0.85rem;\n}\n\nx-keys-exercise-page .divider {\n  width: 100%;\n  height: 1px;\n  background-color: #373a3f;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-keys-exercise-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-keys-exercise-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-page .original-key-display {\n  margin: 0 auto;\n  font-size: 2rem;\n  font-weight: 600;\n  color: #ffffff;\n}\n\nx-keys-exercise-page .form-field-group {\n  border-bottom: 1px solid #373a3f;\n  padding-bottom: 1rem;\n  width: 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  gap: 1rem;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > select {\n  flex: 1 1 100%;\n}\n\nx-keys-exercise-page .form-field-group .form-field-group-content > x-button-group {\n  flex: 0 1 auto;\n}\n\nx-keys-exercise-page x-button.submit-button {\n  width: unset;\n  height: unset;\n  padding: 1rem 2.5rem;\n  margin-top: 1rem;\n}";
 const KEYS_QUALITIES = [
   {
     value: "flat",
@@ -20610,7 +21019,6 @@ const KEYS_QUALITIES = [
     label: elTreeSchema({ tagName: "x-sharp-icon" })
   }
 ];
-const NEXT_QUESTION_TIMEOUT = 3e3;
 const getAnswerKeyQuality = (key) => {
   if (!key.signs) {
     return null;
@@ -20629,7 +21037,7 @@ class KeysExercisePage extends Page {
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
   getElementStyles() {
-    return styles.toString();
+    return styles$2.toString();
   }
   getTemplateSchema() {
     return {
@@ -20926,6 +21334,7 @@ class KeysExercisePage extends Page {
     this._submitButton = this._grid.querySelector('[name="submit-button"]');
     this._submitButton.addEventListener("click", this.onSubmitClick);
     this.initState();
+    this.updateProgressBar();
     this.updateForm();
   }
   initState() {
@@ -20934,16 +21343,18 @@ class KeysExercisePage extends Page {
   resetSelectedData() {
     keysExerciseState.resetSelectedData();
   }
+  updateProgressBar() {
+    this._progress.setProgress({
+      all: keysExerciseState.numberOfAllQuestions,
+      completed: keysExerciseState.numberOfCompletedQuestions
+    });
+  }
   // todo Common mechanism to exclude hidden fields
   updateForm() {
     this.resetSelectedData();
     this._originalKeyDisplay.replaceChildren(
       elTreeSchema(keysExerciseState.originKey.name)
     );
-    this._progress.setProgress({
-      all: keysExerciseState.numberOfAllQuestions,
-      completed: keysExerciseState.numberOfCompletedQuestions
-    });
     if (!keysExerciseState.originKey.parallel || !keysExerciseOptionsState.satelliteKeys.includes(KEYS_EXERCISE_SATELLITE_KEYS_OPTIONS[0].value)) {
       this._parallelKeyField.style.setProperty("display", "none");
     } else {
@@ -20990,7 +21401,7 @@ class KeysExercisePage extends Page {
   // todo FormField component should has its own validators
   // todo Place it in state?
   validateField(field) {
-    let isFieldValid = false;
+    let isFieldValid = true;
     switch (field.getAttribute("name")) {
       case "key-signs-quantity-control":
         isFieldValid = keysExerciseState.selectedOriginKeyData.numberOfSigns === Math.abs(keysExerciseState.originKey.signs).toString();
@@ -21024,10 +21435,15 @@ class KeysExercisePage extends Page {
     } else {
       field.setAttribute("failure", "true");
     }
+    return isFieldValid;
   }
   validateFields() {
+    this._isValid = true;
     for (const field of this._fields) {
-      this.validateField(field);
+      const isFieldValid = this.validateField(field);
+      if (!isFieldValid) {
+        this._isValid = false;
+      }
     }
   }
   resetFields() {
@@ -21038,18 +21454,197 @@ class KeysExercisePage extends Page {
       this.resetFormField(field);
     }
   }
+  updateQuestionsState() {
+    keysExerciseState.numberOfCompletedQuestions++;
+    if (!this._isValid) {
+      keysExerciseState.numberOfWrongAnswers++;
+    }
+  }
   onSubmitClick() {
     this.blockPageUi();
     this.validateFields();
-    setTimeout(() => {
-      keysExerciseState.updateNumberOfCompletedQuestions();
-      this.resetFields();
-      this.updateForm();
-      this.unblockPageUi();
-    }, NEXT_QUESTION_TIMEOUT);
+    this.updateQuestionsState();
+    this.updateProgressBar();
+    if (!keysExerciseState.isAllQuestionsCompleted()) {
+      window.setTimeout(() => {
+        this.resetFields();
+        this.updateForm();
+        this.unblockPageUi();
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
+    } else {
+      window.setTimeout(() => {
+        window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise-results"].route }));
+      }, QuizState.NEXT_QUESTION_TIMEOUT);
+    }
   }
 }
 customElements.define(KeysExercisePage.getTagName(), KeysExercisePage);
+const styles$1 = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-keys-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-keys-exercise-results-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-keys-exercise-results-page {\n  justify-content: center;\n}\n\nx-keys-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\nx-keys-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-keys-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\n\nx-keys-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\n\nx-keys-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\n\nx-keys-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\nx-keys-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
+class KeysExerciseResultsPage extends Page {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_repeatButton");
+    __publicField(this, "_toSettingsButton");
+  }
+  getElementStyles() {
+    return styles$1.toString();
+  }
+  getTemplateSchema() {
+    const numberOfSuccessfulQuestions = (keysExerciseState.numberOfAllQuestions - keysExerciseState.numberOfWrongAnswers).toString();
+    const numberOfAllQuestions = keysExerciseState.numberOfAllQuestions.toString();
+    return {
+      tagName: "div",
+      cssClasses: "container",
+      children: [
+        {
+          tagName: "span",
+          cssClasses: "title",
+          children: "Completed!"
+        },
+        {
+          tagName: "span",
+          cssClasses: "score",
+          children: [
+            {
+              tagName: "span",
+              cssClasses: "completed",
+              children: numberOfSuccessfulQuestions
+            },
+            {
+              tagName: "span",
+              cssClasses: "delimiter",
+              children: "/"
+            },
+            {
+              tagName: "span",
+              cssClasses: "all",
+              children: numberOfAllQuestions
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          cssClasses: "actions",
+          children: [
+            {
+              tagName: "x-button",
+              attrs: {
+                name: "repeat-button"
+              },
+              cssClasses: "action",
+              children: "Repeat"
+            },
+            {
+              tagName: "x-button",
+              attrs: {
+                name: "to-settings-button"
+              },
+              cssClasses: "action",
+              children: "To settings"
+            }
+          ]
+        }
+      ]
+    };
+  }
+  onRepeatExerciseClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise"].route }));
+  }
+  onToExerciseSettingsClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise-settings"].route }));
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._repeatButton = this.querySelector('[name="repeat-button"]');
+    this._repeatButton.addEventListener("click", this.onRepeatExerciseClick);
+    this._toSettingsButton = this.querySelector('[name="to-settings-button"]');
+    this._toSettingsButton.addEventListener("click", this.onToExerciseSettingsClick);
+  }
+}
+customElements.define(KeysExerciseResultsPage.getTagName(), KeysExerciseResultsPage);
+const styles = "x-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-button {\n  border-radius: 1.25rem;\n  background: linear-gradient(-45deg, #26272b, #33363b);\n  color: #ffffff;\n  font-weight: bolder;\n  font-size: 1.05rem;\n}\n\nx-button:active {\n  background: linear-gradient(-45deg, #33363b, #26272b);\n}\n\nx-button {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  user-select: none;\n}\n\nx-button:hover {\n  cursor: pointer;\n}\n\nx-chords-exercise-results-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n}\n\nx-chords-exercise-results-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-chords-exercise-results-page {\n  justify-content: center;\n}\n\nx-chords-exercise-results-page .container {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: center;\n  align-items: center;\n  gap: 40px;\n  width: 100%;\n  height: 100%;\n}\n\nx-chords-exercise-results-page .title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-chords-exercise-results-page .score {\n  font-size: 1.75rem;\n  font-weight: 700;\n  line-height: 140%;\n  color: #ffffff;\n}\n\nx-chords-exercise-results-page .score .completed {\n  color: #43cbc5;\n}\n\nx-chords-exercise-results-page .score .delimiter {\n  margin: 0 10px;\n}\n\nx-chords-exercise-results-page .score .all {\n  font-size: 1.5rem;\n}\n\nx-chords-exercise-results-page .actions {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  gap: 10px;\n}\n\nx-chords-exercise-results-page .actions .action {\n  width: 120px;\n  height: 70px;\n}";
+class ChordsExerciseResultsPage extends Page {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "_repeatButton");
+    __publicField(this, "_toSettingsButton");
+  }
+  getElementStyles() {
+    return styles.toString();
+  }
+  getTemplateSchema() {
+    const numberOfSuccessfulQuestions = (chordsExerciseState.numberOfAllQuestions - chordsExerciseState.numberOfWrongAnswers).toString();
+    const numberOfAllQuestions = chordsExerciseState.numberOfAllQuestions.toString();
+    return {
+      tagName: "div",
+      cssClasses: "container",
+      children: [
+        {
+          tagName: "span",
+          cssClasses: "title",
+          children: "Completed!"
+        },
+        {
+          tagName: "span",
+          cssClasses: "score",
+          children: [
+            {
+              tagName: "span",
+              cssClasses: "completed",
+              children: numberOfSuccessfulQuestions
+            },
+            {
+              tagName: "span",
+              cssClasses: "delimiter",
+              children: "/"
+            },
+            {
+              tagName: "span",
+              cssClasses: "all",
+              children: numberOfAllQuestions
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          cssClasses: "actions",
+          children: [
+            {
+              tagName: "x-button",
+              attrs: {
+                name: "repeat-button"
+              },
+              cssClasses: "action",
+              children: "Repeat"
+            },
+            {
+              tagName: "x-button",
+              attrs: {
+                name: "to-settings-button"
+              },
+              cssClasses: "action",
+              children: "To settings"
+            }
+          ]
+        }
+      ]
+    };
+  }
+  onRepeatExerciseClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["chords-exercise"].route }));
+  }
+  onToExerciseSettingsClick() {
+    window.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["chords-exercise-settings"].route }));
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this._repeatButton = this.querySelector('[name="repeat-button"]');
+    this._repeatButton.addEventListener("click", this.onRepeatExerciseClick);
+    this._toSettingsButton = this.querySelector('[name="to-settings-button"]');
+    this._toSettingsButton.addEventListener("click", this.onToExerciseSettingsClick);
+  }
+}
+customElements.define(ChordsExerciseResultsPage.getTagName(), ChordsExerciseResultsPage);
 const initDrawer = () => {
   const drawer = elTreeSchema({ tagName: "x-drawer" });
   drawer.setStayMounted(true).setParent(document.body).setContent(elTreeSchema({
