@@ -413,17 +413,17 @@ x-button-options-grid > .grid-cell > [active]._option-button {
 }
 
 x-button-options-grid > .grid-cell > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-options-grid > .grid-cell > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-options-grid > .grid-cell > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-options-grid > .grid-cell > ._option-button {
@@ -477,17 +477,17 @@ x-button-options-grid > .grid-cell > [active]._option-button {
 }
 
 x-button-options-grid > .grid-cell > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-options-grid > .grid-cell > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-options-grid > .grid-cell > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-options-grid > .grid-cell > ._option-button {
@@ -549,17 +549,17 @@ x-button-options-grid > .grid-cell > [active]._option-button {
 }
 
 x-button-options-grid > .grid-cell > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-options-grid > .grid-cell > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-options-grid > .grid-cell > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-options-grid > .grid-cell > ._option-button {
@@ -619,17 +619,17 @@ x-button-group[active][variant=grid], x-button-group[active][variant=row], x-but
 }
 
 x-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-group > ._option-button {
@@ -674,17 +674,17 @@ x-button-group[active][variant=grid], x-button-group[active][variant=row], x-but
 }
 
 x-button-group[success][variant=grid], x-button-group[success][variant=row], x-button-group > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-group[failure][variant=grid], x-button-group[failure][variant=row], x-button-group > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-group[disabled][variant=grid], x-button-group[disabled][variant=row], x-button-group > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-group > ._option-button {
@@ -760,17 +760,17 @@ x-button-group-multiple > [active]._option-button {
 }
 
 x-button-group-multiple > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-group-multiple > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-group-multiple > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-group-multiple > ._option-button {
@@ -815,17 +815,17 @@ x-button-group-multiple > [active]._option-button {
 }
 
 x-button-group-multiple > [success]._option-button {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-button-group-multiple > [failure]._option-button {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-button-group-multiple > [disabled]._option-button {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-button-group-multiple > ._option-button {
@@ -867,17 +867,11 @@ x-button-group-multiple[variant=row] > ._option-button {
 
 x-button-group-multiple[variant=grid] {
   display: inline-grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 80px;
   justify-content: center;
   gap: 0.3rem;
   width: 100%;
-}
-
-@media screen and (max-width: 420px) {
-  x-button-group-multiple[variant=grid] {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 x-button-group-multiple[variant=grid] > ._option-button {
@@ -988,17 +982,17 @@ x-modal-dialog .container .content .controls > .control > select[active] {
 }
 
 x-modal-dialog .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-modal-dialog .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-modal-dialog .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-modal-dialog .container .content .controls > .control > select {
@@ -1017,7 +1011,6 @@ x-modal-dialog .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1068,17 +1061,17 @@ x-modal-dialog .container .content .controls > .control > select[active] {
 }
 
 x-modal-dialog .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-modal-dialog .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-modal-dialog .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-modal-dialog .container .content .controls > .control > select {
@@ -1097,7 +1090,6 @@ x-modal-dialog .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1241,17 +1233,17 @@ x-alert-dialog .container .content .controls > .control > select[active] {
 }
 
 x-alert-dialog .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-alert-dialog .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-alert-dialog .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-alert-dialog .container .content .controls > .control > select {
@@ -1270,7 +1262,6 @@ x-alert-dialog .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1321,17 +1312,17 @@ x-alert-dialog .container .content .controls > .control > select[active] {
 }
 
 x-alert-dialog .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-alert-dialog .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-alert-dialog .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-alert-dialog .container .content .controls > .control > select {
@@ -1350,7 +1341,6 @@ x-alert-dialog .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1503,17 +1493,17 @@ x-drawer .container .content .controls > .control > select[active] {
 }
 
 x-drawer .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-drawer .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-drawer .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-drawer .container .content .controls > .control > select {
@@ -1532,7 +1522,6 @@ x-drawer .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1583,17 +1572,17 @@ x-drawer .container .content .controls > .control > select[active] {
 }
 
 x-drawer .container .content .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-drawer .container .content .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-drawer .container .content .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-drawer .container .content .controls > .control > select {
@@ -1612,7 +1601,6 @@ x-drawer .container .content .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -1908,17 +1896,17 @@ x-number-input[active] {
 }
 
 x-number-input[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-number-input[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-number-input[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-number-input {
@@ -1985,17 +1973,17 @@ x-number-input[active] {
 }
 
 x-number-input[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-number-input[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-number-input[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-number-input {
@@ -2252,17 +2240,17 @@ x-settings-page .controls > .control > select[active] {
 }
 
 x-settings-page .controls > .control > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-settings-page .controls > .control > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-settings-page .controls > .control > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-settings-page .controls > .control > select {
@@ -2281,7 +2269,6 @@ x-settings-page .controls {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -2916,17 +2903,17 @@ x-keys-exercise-page .form-field-group .form-field-group-content > select[active
 }
 
 x-keys-exercise-page .form-field-group .form-field-group-content > select[success] {
-  color: #43cbc5;
-  border: 1px solid #43cbc5;
+  color: #0FFF50;
+  outline: 1px solid #0FFF50;
 }
 
 x-keys-exercise-page .form-field-group .form-field-group-content > select[failure] {
-  color: red;
-  border: 1px solid red;
+  color: #FF3131;
+  outline: 1px solid #FF3131;
 }
 
 x-keys-exercise-page .form-field-group .form-field-group-content > select[disabled] {
-  opacity: 0.2;
+  opacity: rgba(0, 0, 0, 0.25);
 }
 
 x-keys-exercise-page .form-field-group .form-field-group-content > select {
