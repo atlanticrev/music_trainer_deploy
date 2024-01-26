@@ -283,10 +283,10 @@ x-bottom-panel button, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -381,10 +381,10 @@ x-grid > .grid-cell {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -406,6 +406,10 @@ x-button-options-grid > .grid-cell, x-grid > .grid-cell {
   x-button-options-grid, x-grid {
     grid-template-columns: repeat(1, 100%);
   }
+}
+
+x-button-options-grid > .grid-cell > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-options-grid > .grid-cell > [active]._option-button {
@@ -445,10 +449,10 @@ x-button, x-button-options-grid, x-grid {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -470,6 +474,10 @@ x-button-options-grid > .grid-cell, x-grid > .grid-cell {
   x-button-options-grid, x-grid {
     grid-template-columns: repeat(1, 100%);
   }
+}
+
+x-button-options-grid > .grid-cell > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-options-grid > .grid-cell > [active]._option-button {
@@ -517,10 +525,10 @@ x-button, x-button-options-grid, x-grid {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -542,6 +550,10 @@ x-button-options-grid > .grid-cell, x-grid > .grid-cell {
   x-button-options-grid, x-grid {
     grid-template-columns: repeat(1, 100%);
   }
+}
+
+x-button-options-grid > .grid-cell > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-options-grid > .grid-cell > [active]._option-button {
@@ -604,14 +616,18 @@ x-button-options-grid > .grid-cell > ._option-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-button-group[variant=grid], x-button-group[variant=row], x-button-group > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {
@@ -659,14 +675,18 @@ x-button-group, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-button-group[variant=grid], x-button-group[variant=row], x-button-group > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-group[active][variant=grid], x-button-group[active][variant=row], x-button-group > [active]._option-button {
@@ -745,14 +765,18 @@ x-button-group > ._option-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-button-group-multiple > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-group-multiple > [active]._option-button {
@@ -800,14 +824,18 @@ x-button-group-multiple, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-button-group-multiple > ._option-button {
+  border-radius: inherit;
 }
 
 x-button-group-multiple > [active]._option-button {
@@ -900,10 +928,10 @@ x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -928,10 +956,10 @@ x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -967,14 +995,18 @@ x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-modal-dialog .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-modal-dialog .container .content .controls > .control > select[active] {
@@ -1046,14 +1078,18 @@ x-modal-dialog .container .content .dialog-content .intervals-option-buttons, x-
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-modal-dialog .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-modal-dialog .container .content .controls > .control > select[active] {
@@ -1218,14 +1254,18 @@ x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-alert-dialog .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-alert-dialog .container .content .controls > .control > select[active] {
@@ -1297,14 +1337,18 @@ x-alert-dialog .container .content .dialog-content .intervals-option-buttons, x-
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-alert-dialog .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-alert-dialog .container .content .controls > .control > select[active] {
@@ -1478,14 +1522,18 @@ x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-drawer .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-drawer .container .content .controls > .control > select[active] {
@@ -1557,14 +1605,18 @@ x-drawer .container .content .dialog-content .intervals-option-buttons, x-drawer
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-drawer .container .content .controls > .control > select {
+  border-radius: inherit;
 }
 
 x-drawer .container .content .controls > .control > select[active] {
@@ -1805,10 +1857,10 @@ x-top-panel .menu-btn-open, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -1881,14 +1933,18 @@ x-number-input x-button, x-number-input input, x-number-input, #app, body, x-but
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-number-input {
+  border-radius: inherit;
 }
 
 x-number-input[active] {
@@ -1958,14 +2014,18 @@ x-number-input x-button, x-number-input input, x-number-input, #app, body, x-but
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
   background: linear-gradient(-45deg, #33363b, #26272b);
+}
+
+x-number-input {
+  border-radius: inherit;
 }
 
 x-number-input[active] {
@@ -2061,12 +2121,6 @@ body {
   padding-bottom: 50px;
   width: 100%;
   height: 100%;
-}
-
-@media screen and (min-width: 1200px) {
-  #app {
-    padding-bottom: 0;
-  }
 }
 
 #app .page-container {
@@ -2235,6 +2289,10 @@ x-exercises-page.blocked {
   box-sizing: border-box;
 }
 
+x-settings-page .controls > .control > select {
+  border-radius: inherit;
+}
+
 x-settings-page .controls > .control > select[active] {
   color: #43cbc5;
 }
@@ -2335,10 +2393,10 @@ x-chords-exercise-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -2370,10 +2428,10 @@ x-chords-exercise-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -2678,10 +2736,10 @@ x-intervals-exercise-results-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -2898,6 +2956,10 @@ x-keys-exercise-page .form-field-group .form-field-group-label {
   color: #ffffff;
 }
 
+x-keys-exercise-page .form-field-group .form-field-group-content > select {
+  border-radius: inherit;
+}
+
 x-keys-exercise-page .form-field-group .form-field-group-content > select[active] {
   color: #43cbc5;
 }
@@ -3018,10 +3080,10 @@ x-keys-exercise-results-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3136,10 +3198,10 @@ x-chords-exercise-results-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3308,10 +3370,10 @@ x-scales-exercise-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3343,10 +3405,10 @@ x-scales-exercise-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3438,10 +3500,10 @@ x-scales-exercise-results-page, x-button {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3556,10 +3618,10 @@ x-scales-exercise-results-page .actions .action {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3584,10 +3646,10 @@ x-button:active {
 
 x-button {
   border-radius: 1.25rem;
-  background: linear-gradient(-45deg, #26272b, #33363b);
   color: #ffffff;
   font-weight: bolder;
   font-size: 1.05rem;
+  background: linear-gradient(-45deg, #26272b, #33363b);
 }
 
 x-button:active {
@@ -3638,12 +3700,6 @@ body {
   padding-bottom: 50px;
   width: 100%;
   height: 100%;
-}
-
-@media screen and (min-width: 1200px) {
-  #app {
-    padding-bottom: 0;
-  }
 }
 
 #app .page-container {
