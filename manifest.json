@@ -1,0 +1,16 @@
+{
+  "name": "Music Trainer",
+  "short_name": "Music Trainer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#26272b",
+  "theme_color": "#26272b",
+  "description": "Exercises, tools, helpers for musicians",
+  "icons": [
+    {
+      "src": "/logo/logo.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg"
+    }
+  ]
+}
