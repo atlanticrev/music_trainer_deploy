@@ -106,8 +106,7 @@ const elTreeSchema = (schema) => {
 const createEvent = (name, detail) => new CustomEvent(name, {
   bubbles: true,
   composed: true,
-  detail: detail ?? void 0
-  // todo review
+  ...detail ? { detail } : {}
 });
 const getTagNameByCtor = (ctor) => {
   const name = ctor.name.split(/(?=[A-Z])|\b/).filter((namePart) => !namePart.includes("_")).map((word) => word.toLowerCase()).join("-");
@@ -709,9 +708,9 @@ class BottomPanel extends CustomElement {
     this.activeBtn.classList.add("active");
     (_d = (_c = this.getActiveBtnIcon()) == null ? void 0 : _c.classList) == null ? void 0 : _d.toggle("active");
   }
-  onBtnClick(e) {
-    e.stopPropagation();
-    const btn = e.composedPath().find((el) => el.tagName === "BUTTON");
+  onBtnClick(event) {
+    event.stopPropagation();
+    const btn = event.composedPath().find((el) => el.tagName === "BUTTON");
     if (btn && this.buttons.includes(btn)) {
       if (btn !== this.activeBtn) {
         this.setActive(btn.dataset.name);
@@ -720,7 +719,7 @@ class BottomPanel extends CustomElement {
     }
   }
 }
-customElements.define(getTagNameByCtor(BottomPanel), BottomPanel);
+customElements.define(BottomPanel.getTagName(), BottomPanel);
 const styles$r = "x-grid {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-grid {\n  display: grid;\n  grid-template-columns: repeat(1, fit-content(100%));\n  grid-gap: 1rem;\n  width: 100%;\n}\n\nx-grid > .grid-cell {\n  display: flex;\n}\n\n@media screen and (max-width: 420px) {\n  x-grid {\n    grid-template-columns: repeat(1, 100%);\n  }\n}";
 class Grid extends CustomElement {
   getElementStyles() {
@@ -803,9 +802,9 @@ const _ButtonGroup = class _ButtonGroup extends CustomElement {
       this.activeButton = null;
     }
   }
-  onBtnClick(e) {
-    e.stopPropagation();
-    const button = e.composedPath().find((el) => el.classList.contains(_ButtonGroup.BUTTON_OPTION_INNER_SELECTOR));
+  onBtnClick(event) {
+    event.stopPropagation();
+    const button = event.composedPath().find((el) => el.classList.contains(_ButtonGroup.BUTTON_OPTION_INNER_SELECTOR));
     if (button && this._buttons.includes(button)) {
       if (button !== this.activeButton) {
         this.setActive(button);
@@ -880,12 +879,12 @@ const _ButtonGroupMultiple = class _ButtonGroupMultiple extends Lockable {
     }
     (_b = (_a = this.getPushedButtonIcon(pushedButton)) == null ? void 0 : _a.classList) == null ? void 0 : _b.toggle("active");
   }
-  onBtnClick(e) {
-    e.stopPropagation();
+  onBtnClick(event) {
+    event.stopPropagation();
     if (this.isLocked()) {
       return;
     }
-    const button = e.composedPath().find((el) => el.classList.contains(_ButtonGroupMultiple.BUTTON_OPTION_INNER_SELECTOR));
+    const button = event.composedPath().find((el) => el.classList.contains(_ButtonGroupMultiple.BUTTON_OPTION_INNER_SELECTOR));
     if (button && this._buttons.includes(button)) {
       this.toggleButtonActive(button);
       this.dispatchEvent(
@@ -1255,9 +1254,9 @@ class TopPanel extends CustomElement {
   getElementStyles() {
     return styles$i.toString();
   }
-  onBtnClick(e) {
-    e.stopPropagation();
-    e.target.dispatchEvent(createEvent("toggle-side-panel"));
+  onBtnClick(event) {
+    event.stopPropagation();
+    event.target.dispatchEvent(createEvent("toggle-side-panel"));
   }
 }
 customElements.define(getTagNameByCtor(TopPanel), TopPanel);
@@ -1544,7 +1543,7 @@ class Page extends CustomElement {
     this.classList.add("blocked");
   }
 }
-customElements.define(getTagNameByCtor(Page), Page);
+customElements.define(Page.getTagName(), Page);
 const styles$e = "x-home-page {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-home-page {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  box-sizing: border-box;\n}\n\nx-home-page {\n  display: flex;\n  flex-flow: column nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  overscroll-behavior: none;\n  padding: 1rem;\n}\n\nx-home-page.blocked {\n  user-select: none;\n  pointer-events: none;\n}\n\nx-home-page .header {\n  color: #ffffff;\n  font-size: 1.85rem;\n  font-weight: 700;\n  padding: 1rem 0;\n}";
 class HomePage extends Page {
   getElementStyles() {
@@ -19029,19 +19028,19 @@ const samplerConfigs = {
   bass2,
   bass3
 };
-const loadSamplers = async (instrumentNames) => {
+const loadSamplers = async (samplerNames) => {
   const loadedSamplers = {};
   const promises = [];
   for (const [samplerName, sampler] of Object.entries(samplerConfigs)) {
-    if (instrumentNames.includes(samplerName)) {
+    if (samplerNames.includes(samplerName)) {
       promises.push(sampler.create());
     }
   }
   try {
     const loadedInstruments = await Promise.all(promises);
     for (const instrument of loadedInstruments) {
-      instrument.toDestination();
       loadedSamplers[instrument.name] = instrument;
+      instrument.toDestination();
     }
   } catch (error) {
     console.error("Error loading loadedSamplers:", error);
@@ -19054,8 +19053,8 @@ const localStorageService = {
   },
   read: (key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"),
   update: (key, value) => {
-    const lastValue = localStorageService.read(key);
-    localStorageService._write(key, Object.assign(lastValue, value));
+    const oldValue = localStorageService.read(key);
+    localStorageService._write(key, Object.assign(oldValue, value));
   }
 };
 const _AudioSettings = class _AudioSettings {
@@ -19066,7 +19065,7 @@ const _AudioSettings = class _AudioSettings {
     __publicField(this, "activeInstrumentName", "piano0");
     __publicField(this, "activeTonality", "C");
     __publicField(this, "activeOctave", 4);
-    __publicField(this, "bpm", 140);
+    __publicField(this, "bpm", 130);
   }
   async init() {
     Transport2.bpm.value = this.bpm;
@@ -19156,11 +19155,11 @@ class SettingsPage extends Page {
       ]
     };
   }
-  onTonalityChange(e) {
-    audioSettings.setActiveTonality(e.target.selectedOptions[0].value);
+  onTonalityChange(event) {
+    audioSettings.setActiveTonality(event.target.selectedOptions[0].value);
   }
-  onInstrumentChange(e) {
-    audioSettings.setActiveInstrument(e.target.selectedOptions[0].value);
+  onInstrumentChange(event) {
+    audioSettings.setActiveInstrument(event.target.selectedOptions[0].value);
   }
   connectedCallback() {
     super.connectedCallback();
@@ -19184,18 +19183,17 @@ const CHORD_NOTES = {
   Sus2: [0, 2, 7],
   Sus4: [0, 5, 7],
   Sus42: [0, 2, 5, 7],
-  Min6th: [0, 3, 7, 9],
   Maj6th: [0, 4, 7, 9],
+  Min6th: [0, 3, 7, 8],
   /**
    * Seventh
    */
   Min7: [0, 3, 7, 10],
-  Min72: [10, 12, 3, 7],
+  Min72: [10, 12, 15, 19],
   D7: [0, 4, 7, 10],
   D65: [4, 7, 10, 12],
   D43: [7, 10, 12, 16],
   D2: [10, 12, 16, 19],
-  // todo recheck
   Maj7: [0, 4, 7, 11],
   Min7b5: [0, 3, 6, 10],
   Dim: [0, 3, 6, 9],
@@ -19230,8 +19228,8 @@ const SCALE_NOTES = {
   /**
    * Pentatonic
    */
-  minorPentatonic: [0, 3, 5, 7, 10],
-  majorPentatonic: [0, 2, 4, 7, 9],
+  minorPentatonic: [0, 3, 5, 7, 10, 12],
+  majorPentatonic: [0, 2, 4, 7, 9, 12],
   /**
    * Blues
    */
@@ -19241,16 +19239,18 @@ const SCALE_NOTES = {
    * Gregorian
    */
   ionic: [0, 2, 4, 5, 7, 9, 11, 12],
-  // dorian: [],
-  // phrygian: [],
+  dorian: [0, 2, 3, 5, 7, 9, 10, 12],
+  phrygian: [0, 1, 3, 5, 7, 8, 10, 12],
   lydian: [0, 2, 4, 6, 7, 9, 11, 12],
   mixolydian: [0, 2, 4, 5, 7, 9, 10, 12],
-  aeolian: [0, 2, 3, 5, 7, 8, 9, 12],
-  // locrian: [],
+  aeolian: [0, 2, 3, 5, 7, 8, 10, 12],
+  locrian: [0, 1, 3, 5, 6, 8, 10, 12],
   /**
    * Exotic
    */
-  wholeTone: [0, 2, 4, 6, 8, 10, 12]
+  wholeTone: [0, 2, 4, 6, 8, 10, 12],
+  halfWholeDiminished: [0, 1, 3, 4, 6, 7, 9, 10, 12],
+  wholeHalfDiminished: [0, 2, 3, 5, 6, 8, 9, 11, 12]
 };
 function between(min, max) {
   const range2 = max - min;
@@ -19299,8 +19299,8 @@ const stopPlaying = () => {
     }
   }
 };
-const prepareToStartPlaying = () => {
-  start();
+const prepareToStartPlaying = async () => {
+  await start();
   stopPlaying();
   audioSettings.isPlaying = true;
 };
@@ -20601,9 +20601,9 @@ class KeysExerciseSettingsPage extends Page {
         break;
     }
   }
-  onStartButtonClick(e) {
-    e.stopPropagation();
-    e.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise"].route }));
+  onStartButtonClick(event) {
+    event.stopPropagation();
+    event.target.dispatchEvent(createEvent(ROUTER_ROUTE_TO_EVENT, { route: ROUTES_SCHEMA["keys-exercise"].route }));
   }
   connectedCallback() {
     super.connectedCallback();
@@ -21689,12 +21689,12 @@ const PRESETS = [
   {
     name: "gregorian",
     label: "Gregorian scales",
-    scales: ["ionic", "lydian", "mixolydian"]
+    scales: ["ionic", "dorian", "phrygian", "lydian", "mixolydian", "aeolian", "locrian"]
   },
   {
     name: "exotic",
     label: "Exotic scales",
-    scales: ["wholeTone"]
+    scales: ["wholeTone", "halfWholeDiminished", "wholeHalfDiminished"]
   }
 ];
 class ScalesExerciseSettingsPage extends Page {
@@ -22186,12 +22186,12 @@ class Router {
         window.history.pushState({ route: routeSchema.route }, "", routeSchema.url);
       }
     };
-    window.addEventListener(ROUTER_ROUTE_TO_EVENT, (e) => {
-      const { route } = e.detail;
+    window.addEventListener(ROUTER_ROUTE_TO_EVENT, (event) => {
+      const { route } = event.detail;
       onRouteChange(route, true);
     });
-    window.addEventListener("popstate", (e) => {
-      const { state: { route } } = e;
+    window.addEventListener("popstate", (event) => {
+      const { state: { route } } = event;
       onRouteChange(route);
     });
     this.setActivePage(pageContainer, { tagName: "x-home-page" });
